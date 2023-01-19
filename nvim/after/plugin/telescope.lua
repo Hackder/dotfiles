@@ -14,6 +14,7 @@ vim.keymap.set('n', '<leader>ff', builtin.git_files, {})
 vim.keymap.set('n', '<leader>fa', builtin.find_files, {})
 vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
 vim.keymap.set('n', '<leader>fw', builtin.grep_string, {})
+vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
 vim.keymap.set('n', '<leader>fW', function()
   require('telescope.builtin').live_grep {
     additional_args = function(args) return vim.list_extend(args, { "--hidden" }) end,
