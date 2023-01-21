@@ -43,6 +43,10 @@ lsp.on_attach(function(client, bufnr)
   vim.keymap.set("n", "<C-S-Space>", function() vim.lsp.buf.signature_help() end, opts)
 end)
 
+lsp.set_preferences({
+  set_lsp_keymaps = { omit = { 'K' } }
+})
+
 lsp.setup()
 
 -- Enable inline diagnostics, with increased spacing
