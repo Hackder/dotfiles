@@ -85,4 +85,7 @@ return require('packer').startup(function(use)
     'jayp0521/mason-nvim-dap.nvim',
     requires = {'mfussenegger/nvim-dap'}
   }
+
+  -- Formatter / Linter
+  use { 'jose-elias-alvarez/null-ls.nvim' }
 end)
