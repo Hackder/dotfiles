@@ -18,6 +18,7 @@ vim.opt.swapfile = false
 vim.opt.backup = false
 vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
 vim.opt.undofile = true
+vim.opt.autoread = true
 
 -- Search
 
@@ -34,3 +35,16 @@ vim.opt.isfname:append("@-@")
 vim.opt.updatetime = 50
 
 vim.g.mapleader = " "
+
+-- Prettier
+vim.api.nvim_create_user_command(
+  'Prettier',
+  function(opts)
+    vim.api.nvim_command('write')
+    local path = vim.fn.expand('%')
+    local result = io.popen('npx prettier -w ' .. path):read("a")
+    print(result)
+    vim.cmd('e')
+  end,
+  { nargs = 0 }
+)
