@@ -73,19 +73,17 @@ return require('packer').startup(function(use)
   -- Debugger
   use {
     'rcarriga/nvim-dap-ui',
-    requires = {'mfussenegger/nvim-dap'}
+    requires = { 'mfussenegger/nvim-dap' }
   }
 
   use {
     'nvim-telescope/telescope-dap.nvim',
-    requires = {'nvim-telescope/telescope.nvim'}
+    requires = { 'nvim-telescope/telescope.nvim' }
   }
 
   use {
     'jayp0521/mason-nvim-dap.nvim',
-    requires = {'mfussenegger/nvim-dap'}
+    requires = { 'mfussenegger/nvim-dap' }
   }
 
-  -- Formatter / Linter
-  use { 'jose-elias-alvarez/null-ls.nvim' }
 end)
