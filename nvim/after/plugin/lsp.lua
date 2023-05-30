@@ -6,6 +6,19 @@ lsp.ensure_installed({
   'tsserver',
   'eslint',
   'rust_analyzer',
+  'lua_ls',
+})
+
+local lsp_config = require('lspconfig')
+
+lsp_config.lua_ls.setup({
+  settings = {
+    Lua = {
+      diagnostics = {
+        globals = { 'vim' },
+      },
+    },
+  },
 })
 
 local cmp = require('cmp')
@@ -22,7 +35,7 @@ lsp.setup_nvim_cmp({
   sources = {
     { name = 'path' },
     { name = 'nvim_lsp' },
-    { name = 'buffer', keyword_length = 3 },
+    { name = 'buffer',  keyword_length = 3 },
     { name = 'luasnip', keyword_length = 2 },
   }
 })
