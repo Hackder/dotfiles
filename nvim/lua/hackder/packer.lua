@@ -87,4 +87,9 @@ return require('packer').startup(function(use)
     requires = { 'mfussenegger/nvim-dap' }
   }
 
+  -- Formatter
+  use {
+    'sbdchd/neoformat',
+  }
+
 end)

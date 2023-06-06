@@ -54,15 +54,3 @@ vim.g.clipboard = {
   cache_enabled = 0,
 }
 
--- Prettier
-vim.api.nvim_create_user_command(
-  'Prettier',
-  function(opts)
-    vim.api.nvim_command('write')
-    local path = vim.fn.expand('%')
-    local result = io.popen('npx prettier -w ' .. path):read("a")
-    print(result)
-    vim.cmd('e')
-  end,
-  { nargs = 0 }
-)
