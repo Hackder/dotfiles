@@ -24,3 +24,5 @@ end, {
     return {'on', 'off'}
   end
 })
+
+neoformat()
