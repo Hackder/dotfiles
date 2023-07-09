@@ -92,4 +92,8 @@ return require('packer').startup(function(use)
     'sbdchd/neoformat',
   }
 
+  -- Markdown preview
+  use {
+    'instant-markdown/vim-instant-markdown',
+  }
 end)
