@@ -41,25 +41,27 @@ lsp.setup_nvim_cmp({
 })
 
 lsp.on_attach(function(client, bufnr)
-  vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end,
+  vim.keymap.set("n", "gd", vim.lsp.buf.definition,
     { buffer = bufnr, remap = false, desc = 'Go to definition' })
-  vim.keymap.set("n", "<leader>lk", function() vim.lsp.buf.hover() end,
+  vim.keymap.set("n", "gD", vim.lsp.buf.declaration,
+    { buffer = bufnr, remap = false, desc = 'Go to declaration' })
+  vim.keymap.set("n", "<leader>lk", vim.lsp.buf.hover,
     { buffer = bufnr, remap = false, desc = 'Hover analytics' })
-  vim.keymap.set("n", "<leader>ls", function() vim.lsp.buf.workspace_symbol() end,
+  vim.keymap.set("n", "<leader>ls", vim.lsp.buf.workspace_symbol,
     { buffer = bufnr, remap = false, desc = 'Search workspace symbols' })
-  vim.keymap.set("n", "<leader>ld", function() vim.diagnostic.open_float() end,
+  vim.keymap.set("n", "<leader>ld", vim.diagnostic.open_float,
     { buffer = bufnr, remap = false, desc = 'Show diagnostics' })
-  vim.keymap.set("n", "[d", function() vim.diagnostic.goto_next() end,
+  vim.keymap.set("n", "[d", vim.diagnostic.goto_next,
     { buffer = bufnr, remap = false, desc = 'Next diagnostic' })
-  vim.keymap.set("n", "]d", function() vim.diagnostic.goto_prev() end,
+  vim.keymap.set("n", "]d", vim.diagnostic.goto_prev,
     { buffer = bufnr, remap = false, desc = 'Previous diagnostic' })
-  vim.keymap.set("n", "<leader>la", function() vim.lsp.buf.code_action() end,
+  vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action,
     { buffer = bufnr, remap = false, desc = 'Code actions' })
-  vim.keymap.set("n", "<leader>lR", function() vim.lsp.buf.references() end,
+  vim.keymap.set("n", "<leader>lR", require('telescope.builtin').lsp_references,
     { buffer = bufnr, remap = false, desc = 'Search references' })
-  vim.keymap.set("n", "<leader>lr", function() vim.lsp.buf.rename() end,
+  vim.keymap.set("n", "<leader>lr", vim.lsp.buf.rename,
     { buffer = bufnr, remap = false, desc = 'Rename' })
-  vim.keymap.set("n", "<C-S-Space>", function() vim.lsp.buf.signature_help() end,
+  vim.keymap.set("n", "<C-S-Space>", vim.lsp.buf.signature_help,
     { buffer = bufnr, remap = false, desc = 'Signature help' })
 end)
 
