@@ -96,4 +96,9 @@ return require('packer').startup(function(use)
   use {
     'instant-markdown/vim-instant-markdown',
   }
+
+  -- Show pending keybinds
+  use {
+    'folke/which-key.nvim',
+  }
 end)
