@@ -41,8 +41,10 @@ lsp.setup_nvim_cmp({
 })
 
 lsp.on_attach(function(client, bufnr)
-  vim.keymap.set("n", "gd", vim.lsp.buf.definition,
+  vim.keymap.set("n", "gd", require('telescope.builtin').lsp_definitions,
     { buffer = bufnr, remap = false, desc = 'Go to definition' })
+  vim.keymap.set("n", "gi", require('telescope.builtin').lsp_implementations,
+    { buffer = bufnr, remap = false, desc = 'Go to implementation' })
   vim.keymap.set("n", "gD", vim.lsp.buf.declaration,
     { buffer = bufnr, remap = false, desc = 'Go to declaration' })
   vim.keymap.set("n", "<leader>lk", vim.lsp.buf.hover,
