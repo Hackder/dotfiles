@@ -23,3 +23,5 @@ vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><
 
 vim.keymap.set("n", "<F11>", "<cmd>let g:neovide_fullscreen = !g:neovide_fullscreen<cr>",
   { desc = 'Toggle fullscreen in neovide' })
+
+vim.keymap.set("t", "<Esc>", "<C-\\><C-n>", { desc = 'Exit terminal mode' })
