@@ -47,6 +47,8 @@ lsp.on_attach(function(client, bufnr)
     { buffer = bufnr, remap = false, desc = 'Go to implementation' })
   vim.keymap.set("n", "gD", vim.lsp.buf.declaration,
     { buffer = bufnr, remap = false, desc = 'Go to declaration' })
+  vim.keymap.set("n", "gr", require('telescope.builtin').lsp_references,
+    { buffer = bufnr, remap = false, desc = 'Search references' })
   vim.keymap.set("n", "<leader>lk", vim.lsp.buf.hover,
     { buffer = bufnr, remap = false, desc = 'Hover analytics' })
   vim.keymap.set("n", "<leader>ls", vim.lsp.buf.workspace_symbol,
@@ -59,8 +61,6 @@ lsp.on_attach(function(client, bufnr)
     { buffer = bufnr, remap = false, desc = 'Previous diagnostic' })
   vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action,
     { buffer = bufnr, remap = false, desc = 'Code actions' })
-  vim.keymap.set("n", "<leader>lR", require('telescope.builtin').lsp_references,
-    { buffer = bufnr, remap = false, desc = 'Search references' })
   vim.keymap.set("n", "<leader>lr", vim.lsp.buf.rename,
     { buffer = bufnr, remap = false, desc = 'Rename' })
   vim.keymap.set("n", "<C-S-Space>", vim.lsp.buf.signature_help,
