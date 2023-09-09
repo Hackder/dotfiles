@@ -3,7 +3,7 @@
 if [[ $# -eq 1 ]]; then
     selected=$1
 else
-    selected=$(find ~/pmat ~/pmat/interactives/ ~/ ~/programming/ ~/temp/ ~/proxic/ ~/pollux/ -mindepth 1 -maxdepth 1 -type d | fzf)
+    selected=$(find ~/pmat ~/pmat/interactives/ ~/ ~/programming/ ~/temp/ ~/proxic/ ~/pollux/ ~/dev ~/dev/pmat -mindepth 1 -maxdepth 1 -type d | fzf)
 fi
 
 if [[ -z $selected ]]; then
