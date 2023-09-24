@@ -70,22 +70,6 @@ return require('packer').startup(function(use)
     config = function() require("nvim-autopairs").setup {} end
   }
 
-  -- Debugger
-  use {
-    'rcarriga/nvim-dap-ui',
-    requires = { 'mfussenegger/nvim-dap' }
-  }
-
-  use {
-    'nvim-telescope/telescope-dap.nvim',
-    requires = { 'nvim-telescope/telescope.nvim' }
-  }
-
-  use {
-    'jayp0521/mason-nvim-dap.nvim',
-    requires = { 'mfussenegger/nvim-dap' }
-  }
-
   -- Formatter
   use {
     'sbdchd/neoformat',
