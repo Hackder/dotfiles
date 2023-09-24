@@ -2,23 +2,12 @@ local lsp = require('lsp-zero')
 
 lsp.preset('recommended')
 
-lsp.ensure_installed({
-  'tsserver',
-  'eslint',
-  'rust_analyzer',
-  'lua_ls',
-})
-
-local lsp_config = require('lspconfig')
-
-lsp_config.lua_ls.setup({
-  settings = {
-    Lua = {
-      diagnostics = {
-        globals = { 'vim' },
-      },
-    },
-  },
+require('mason').setup({})
+require('mason-lspconfig').setup({
+  ensure_installed = {'tsserver', 'eslint', 'rust_analyzer', 'lua_ls'},
+  handlers = {
+    lsp.default_setup,
+  }
 })
 
 local cmp = require('cmp')
@@ -30,14 +19,14 @@ local cmp_mappings = lsp.defaults.cmp_mappings({
   ['<C-Space>'] = cmp.mapping.complete(),
 })
 
-lsp.setup_nvim_cmp({
-  mapping = cmp_mappings,
-  sources = {
+cmp.setup({
+   mapping = cmp_mappings,
+   sources = {
     { name = 'path' },
     { name = 'nvim_lsp' },
     { name = 'buffer',  keyword_length = 3 },
     { name = 'luasnip', keyword_length = 2 },
-  }
+   }
 })
 
 lsp.on_attach(function(client, bufnr)
