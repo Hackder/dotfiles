@@ -4,7 +4,7 @@ lsp.preset('recommended')
 
 require('mason').setup({})
 require('mason-lspconfig').setup({
-  ensure_installed = {'tsserver', 'eslint', 'rust_analyzer', 'lua_ls'},
+  ensure_installed = { 'tsserver', 'eslint', 'rust_analyzer', 'lua_ls' },
   handlers = {
     lsp.default_setup,
   }
@@ -12,7 +12,7 @@ require('mason-lspconfig').setup({
 
 local cmp = require('cmp')
 local cmp_select = { beahvior = cmp.SelectBehavior.Select }
-local cmp_mappings = lsp.defaults.cmp_mappings({
+local cmp_mappings = cmp.mapping.preset.insert({
   ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
   ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
   ['<C-y>'] = cmp.mapping.confirm({ select = true }),
@@ -20,13 +20,13 @@ local cmp_mappings = lsp.defaults.cmp_mappings({
 })
 
 cmp.setup({
-   mapping = cmp_mappings,
-   sources = {
+  mapping = cmp_mappings,
+  sources = {
     { name = 'path' },
     { name = 'nvim_lsp' },
     { name = 'buffer',  keyword_length = 3 },
     { name = 'luasnip', keyword_length = 2 },
-   }
+  }
 })
 
 lsp.on_attach(function(client, bufnr)
