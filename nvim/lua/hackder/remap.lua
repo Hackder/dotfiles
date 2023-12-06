@@ -25,3 +25,6 @@ vim.keymap.set("n", "<F11>", "<cmd>let g:neovide_fullscreen = !g:neovide_fullscr
   { desc = 'Toggle fullscreen in neovide' })
 
 vim.keymap.set("t", "<Esc>", "<C-\\><C-n>", { desc = 'Exit terminal mode' })
+
+vim.keymap.set("n", "<C-n>", ":cprevious<CR>", { desc = 'Previous item in quickfix list' })
+vim.keymap.set("n", "<C-m>", ":cnext<CR>", { desc = 'Next item in quickfix list' })
