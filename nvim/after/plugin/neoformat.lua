@@ -2,7 +2,7 @@ vim.g.neoformat_try_node_exe = 1
 
 function neoformat()
   vim.api.nvim_create_autocmd('BufWritePre', {
-    pattern = '*.\\(js\\|jsx\\|ts\\|tsx\\|mts\\|mjs\\|cjs\\|html\\)',
+    pattern = '*.\\(js\\|jsx\\|ts\\|tsx\\|mts\\|mjs\\|cjs\\|html\\|json\\)',
     group = vim.api.nvim_create_augroup('formatting', { clear = true }),
     callback = function()
       vim.cmd('Neoformat prettierd')
