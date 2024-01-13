@@ -1,4 +1,4 @@
-function neoformat()
+function Neoformat()
   local group = vim.api.nvim_create_augroup('formatting', { clear = true })
 
   vim.api.nvim_create_autocmd('BufWritePre', {
@@ -24,9 +24,9 @@ return {
     config = function()
       vim.g.neoformat_try_node_exe = 1
 
-      vim.api.nvim_create_user_command('FormatOnSave', function (opts) 
+      vim.api.nvim_create_user_command('FormatOnSave', function (opts)
         if opts.fargs[1] == 'on' then
-          neoformat()
+          Neoformat()
         elseif opts.fargs[1] == 'off' then
           vim.api.nvim_exec('autocmd! formatting', true)
         else
@@ -39,7 +39,7 @@ return {
         end
       })
 
-      neoformat()
+      Neoformat()
     end
   }
 }
