@@ -40,6 +40,8 @@ vim.opt.updatetime = 50
 
 vim.g.mapleader = " "
 
+vim.opt.colorcolumn = "80"
+
 -- Fix wsl clipboard
 if os.execute('command -v win32yank.exe') == 0 then
   vim.g.clipboard = {
