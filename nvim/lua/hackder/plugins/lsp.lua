@@ -17,7 +17,7 @@ return {
       config = function()
         local lsp_zero = require('lsp-zero')
         require('mason-lspconfig').setup({
-          ensure_installed = {"lua_ls", "tsserver", "rust_analyzer"},
+          ensure_installed = { "lua_ls", "tsserver", "rust_analyzer" },
           handlers = {
             lsp_zero.default_setup,
             tsserver = function()
@@ -76,8 +76,8 @@ return {
       end
     },
 
-    {'neovim/nvim-lspconfig'},
-    {'hrsh7th/cmp-nvim-lsp'},
+    { 'neovim/nvim-lspconfig' },
+    { 'hrsh7th/cmp-nvim-lsp' },
     {
       'hrsh7th/nvim-cmp',
       config = function()
@@ -101,7 +101,7 @@ return {
         })
       end
     },
-    {'L3MON4D3/LuaSnip'},
+    { 'L3MON4D3/LuaSnip' },
     {
       'VonHeikemen/lsp-zero.nvim',
       dependencies = {

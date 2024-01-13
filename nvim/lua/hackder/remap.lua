@@ -31,4 +31,3 @@ vim.keymap.set("n", "<C-m>", ":cnext<CR>", { desc = 'Next item in quickfix list'
 
 vim.keymap.set("v", ">", ">gv", { desc = 'Indent selection without losing selection' })
 vim.keymap.set("v", "<", "<gv", { desc = 'Unindent selection without losing selection' })
-

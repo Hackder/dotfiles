@@ -55,4 +55,3 @@ if os.execute('command -v win32yank.exe') == 0 then
     cache_enabled = 0,
   }
 end
-

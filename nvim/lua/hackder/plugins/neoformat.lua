@@ -24,7 +24,7 @@ return {
     config = function()
       vim.g.neoformat_try_node_exe = 1
 
-      vim.api.nvim_create_user_command('FormatOnSave', function (opts)
+      vim.api.nvim_create_user_command('FormatOnSave', function(opts)
         if opts.fargs[1] == 'on' then
           Neoformat()
         elseif opts.fargs[1] == 'off' then
@@ -35,7 +35,7 @@ return {
       end, {
         nargs = 1,
         complete = function(ArgLead, CmdLine, CursorPos)
-          return {'on', 'off'}
+          return { 'on', 'off' }
         end
       })
 
