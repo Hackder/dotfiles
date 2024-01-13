@@ -27,7 +27,7 @@ vim.opt.autoread = true
 -- Search
 
 vim.opt.ignorecase = true
-vim.opt.hlsearch = true
+vim.opt.hlsearch = false
 vim.opt.incsearch = true
 
 vim.opt.termguicolors = true
@@ -55,3 +55,4 @@ if os.execute('command -v win32yank.exe') == 0 then
     cache_enabled = 0,
   }
 end
+
