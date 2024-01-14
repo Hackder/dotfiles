@@ -117,7 +117,6 @@ return {
         })
 
         lsp.on_attach(function(client, bufnr)
-          client.server_capabilities.semanticTokensProvider = nil
           vim.keymap.set("n", "gd", require('telescope.builtin').lsp_definitions,
             { buffer = bufnr, remap = false, desc = 'Go to definition' })
           vim.keymap.set("n", "gi", require('telescope.builtin').lsp_implementations,

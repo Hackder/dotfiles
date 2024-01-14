@@ -40,7 +40,7 @@ return {
   --     vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
   --     -- vim.api.nvim_set_hl(0, "SignColumn", { bg = "none" })
   --   end
-  -- }
+  -- },
   {
     "RRethy/nvim-base16",
     lazy = false,
@@ -49,8 +49,21 @@ return {
       vim.g.base16colorspace = 256
       vim.o.background = "dark"
       vim.cmd.colorscheme("base16-gruvbox-dark-hard")
-      vim.cmd("syntax on")
-      vim.cmd("hi Normal ctermbg=none")
+      -- Setup lsp token highlights
+      vim.api.nvim_set_hl(0, '@lsp.type.namespace', { link = '@namespace' })
+      vim.api.nvim_set_hl(0, '@lsp.type.type', { link = '@type' })
+      vim.api.nvim_set_hl(0, '@lsp.type.class', { link = '@type' })
+      vim.api.nvim_set_hl(0, '@lsp.type.enum', { link = '@type' })
+      vim.api.nvim_set_hl(0, '@lsp.type.interface', { link = '@type' })
+      vim.api.nvim_set_hl(0, '@lsp.type.struct', { link = '@structure' })
+      vim.api.nvim_set_hl(0, '@lsp.type.parameter', { link = '@parameter' })
+      vim.api.nvim_set_hl(0, '@lsp.type.variable', { link = '@variable' })
+      vim.api.nvim_set_hl(0, '@lsp.type.property', { link = '@property' })
+      vim.api.nvim_set_hl(0, '@lsp.type.enumMember', { link = '@constant' })
+      vim.api.nvim_set_hl(0, '@lsp.type.function', { link = '@function' })
+      vim.api.nvim_set_hl(0, '@lsp.type.method', { link = '@method' })
+      vim.api.nvim_set_hl(0, '@lsp.type.macro', { link = '@macro' })
+      vim.api.nvim_set_hl(0, '@lsp.type.decorator', { link = '@function' })
     end
   }
 }
