@@ -1,0 +1,163 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
+format = """
+[ ]()\
+$os\
+[ ]()\
+[|]()\
+$directory\
+$git_branch\
+$git_status\
+[|]()\
+$c\
+$rust\
+$golang\
+$nodejs\
+$php\
+$java\
+$kotlin\
+$haskell\
+$python\
+[|](fg:color_base04)\
+$time\
+$cmd_duration\
+$status\
+$line_break$character"""
+
+palette = 'gruvbox_dark_hard'
+
+[palettes.gruvbox_dark_hard]
+color_base00 = '#1d2021'
+color_base01 = '#3c3836'
+color_base02 = '#504945'
+color_base03 = '#665c54'
+color_base04 = '#bdae93'
+color_base05 = '#d5c4a1'
+color_base06 = '#ebdbb2'
+color_base07 = '#fbf1c7'
+color_base08 = '#fb4934'
+color_base09 = '#fe8019'
+color_base0a = '#fabd2f'
+color_base0b = '#b8bb26'
+color_base0c = '#8ec07c'
+color_base0d = '#83a598'
+color_base0e = '#d3869b'
+color_base0f = '#d65d0e'
+
+[os]
+disabled = false
+style = "fg:color_base07"
+
+[os.symbols]
+Windows = "󰍲"
+Ubuntu = "󰕈"
+SUSE = ""
+Raspbian = "󰐿"
+Mint = "󰣭"
+Macos = "󰀵"
+Manjaro = ""
+Linux = "󰌽"
+Gentoo = "󰣨"
+Fedora = "󰣛"
+Alpine = ""
+Amazon = ""
+Android = ""
+Arch = "󰣇"
+Artix = "󰣇"
+CentOS = ""
+Debian = "󰣚"
+Redhat = "󱄛"
+RedHatEnterprise = "󱄛"
+
+[username]
+show_always = true
+style_user = "bg:color_orange fg:color_fg0"
+style_root = "bg:color_orange fg:color_fg0"
+format = '[ $user ]($style)'
+
+[directory]
+style = "fg:color_fg0 bg:color_yellow"
+format = "[ $path ]($style)"
+truncation_length = 3
+truncation_symbol = "…/"
+
+[directory.substitutions]
+"Documents" = "󰈙 "
+"Downloads" = " "
+"Music" = "󰝚 "
+"Pictures" = " "
+"Developer" = "󰲋 "
+
+[git_branch]
+symbol = ""
+format = '[[| $symbol $branch ](fg:color_base0a)]()'
+
+[git_status]
+format = '[[($all_status$ahead_behind )](fg:color_base0d)]()'
+
+[nodejs]
+symbol = ""
+format = '[[ $symbol( $version) ](fg:color_base0c)]()'
+
+[bun]
+format = '[[ $symbol( $version) ](fg:color_base07)]()'
+
+[c]
+symbol = " "
+format = '[[ $symbol( $version) ](fg:color_base0d)]()'
+
+[rust]
+symbol = ""
+format = '[[ $symbol( $version) ](fg:color_base09)]()'
+
+[golang]
+symbol = ""
+format = '[[ $symbol( $version) ](fg:color_base0d)]()'
+
+[php]
+symbol = ""
+format = '[[ $symbol( $version) ](fg:color_base0e)]()'
+
+[java]
+symbol = " "
+format = '[[ $symbol( $version) ](fg:color_base0d)]()'
+
+[kotlin]
+symbol = ""
+format = '[[ $symbol( $version) ](fg:color_base0d)]()'
+
+[haskell]
+symbol = ""
+format = '[[ $symbol( $version) ](fg:color_base0e)]()'
+
+[python]
+symbol = ""
+format = '[[ $symbol( $version) ](fg:color_base0d)]()'
+
+[time]
+disabled = false
+time_format = "%R"
+format = '[[  $time ](fg:color_base04)]()'
+
+[line_break]
+disabled = false
+
+[character]
+disabled = false
+success_symbol = '[>](bold fg:color_base0b)'
+error_symbol = '[>](bold fg:color_base08)'
+vimcmd_symbol = '[>](bold fg:color_base0a)'
+vimcmd_replace_one_symbol = '[<](bold fg:color_base0e)'
+vimcmd_replace_symbol = '[<](bold fg:color_base0e)'
+vimcmd_visual_symbol = '[<](bold fg:color_base0a)'
+format = '[ $symbol ]()'
+
+[cmd_duration]
+disabled = false
+min_time = 500
+format = '[| [$duration](fg:color_base04) ]()'
+
+[status]
+disabled = false
+symbol = ''
+format = '[| $symbol$status]($style) '
