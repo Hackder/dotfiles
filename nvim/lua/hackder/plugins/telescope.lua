@@ -2,18 +2,14 @@
 -- Process creation is expensive in Windows, so this reduces latency
 local is_inside_work_tree = {}
 
-local find_command = { "fd", "--type", "f", "--strip-cwd-prefix", "--hidden", "--no-ignore", "-E", ".git", "-E", "node_modules", "-E", ".next", "-E", ".turbo" }
+local find_command = { "fd", "--type", "f", "--strip-cwd-prefix", "--hidden", "--no-ignore", "-E", ".git", "-E", "node_modules", "-E", ".next", "-E", "\\.turbo" }
 
 return {
   "nvim-telescope/telescope.nvim",
   branch = "0.1.x",
   dependencies = { "nvim-lua/plenary.nvim" },
   config = function()
-    require("telescope").setup({
-      defaults = {
-        file_ignore_patterns = { ".git", "node_modules", ".next", ".turbo" }
-      },
-    })
+    require("telescope").setup({})
 
     local builtin = require('telescope.builtin')
     vim.keymap.set('n', '<C-p>', function()
