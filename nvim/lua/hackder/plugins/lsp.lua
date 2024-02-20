@@ -62,6 +62,31 @@ return {
             end,
             lua_ls = function()
               require("lspconfig").lua_ls.setup({})
+            end,
+            tailwindcss = function()
+              require("lspconfig").tailwindcss.setup({
+                filtetypes = {
+                  "css",
+                  "scss",
+                  "sass",
+                  "postcss",
+                  "html",
+                  "javascript",
+                  "javascriptreact",
+                  "typescript",
+                  "typescriptreact",
+                  "svelte",
+                  "vue",
+                  "rust",
+                },
+                init_options = {
+                  userLanguages = {
+                    rust = "html",
+                  }
+                },
+                root_dir = require("lspconfig").util.root_pattern("tailwind.config.js", "tailwind.config.ts",
+                  "tailwind.config.mjs", "tailwind.config.cjs")
+              })
             end
           }
         })
