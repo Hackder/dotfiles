@@ -14,6 +14,7 @@ return {
 					typescript = { { "prettierd", "prettier" } },
 					typescriptreact = { { "prettierd", "prettier" } },
 					java = { "google-java-format" },
+					php = { "phpcbf" },
 				},
 				format_on_save = {
 					-- These options will be passed to conform.format()
