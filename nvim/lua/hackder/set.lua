@@ -17,9 +17,9 @@ vim.opt.wrap = false
 vim.opt.swapfile = false
 vim.opt.backup = false
 if os.getenv("HOME") then
-  vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
+	vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
 else
-  vim.opt.undodir = os.getenv("USERPROFILE") .. "/.vim/undodir"
+	vim.opt.undodir = os.getenv("USERPROFILE") .. "/.vim/undodir"
 end
 vim.opt.undofile = true
 vim.opt.autoread = true
@@ -43,17 +43,17 @@ vim.g.mapleader = " "
 vim.opt.colorcolumn = "80"
 
 -- Fix wsl clipboard
-if os.execute('command -v win32yank.exe') == 0 then
-  vim.g.clipboard = {
-    name = "win32yank-wsl",
-    copy = {
-      ["+"] = "win32yank.exe -i --crlf",
-      ["*"] = "win32yank.exe -i --crlf",
-    },
-    paste = {
-      ["+"] = "win32yank.exe -o --lf",
-      ["*"] = "win32yank.exe -o --lf",
-    },
-    cache_enabled = 0,
-  }
+if os.execute("command -v win32yank.exe") == 0 then
+	vim.g.clipboard = {
+		name = "win32yank-wsl",
+		copy = {
+			["+"] = "win32yank.exe -i --crlf",
+			["*"] = "win32yank.exe -i --crlf",
+		},
+		paste = {
+			["+"] = "win32yank.exe -o --lf",
+			["*"] = "win32yank.exe -o --lf",
+		},
+		cache_enabled = 0,
+	}
 end
