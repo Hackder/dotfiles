@@ -1,3 +1,15 @@
+function ConformFormatOnSave()
+	local group = vim.api.nvim_create_augroup("formatting", { clear = true })
+
+	vim.api.nvim_create_autocmd("BufWritePre", {
+		pattern = "*",
+		group = group,
+		callback = function(args)
+			require("conform").format({ bufnr = args.buf, timeout = 1000 })
+		end,
+	})
+end
+
 return {
 	{
 		"stevearc/conform.nvim",
@@ -15,13 +27,26 @@ return {
 					typescriptreact = { { "prettierd", "prettier" } },
 					java = { "google-java-format" },
 					php = { "phpcbf" },
-				},
-				format_on_save = {
-					-- These options will be passed to conform.format()
-					timeout_ms = 500,
-					lsp_fallback = true,
+					latex = { "latexindent" },
 				},
 			})
+
+			vim.api.nvim_create_user_command("FormatOnSave", function(opts)
+				if opts.fargs[1] == "on" then
+					ConformFormatOnSave()
+				elseif opts.fargs[1] == "off" then
+					vim.api.nvim_exec("autocmd! formatting", true)
+				else
+					print("Invalid argument")
+				end
+			end, {
+				nargs = 1,
+				complete = function(ArgLead, CmdLine, CursorPos)
+					return { "on", "off" }
+				end,
+			})
+
+			ConformFormatOnSave()
 		end,
 	},
 }
