@@ -90,6 +90,15 @@ return {
 								),
 							})
 						end,
+						pyright = function()
+							require("lspconfig").pyright.setup({
+								settings = {
+									python = {
+										pythonPath = vim.fn.exepath("python3"),
+									},
+								},
+							})
+						end,
 					},
 				})
 			end,
