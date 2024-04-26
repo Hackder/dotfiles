@@ -55,10 +55,7 @@ return {
 			{ "nvim-lua/plenary.nvim" }, -- for curl, log wrapper
 			{ "nvim-telescope/telescope.nvim" },
 		},
-		opts = {
-			debug = false, -- Enable debugging
-			-- See Configuration section for rest
-		},
+		opts = {},
 		-- See Commands section for default commands if you want to lazy load on them
 		keys = {
 			{
@@ -67,7 +64,16 @@ return {
 					local actions = require("CopilotChat.actions")
 					require("CopilotChat.integrations.telescope").pick(actions.prompt_actions())
 				end,
+				mode = { "n", "v" },
 				desc = "CopilotChat - Help actions",
+			},
+			{
+				"<leader>cco",
+				function()
+					require("CopilotChat").toggle()
+				end,
+				mode = { "n", "v" },
+				desc = "CopilotChat - Toggle",
 			},
 		},
 	},
