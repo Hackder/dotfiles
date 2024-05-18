@@ -11,9 +11,6 @@ vim.keymap.set("n", "<leader>y", '"+y', { desc = "Copy to clipboard" })
 vim.keymap.set("v", "<leader>y", '"+y', { desc = "Copy to clipboard" })
 vim.keymap.set("n", "<leader>Y", '"+Y', { desc = "Copy to clipboard" })
 
-vim.keymap.set("n", "<leader>d", '"_d', { desc = "Delete without yanking" })
-vim.keymap.set("v", "<leader>d", '"_d', { desc = "Delete without yanking" })
-
 vim.keymap.set("i", "<C-c>", "<Esc>", { desc = "Exit insert mode" })
 
 vim.keymap.set("n", "Q", "<nop>")

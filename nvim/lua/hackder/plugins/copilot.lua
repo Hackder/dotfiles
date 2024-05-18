@@ -1,7 +1,12 @@
 return {
 	{
 		"zbirenbaum/copilot.lua",
+		dependencies = {
+			{ "nvim-lua/plenary.nvim" },
+			{ "folke/which-key.nvim" },
+		},
 		config = function()
+			require("which-key").register({ ["<leader>c"] = { name = "Copilot" } })
 			require("copilot").setup({
 				panel = {
 					enabled = true,
@@ -51,11 +56,16 @@ return {
 		"CopilotC-Nvim/CopilotChat.nvim",
 		branch = "canary",
 		dependencies = {
+			{ "folke/which-key.nvim" },
 			{ "zbirenbaum/copilot.lua" }, -- or github/copilot.vim
 			{ "nvim-lua/plenary.nvim" }, -- for curl, log wrapper
 			{ "nvim-telescope/telescope.nvim" },
 		},
-		opts = {},
+		config = function()
+			local wk = require("which-key")
+			wk.register({ ["<leader>cc"] = { name = "CopilotChat" } })
+			require("CopilotChat").setup({})
+		end,
 		-- See Commands section for default commands if you want to lazy load on them
 		keys = {
 			{
