@@ -5,7 +5,7 @@ function ConformFormatOnSave()
 		pattern = "*",
 		group = group,
 		callback = function(args)
-			require("conform").format({ bufnr = args.buf, timeout = 1000 })
+			require("conform").format({ bufnr = args.buf, timeout = 1000, lsp_format = "fallback" })
 		end,
 	})
 end
