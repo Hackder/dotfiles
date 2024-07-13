@@ -24,6 +24,15 @@ return {
 					root_dir = require("lspconfig").util.root_pattern("gleam.toml"),
 				})
 
+				require("lspconfig").zls.setup({
+					cmd = { "zls" },
+					settings = {
+						zls = {
+							zig_exe_path = vim.fn.exepath("zig"),
+						},
+					},
+				})
+
 				require("mason-lspconfig").setup({
 					ensure_installed = { "lua_ls", "tsserver", "rust_analyzer" },
 					handlers = {
