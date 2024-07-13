@@ -6,7 +6,7 @@ return {
 			{ "folke/which-key.nvim" },
 		},
 		config = function()
-			require("which-key").register({ ["<leader>c"] = { name = "Copilot" } })
+			require("which-key").add({ { "<leader>c", group = "Copilot" } })
 			require("copilot").setup({
 				panel = {
 					enabled = true,
@@ -63,7 +63,7 @@ return {
 		},
 		config = function()
 			local wk = require("which-key")
-			wk.register({ ["<leader>cc"] = { name = "CopilotChat" } })
+			wk.add({ { "<leader>cc", group = "CopilotChat" } })
 			require("CopilotChat").setup({})
 		end,
 		-- See Commands section for default commands if you want to lazy load on them
