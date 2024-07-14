@@ -137,6 +137,12 @@ return {
 					completion = {
 						completeopt = "menu,menuone,noinsert",
 					},
+					formatting = {
+						format = function(entry, vim_item)
+							vim_item.menu = entry:get_completion_item().detail
+							return vim_item
+						end,
+					},
 				})
 			end,
 		},
