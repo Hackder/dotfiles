@@ -19,7 +19,7 @@ return {
 				lsp_zero.extend_lspconfig()
 
 				require("lspconfig").gleam.setup({
-					cmd = { "gleam", "lsp" },
+					cmd = { "/Users/jurajpetras/dev/gleam/gleam/target/debug/gleam", "lsp" },
 					filetypes = { "gleam" },
 					root_dir = require("lspconfig").util.root_pattern("gleam.toml"),
 				})
