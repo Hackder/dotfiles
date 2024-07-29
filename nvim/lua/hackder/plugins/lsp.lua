@@ -144,6 +144,13 @@ return {
 						end,
 					},
 				})
+
+				cmp.setup.filetype({ "sql" }, {
+					sources = {
+						{ name = "vim-dadbod-completion" },
+						{ name = "buffer" },
+					},
+				})
 			end,
 		},
 		{ "L3MON4D3/LuaSnip" },
