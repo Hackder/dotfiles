@@ -27,7 +27,8 @@ vim.opt.autoread = true
 -- Search
 
 vim.opt.ignorecase = true
-vim.opt.hlsearch = false
+vim.opt.smartcase = true
+vim.opt.hlsearch = true
 vim.opt.incsearch = true
 
 vim.opt.termguicolors = true
