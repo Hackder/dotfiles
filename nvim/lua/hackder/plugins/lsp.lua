@@ -18,19 +18,26 @@ return {
 				local lsp_zero = require("lsp-zero")
 				lsp_zero.extend_lspconfig()
 
-				require("lspconfig").gleam.setup({
+				local lsp_config = require("lspconfig")
+
+				lsp_config.gleam.setup({
 					cmd = { "/Users/jurajpetras/dev/gleam/gleam/target/debug/gleam", "lsp" },
 					filetypes = { "gleam" },
 					root_dir = require("lspconfig").util.root_pattern("gleam.toml"),
 				})
 
-				require("lspconfig").zls.setup({
+				lsp_config.zls.setup({
 					cmd = { "zls" },
 					settings = {
 						zls = {
 							zig_exe_path = vim.fn.exepath("zig"),
 						},
 					},
+				})
+
+				lsp_config.roc_ls.setup({
+					cmd = { "roc_language_server" },
+					filetypes = { "roc" },
 				})
 
 				require("mason-lspconfig").setup({
