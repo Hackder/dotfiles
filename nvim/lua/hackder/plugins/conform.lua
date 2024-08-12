@@ -22,10 +22,10 @@ return {
 					-- Conform will run multiple formatters sequentially
 					python = { "ruff_fix", "ruff_format", "ruff_organize_imports" },
 					-- Use a sub-list to run only the first available formatter
-					javascript = { { "prettierd", "prettier" } },
-					javascriptreact = { { "prettierd", "prettier" } },
-					typescript = { { "prettierd", "prettier" } },
-					typescriptreact = { { "prettierd", "prettier" } },
+					javascript = { "prettierd", "prettier", stop_after_first = true },
+					javascriptreact = { "prettierd", "prettier", stop_after_first = true },
+					typescript = { "prettierd", "prettier", stop_after_first = true },
+					typescriptreact = { "prettierd", "prettier", stop_after_first = true },
 					java = { "google-java-format" },
 					php = { "phpcbf" },
 					latex = { "latexindent" },
