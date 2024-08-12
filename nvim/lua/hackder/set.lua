@@ -24,6 +24,9 @@ end
 vim.opt.undofile = true
 vim.opt.autoread = true
 
+vim.opt.splitright = true
+vim.opt.splitbelow = false
+
 -- Search
 
 vim.opt.ignorecase = true
