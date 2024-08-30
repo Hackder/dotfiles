@@ -21,7 +21,8 @@ return {
 				local lsp_config = require("lspconfig")
 
 				lsp_config.gleam.setup({
-					cmd = { "/Users/jurajpetras/dev/gleam/gleam/target/debug/gleam", "lsp" },
+					-- cmd = { "/Users/jurajpetras/dev/gleam/gleam/target/debug/gleam", "lsp" },
+					cmd = { "gleam", "lsp" },
 					filetypes = { "gleam" },
 					root_dir = require("lspconfig").util.root_pattern("gleam.toml"),
 				})
