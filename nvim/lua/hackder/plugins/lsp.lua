@@ -124,6 +124,7 @@ return {
 		{ "hrsh7th/cmp-nvim-lsp" },
 		{
 			"hrsh7th/nvim-cmp",
+			dependencies = { "hrsh7th/cmp-nvim-lsp", "hrsh7th/cmp-path", "L3MON4D3/LuaSnip" },
 			config = function()
 				local cmp = require("cmp")
 				local cmp_select = { beahvior = cmp.SelectBehavior.Select }
@@ -137,7 +138,7 @@ return {
 				cmp.setup({
 					mapping = cmp_mappings,
 					sources = {
-						{ name = "path" },
+						{ name = "path", keyword_length = 1 },
 						{ name = "nvim_lsp" },
 						{ name = "buffer", keyword_length = 3 },
 						{ name = "luasnip", keyword_length = 2 },
