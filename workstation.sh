@@ -49,7 +49,9 @@ mv /tmp/stew/stew ~/.local/bin/stew
 # stew install neovim/neovim
 # stew install nelsonenzo/tmux-appimage
 
-stew install ~/dotfiles/Stewfile.lock.json
+cd ~/dotfiles
+stew install Stewfile.lock.json
+cd ~
 
 link_files() {
     local target_dir="$1"
