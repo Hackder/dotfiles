@@ -84,3 +84,6 @@ ln -s "$HOME/.local/kitty.app/bin/kitten" "$HOME/.local/bin/kitten"
 
 # Replace shell in kitty config
 echo "shell $HOME/.local/bin/zsh" >> ~/.config/kitty/kitty.conf
+
+curl -L https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/FiraCode.zip -o /tmp/FiraCode.zip
+unzip /tmp/FiraCode.zip -d ~/.fonts
