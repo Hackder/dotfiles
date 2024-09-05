@@ -19,16 +19,16 @@ if [ -f ~/.bash_profile ]; then
   cp ~/.bash_profile ~/.bash_profile.bak
 fi
 echo "
-export SHELL=~/.local/bin/zsh
-exec ~/.local/bin/zsh -l
+export SHELL=$HOME/.local/bin/zsh
+exec $HOME/.local/bin/zsh -l
 " >> ~/.bash_profile
 
 if [ -f ~/.profile ]; then
   cp ~/.profile ~/.profile.bak
 fi
 echo "
-export SHELL=/bin/zsh
-[ -z "$ZSH_VERSION" ] && exec /bin/zsh -l
+export SHELL=$HOME/.local/bin/zsh
+[ -z "$ZSH_VERSION" ] && exec $HOME/.local/bin/zsh -l
 " >> ~/.profile
 
 curl -L https://github.com/marwanhawari/stew/releases/download/v0.4.0/stew-v0.4.0-linux-amd64.tar.gz -o /tmp/stew.tar.gz
@@ -88,5 +88,5 @@ link_files yazi
 link_files starship
 
 curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
-
-ln -s "$HOME/.local/kitty.app" "$HOME/.local/bin/kitty"
+ln -s "$HOME/.local/kitty.app/bin/kitty" "$HOME/.local/bin/kitty"
+ln -s "$HOME/.local/kitty.app/bin/kitten" "$HOME/.local/bin/kitten"

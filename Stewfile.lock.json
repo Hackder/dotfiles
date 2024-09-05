@@ -71,6 +71,16 @@
       "binary": "tmux",
       "url": "https://api.github.com/repos/nelsonenzo/tmux-appimage/releases/assets/129979255",
       "binaryHash": "ba8f457f280caacf0e6f3b3772eb84be2b47800d0b853da680cddd09c353bcc3"
+    },
+    {
+      "source": "github",
+      "owner": "eza-community",
+      "repo": "eza",
+      "tag": "v0.19.2",
+      "asset": "eza_x86_64-unknown-linux-musl.tar.gz",
+      "binary": "eza",
+      "url": "https://api.github.com/repos/eza-community/eza/releases/assets/190514804",
+      "binaryHash": "abc8b91d2a0b2b85b00a2a66c63ff26a4b84251a37fe4c4c137175cc2f0f252c"
     }
   ]
 }
