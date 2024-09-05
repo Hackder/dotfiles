@@ -45,6 +45,8 @@ stew install ~/dotfiles/Stewfile.lock.json
 
 curl https://mise.run | sh
 
+fnm install --latest
+
 link_files() {
     local target_dir="$1"
 
@@ -78,12 +80,14 @@ link_files kitty
 link_files yazi
 link_files starship
 
-curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
-ln -s "$HOME/.local/kitty.app/bin/kitty" "$HOME/.local/bin/kitty"
-ln -s "$HOME/.local/kitty.app/bin/kitten" "$HOME/.local/bin/kitten"
+curl -L https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/FiraCode.zip -o /tmp/FiraCode.zip
+unzip /tmp/FiraCode.zip -d ~/.fonts
 
 # Replace shell in kitty config
 echo "shell $HOME/.local/bin/zsh" >> ~/.config/kitty/kitty.conf
 
-curl -L https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/FiraCode.zip -o /tmp/FiraCode.zip
-unzip /tmp/FiraCode.zip -d ~/.fonts
+curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
+ln -s "$HOME/.local/kitty.app/bin/kitty" "$HOME/.local/bin/kitty"
+ln -s "$HOME/.local/kitty.app/bin/kitten" "$HOME/.local/bin/kitten"
+
+

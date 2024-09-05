@@ -121,9 +121,7 @@ export PATH="$DENO_INSTALL/bin:$PATH"
 
 # Roc
 export PATH="/Users/jurajpetras/roc_nightly-macos_apple_silicon-2024-07-13-070d14a5d60:$PATH"
-if [ -f "/Users/jurajpetras/.local/bin/mise" ]; then
-  eval "$(/Users/jurajpetras/.local/bin/mise activate zsh)"
-fi
+eval "$(mise activate zsh)"
 
 # zprof
 
