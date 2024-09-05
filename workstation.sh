@@ -36,6 +36,9 @@ mkdir -p /tmp/stew
 tar -xzf /tmp/stew.tar.gz -C /tmp/stew
 mv /tmp/stew/stew ~/.local/bin/stew
 
+cd ~
+git clone https://github.com/Hackder/dotfiles.git
+
 # If git is not installed, install it
 # if ! command -v git &> /dev/null; then
 #   # TODO install git
@@ -49,12 +52,12 @@ mv /tmp/stew/stew ~/.local/bin/stew
 # stew install neovim/neovim
 # stew install nelsonenzo/tmux-appimage
 
-cd ~/dotfiles
-stew install Stewfile.lock.json
-cd ~
+stew install ~/dotfiles/Stewfile.lock.json
 
 link_files() {
     local target_dir="$1"
+
+    local current_dir=$(pwd)
 
     # Check if the target directory is provided and exists
     if [[ -z "$target_dir" || ! -d "$target_dir" ]]; then
@@ -63,7 +66,7 @@ link_files() {
     fi
 
     # Use `fd` to find all files recursively in the target directory
-    fd -H --base-directory="$target" -t f . | while read -r file; do
+    fd -H --base-directory="$target_dir" -t f . | while read -r file; do
         # Determine the destination path in $HOME
         dest="$HOME/$file"
 
@@ -71,14 +74,12 @@ link_files() {
         mkdir -p "$(dirname "$dest")"
 
         # Create the symlink
-        ln -sf "$target/$file" "$dest"
+        ln -sf "$current_dir/$target_dir/$file" "$dest"
     done
 }
 
-cd ~
-git clone https://github.com/Hackder/dotfiles.git
-cd dotfiles
 
+cd dotfiles
 link_files nvim
 link_files zsh
 link_files tmux
