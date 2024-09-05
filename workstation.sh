@@ -7,7 +7,12 @@
 # Install Homebrew
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-brew install git stow
+# If git is not installed, install it
+if ! command -v git &> /dev/null; then
+    brew install git
+fi
+
+brew install stow
 cd ~
 git clone https://github.com/Hackder/dotfiles.git
 
