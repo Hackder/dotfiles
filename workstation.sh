@@ -13,12 +13,30 @@ mkdir -p ~/.local/bin &&
 ln -s ~/.local/Homebrew/bin/brew ~/.local/bin
 
 if command -v curl &> /dev/null; then
-  sh -c "$(curl -fsSL https://raw.githubusercontent.com/romkatv/zsh-bin/master/install)"
+  echo "2
+  n" | sh -c "$(curl -fsSL https://raw.githubusercontent.com/romkatv/zsh-bin/master/install)"
 else
-  sh -c "$(wget -O- https://raw.githubusercontent.com/romkatv/zsh-bin/master/install)"
+  echo "2
+  n" | sh -c "$(wget -O- https://raw.githubusercontent.com/romkatv/zsh-bin/master/install)"
 fi
 
 export PATH="$HOME/.local/bin:$PATH"
+
+if [ -f ~/.bash_profile ]; then
+  cp ~/.bash_profile ~/.bash_profile.bak
+fi
+echo "
+export SHELL=~/.local/bin/zsh
+exec ~/.local/bin/zsh -l
+" >> ~/.bash_profile
+
+if [ -f ~/.profile ]; then
+  cp ~/.profile ~/.profile.bak
+fi
+echo "
+export SHELL=/bin/zsh
+[ -z "$ZSH_VERSION" ] && exec /bin/zsh -l
+" >> ~/.profile
 
 # If git is not installed, install it
 if ! command -v git &> /dev/null; then
@@ -40,5 +58,4 @@ stow nvim
 # Install git
 brew install git ripgrep fd fzf tmux neovim yazi starship
 
-# Change shell to zsh
-chsh -s /opt/homebrew/bin/zsh
+curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin

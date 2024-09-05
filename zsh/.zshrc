@@ -23,6 +23,7 @@ autoload -U colors && colors
 
 # Custom Variables
 export EDITOR=nvim
+export PATH="$HOME/.local/bin:$PATH"
 
 # History in cache directory:
 HISTSIZE=10000
