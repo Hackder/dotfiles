@@ -14,10 +14,10 @@ ln -s ~/.local/Homebrew/bin/brew ~/.local/bin
 
 if command -v curl &> /dev/null; then
   echo "2
-  n" | sh -c "$(curl -fsSL https://raw.githubusercontent.com/romkatv/zsh-bin/master/install)"
+n" | sh -c "$(curl -fsSL https://raw.githubusercontent.com/romkatv/zsh-bin/master/install)"
 else
   echo "2
-  n" | sh -c "$(wget -O- https://raw.githubusercontent.com/romkatv/zsh-bin/master/install)"
+n" | sh -c "$(wget -O- https://raw.githubusercontent.com/romkatv/zsh-bin/master/install)"
 fi
 
 export PATH="$HOME/.local/bin:$PATH"
