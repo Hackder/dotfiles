@@ -44,7 +44,7 @@ mv /tmp/stew/stew ~/.local/bin/stew
 stew install junegunn/fzf
 stew install BurntSushi/ripgrep
 stew install sharkdp/fd
-stew install yazgoo/yazi
+stew install sxyazi/yazi
 stew install starship/starship
 stew install neovim/neovim
 stew install nelsonenzo/tmux-appimage
@@ -60,7 +60,7 @@ link_files() {
     fi
 
     # Use `fd` to find all files recursively in the target directory
-    fd -t f . "$target_dir" | while read -r file; do
+    fd -H -t f . "$target_dir" | while read -r file; do
         # Determine the relative path from the target directory
         relative_path="${file#$target_dir/}"
 
@@ -87,3 +87,5 @@ link_files yazi
 link_files starship
 
 curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
+
+ln -s "$HOME/.local/kitty.app" "$HOME/.local/bin/kitty"
