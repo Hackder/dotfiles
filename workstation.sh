@@ -41,14 +41,15 @@ mv /tmp/stew/stew ~/.local/bin/stew
 #   # TODO install git
 # fi
 
-stew install junegunn/fzf
-stew install BurntSushi/ripgrep
-stew install sharkdp/fd
-stew install sxyazi/yazi
-stew install starship/starship
-stew install neovim/neovim
-stew install nelsonenzo/tmux-appimage
+# stew install junegunn/fzf
+# stew install BurntSushi/ripgrep
+# stew install sharkdp/fd
+# stew install sxyazi/yazi
+# stew install starship/starship
+# stew install neovim/neovim
+# stew install nelsonenzo/tmux-appimage
 
+stew install ~/dotfiles/Stewfile.lock.json
 
 link_files() {
     local target_dir="$1"
@@ -60,18 +61,15 @@ link_files() {
     fi
 
     # Use `fd` to find all files recursively in the target directory
-    fd -H -t f . "$target_dir" | while read -r file; do
-        # Determine the relative path from the target directory
-        relative_path="${file#$target_dir/}"
-
+    fd -H --base-directory="$target" -t f . | while read -r file; do
         # Determine the destination path in $HOME
-        dest="$HOME/$relative_path"
+        dest="$HOME/$file"
 
         # Create the parent directory of the destination if it doesn't exist
         mkdir -p "$(dirname "$dest")"
 
         # Create the symlink
-        ln -sf "$file" "$dest"
+        ln -sf "$target/$file" "$dest"
     done
 }
 
