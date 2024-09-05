@@ -47,17 +47,23 @@ bindkey -s ^a 'tmux a\n'
 [ -f "$HOME/aliasrc" ] && source "$HOME/aliasrc"
 
 # Load ; should be last.
-source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+if [ -f /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
+  source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+fi
+if [ -f /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
+  source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+fi
 # source ~/powerlevel10k/powerlevel10k.zsh-theme
 
 # # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 # [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
-export GITLAB_AUTH_TOKEN=kK7ph7EFyq6AsBBDUt_3
 export COLORTERM=truecolor
 export TERM='screen-256color'
 export RANRC=1
+
+if [ -f ~/.zsh_secrets ]; then
+  source ~/.zsh_secrets
+fi
 
 # Starship
 eval "$(starship init zsh)"

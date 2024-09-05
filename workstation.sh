@@ -15,22 +15,6 @@ fi
 
 export PATH="$HOME/.local/bin:$PATH"
 
-if [ -f ~/.bash_profile ]; then
-  cp ~/.bash_profile ~/.bash_profile.bak
-fi
-echo "
-export SHELL=$HOME/.local/bin/zsh
-exec $HOME/.local/bin/zsh -l
-" >> ~/.bash_profile
-
-if [ -f ~/.profile ]; then
-  cp ~/.profile ~/.profile.bak
-fi
-echo "
-export SHELL=$HOME/.local/bin/zsh
-[ -z "$ZSH_VERSION" ] && exec $HOME/.local/bin/zsh -l
-" >> ~/.profile
-
 curl -L https://github.com/marwanhawari/stew/releases/download/v0.4.0/stew-v0.4.0-linux-amd64.tar.gz -o /tmp/stew.tar.gz
 mkdir -p /tmp/stew
 tar -xzf /tmp/stew.tar.gz -C /tmp/stew
@@ -90,3 +74,6 @@ link_files starship
 curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
 ln -s "$HOME/.local/kitty.app/bin/kitty" "$HOME/.local/bin/kitty"
 ln -s "$HOME/.local/kitty.app/bin/kitten" "$HOME/.local/bin/kitten"
+
+# Replace shell in kitty config
+echo "shell $HOME/.local/bin/zsh" >> ~/.config/kitty/kitty.conf
