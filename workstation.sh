@@ -5,13 +5,20 @@
 # in PATH. It will also stow all the dotfiles.
 
 # Install Homebrew
-cd ~
-mkdir homebrew
-curl -L https://github.com/Homebrew/brew/tarball/master | tar xz --strip-components 1 -C homebrew
+mkdir -p ~/.local/Homebrew &&
+curl -L https://github.com/Homebrew/brew/tarball/master |
+tar xz --strip 1 -C ~/.local/Homebrew
 
-eval "$(homebrew/bin/brew shellenv)"
-brew update --force --quiet
-# chmod -R go-w "$(brew --prefix)/share/zsh"
+mkdir -p ~/.local/bin &&
+ln -s ~/.local/Homebrew/bin/brew ~/.local/bin
+
+if command -v curl &> /dev/null; then
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/romkatv/zsh-bin/master/install)"
+else
+  sh -c "$(wget -O- https://raw.githubusercontent.com/romkatv/zsh-bin/master/install)"
+fi
+
+export PATH="$HOME/.local/bin:$PATH"
 
 # If git is not installed, install it
 if ! command -v git &> /dev/null; then
@@ -31,7 +38,7 @@ stow zsh
 stow nvim
 
 # Install git
-brew install git ripgrep fd fzf zsh tmux neovim kitty yazi starship
+brew install git ripgrep fd fzf tmux neovim yazi starship
 
 # Change shell to zsh
 chsh -s /opt/homebrew/bin/zsh
