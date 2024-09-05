@@ -5,7 +5,13 @@
 # in PATH. It will also stow all the dotfiles.
 
 # Install Homebrew
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+cd ~
+mkdir homebrew
+curl -L https://github.com/Homebrew/brew/tarball/master | tar xz --strip-components 1 -C homebrew
+
+eval "$(homebrew/bin/brew shellenv)"
+brew update --force --quiet
+# chmod -R go-w "$(brew --prefix)/share/zsh"
 
 # If git is not installed, install it
 if ! command -v git &> /dev/null; then
