@@ -15,6 +15,11 @@ fi
 
 export PATH="$HOME/.local/bin:$PATH"
 
+mkdir -p ~/.config/stew
+echo "{
+  \"stewPath\": \"$HOME/.local/share/stew\",
+  \"stewBinPath\": \"$HOME/.local/bin\"
+}" > ~/.config/stew/stew.config.json
 
 if command -v curl &> /dev/null; then
   curl -L https://github.com/marwanhawari/stew/releases/download/v0.4.0/stew-v0.4.0-linux-amd64.tar.gz -o /tmp/stew.tar.gz
