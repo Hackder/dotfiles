@@ -1,0 +1,76 @@
+{
+  "os": "linux",
+  "arch": "amd64",
+  "packages": [
+    {
+      "source": "github",
+      "owner": "junegunn",
+      "repo": "fzf",
+      "tag": "v0.55.0",
+      "asset": "fzf-0.55.0-linux_amd64.tar.gz",
+      "binary": "fzf",
+      "url": "https://api.github.com/repos/junegunn/fzf/releases/assets/189050373",
+      "binaryHash": "bc96f0fa94b85b6b79ab84cdd2c173304c3f4621aa7e5fa97b7f713de77ba3f8"
+    },
+    {
+      "source": "github",
+      "owner": "BurntSushi",
+      "repo": "ripgrep",
+      "tag": "14.1.0",
+      "asset": "ripgrep-14.1.0-x86_64-unknown-linux-musl.tar.gz",
+      "binary": "rg",
+      "url": "https://api.github.com/repos/BurntSushi/ripgrep/releases/assets/144124496",
+      "binaryHash": "c2feed7a376d3754958fa6235a6ef88a74bcabc9b0cfccacbd48939b5f87860d"
+    },
+    {
+      "source": "github",
+      "owner": "sharkdp",
+      "repo": "fd",
+      "tag": "v10.2.0",
+      "asset": "fd-v10.2.0-x86_64-unknown-linux-musl.tar.gz",
+      "binary": "fd",
+      "url": "https://api.github.com/repos/sharkdp/fd/releases/assets/187806646",
+      "binaryHash": "ebcfc522da2a3086435d4e932770ea7eab53609d0377ea1f387e82fae3d447ce"
+    },
+    {
+      "source": "github",
+      "owner": "sxyazi",
+      "repo": "yazi",
+      "tag": "v0.3.3",
+      "asset": "yazi-x86_64-unknown-linux-musl.zip",
+      "binary": "yazi",
+      "url": "https://api.github.com/repos/sxyazi/yazi/releases/assets/190390158",
+      "binaryHash": "29e3cf17dcecfa1873a5ff8fa4e06211a6675ee8edd07b03706ca30cd196a560"
+    },
+    {
+      "source": "github",
+      "owner": "starship",
+      "repo": "starship",
+      "tag": "v1.20.1",
+      "asset": "starship-x86_64-unknown-linux-musl.tar.gz",
+      "binary": "starship",
+      "url": "https://api.github.com/repos/starship/starship/releases/assets/182174711",
+      "binaryHash": "dc8e6ec38af47edfeb87dec3a719218befa195f96e4daf7503137fe338c6779b"
+    },
+    {
+      "source": "github",
+      "owner": "neovim",
+      "repo": "neovim",
+      "tag": "nightly",
+      "asset": "nvim.appimage",
+      "binary": "nvim",
+      "url": "https://api.github.com/repos/neovim/neovim/releases/assets/190536815",
+      "binaryHash": "0d23a1496fcf55e1327beff5520d5f5ecd614f9692203541797afc2a97ffd55e"
+    },
+    {
+      "source": "github",
+      "owner": "nelsonenzo",
+      "repo": "tmux-appimage",
+      "tag": "3.3a",
+      "asset": "tmux.appimage",
+      "binary": "tmux",
+      "url": "https://api.github.com/repos/nelsonenzo/tmux-appimage/releases/assets/129979255",
+      "binaryHash": "ba8f457f280caacf0e6f3b3772eb84be2b47800d0b853da680cddd09c353bcc3"
+    }
+  ]
+}
