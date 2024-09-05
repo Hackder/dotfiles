@@ -43,9 +43,12 @@ git clone https://github.com/Hackder/dotfiles.git
 
 stew install ~/dotfiles/Stewfile.lock.json
 
-curl https://mise.run | sh
-
 fnm install --latest
+
+curl https://mise.run | sh
+mise install python
+mise use --global python
+
 
 link_files() {
     local target_dir="$1"

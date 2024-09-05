@@ -42,11 +42,11 @@ return {
 				})
 
 				require("mason-lspconfig").setup({
-					ensure_installed = { "lua_ls", "tsserver", "rust_analyzer" },
+					ensure_installed = { "lua_ls", "tsserver", "rust_analyzer", "pyright" },
 					handlers = {
 						lsp_zero.default_setup,
 						tsserver = function()
-							require("lspconfig").tsserver.setup({
+							require("lspconfig").ts_ls.setup({
 								handlers = {
 									["textDocument/publishDiagnostics"] = function(_, result, ctx, config)
 										if result.diagnostics == nil then
