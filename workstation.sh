@@ -47,7 +47,7 @@ stew install sharkdp/fd
 stew install yazgoo/yazi
 stew install starship/starship
 stew install neovim/neovim
-stew install tmux/tmux
+stew install nelsonenzo/tmux-appimage
 
 
 link_files() {
