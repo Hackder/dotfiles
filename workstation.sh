@@ -56,6 +56,6 @@ stow zsh
 stow nvim
 
 # Install git
-brew install git ripgrep fd fzf tmux neovim yazi starship
+brew install ripgrep fd fzf tmux neovim yazi starship
 
 curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
