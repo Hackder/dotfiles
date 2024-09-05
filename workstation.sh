@@ -15,7 +15,12 @@ fi
 
 export PATH="$HOME/.local/bin:$PATH"
 
-curl -L https://github.com/marwanhawari/stew/releases/download/v0.4.0/stew-v0.4.0-linux-amd64.tar.gz -o /tmp/stew.tar.gz
+
+if command -v curl &> /dev/null; then
+  curl -L https://github.com/marwanhawari/stew/releases/download/v0.4.0/stew-v0.4.0-linux-amd64.tar.gz -o /tmp/stew.tar.gz
+else
+  wget -O /tmp/stew.tar.gz https://github.com/marwanhawari/stew/releases/download/v0.4.0/stew-v0.4.0-linux-amd64.tar.gz
+fi
 mkdir -p /tmp/stew
 tar -xzf /tmp/stew.tar.gz -C /tmp/stew
 mv /tmp/stew/stew ~/.local/bin/stew
@@ -37,6 +42,8 @@ git clone https://github.com/Hackder/dotfiles.git
 # stew install nelsonenzo/tmux-appimage
 
 stew install ~/dotfiles/Stewfile.lock.json
+
+curl https://mise.run | sh
 
 link_files() {
     local target_dir="$1"

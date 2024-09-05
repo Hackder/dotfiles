@@ -91,6 +91,16 @@
       "binary": "fnm",
       "url": "https://api.github.com/repos/Schniz/fnm/releases/assets/173569605",
       "binaryHash": "2a6d31309b7301fb7a4ffc3e78df864a46dad61198bd193057b2fb48337a11e0"
+    },
+    {
+      "source": "github",
+      "owner": "stunnel",
+      "repo": "static-curl",
+      "tag": "8.9.1",
+      "asset": "curl-linux-x86_64-musl-8.9.1.tar.xz",
+      "binary": "curl",
+      "url": "https://api.github.com/repos/stunnel/static-curl/releases/assets/182965726",
+      "binaryHash": "010f9f304b38ffefc297c85fa152a5f593ca05eeea8c78d3f3c8b2c5f5eae07f"
     }
   ]
 }
