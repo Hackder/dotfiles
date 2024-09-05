@@ -41,7 +41,9 @@ git clone https://github.com/Hackder/dotfiles.git
 # stew install neovim/neovim
 # stew install nelsonenzo/tmux-appimage
 
-stew install ~/dotfiles/Stewfile.lock.json
+echo "
+
+" | stew install ~/dotfiles/Stewfile.lock.json
 
 fnm install --latest
 
