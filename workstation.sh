@@ -37,9 +37,9 @@ tar -xzf /tmp/stew.tar.gz -C /tmp/stew
 mv /tmp/stew/stew ~/.local/bin/stew
 
 # If git is not installed, install it
-if ! command -v git &> /dev/null; then
-  # TODO install git
-fi
+# if ! command -v git &> /dev/null; then
+#   # TODO install git
+# fi
 
 stew install junegunn/fzf
 stew install BurntSushi/ripgrep
