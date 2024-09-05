@@ -31,7 +31,9 @@ export SHELL=/bin/zsh
 [ -z "$ZSH_VERSION" ] && exec /bin/zsh -l
 " >> ~/.profile
 
-curl -L https://github.com/marwanhawari/stew/releases/download/v0.4.0/stew-v0.4.0-linux-amd64.tar.gz | tar -xzf - -C /tmp/stew
+curl -L https://github.com/marwanhawari/stew/releases/download/v0.4.0/stew-v0.4.0-linux-amd64.tar.gz -o /tmp/stew.tar.gz
+mkdir -p /tmp/stew
+tar -xzf /tmp/stew.tar.gz -C /tmp/stew
 mv /tmp/stew/stew ~/.local/bin/stew
 
 # If git is not installed, install it
