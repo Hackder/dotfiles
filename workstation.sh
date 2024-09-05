@@ -4,14 +4,7 @@
 # It will download binaries for all the tools and set them up
 # in PATH. It will also stow all the dotfiles.
 
-# Install Homebrew
-mkdir -p ~/.local/Homebrew &&
-curl -L https://github.com/Homebrew/brew/tarball/master |
-tar xz --strip 1 -C ~/.local/Homebrew
-
-mkdir -p ~/.local/bin &&
-ln -s ~/.local/Homebrew/bin/brew ~/.local/bin
-
+# ZSH
 if command -v curl &> /dev/null; then
   echo "2
 n" | sh -c "$(curl -fsSL https://raw.githubusercontent.com/romkatv/zsh-bin/master/install)"
@@ -38,24 +31,57 @@ export SHELL=/bin/zsh
 [ -z "$ZSH_VERSION" ] && exec /bin/zsh -l
 " >> ~/.profile
 
+curl -L https://github.com/marwanhawari/stew/releases/download/v0.4.0/stew-v0.4.0-linux-amd64.tar.gz | tar -xzf - -C /tmp/stew
+mv /tmp/stew/stew ~/.local/bin/stew
+
 # If git is not installed, install it
 if ! command -v git &> /dev/null; then
-    brew install git
+  # TODO install git
 fi
 
-brew install stow
+stew install junegunn/fzf
+stew install BurntSushi/ripgrep
+stew install sharkdp/fd
+stew install yazgoo/yazi
+stew install starship/starship
+stew install neovim/neovim
+stew install tmux/tmux
+
+
+link_files() {
+    local target_dir="$1"
+
+    # Check if the target directory is provided and exists
+    if [[ -z "$target_dir" || ! -d "$target_dir" ]]; then
+        echo "Please provide a valid directory."
+        return 1
+    fi
+
+    # Use `fd` to find all files recursively in the target directory
+    fd -t f . "$target_dir" | while read -r file; do
+        # Determine the relative path from the target directory
+        relative_path="${file#$target_dir/}"
+
+        # Determine the destination path in $HOME
+        dest="$HOME/$relative_path"
+
+        # Create the parent directory of the destination if it doesn't exist
+        mkdir -p "$(dirname "$dest")"
+
+        # Create the symlink
+        ln -sf "$file" "$dest"
+    done
+}
+
 cd ~
 git clone https://github.com/Hackder/dotfiles.git
-
 cd dotfiles
-stow kitty
-stow yazi
-stow starship
-stow tmux
-stow zsh
-stow nvim
 
-# Install git
-brew install ripgrep fd fzf tmux neovim yazi starship
+link_files nvim
+link_files zsh
+link_files tmux
+link_files kitty
+link_files yazi
+link_files starship
 
 curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
