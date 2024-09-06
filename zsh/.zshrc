@@ -124,6 +124,16 @@ export PATH="$DENO_INSTALL/bin:$PATH"
 export PATH="/Users/jurajpetras/roc_nightly-macos_apple_silicon-2024-07-13-070d14a5d60:$PATH"
 eval "$(mise activate zsh)"
 
+# yazi
+function yy() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
+	yazi "$@" --cwd-file="$tmp"
+	if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+		builtin cd -- "$cwd"
+	fi
+	rm -f -- "$tmp"
+}
+
 # zprof
 
 
