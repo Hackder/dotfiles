@@ -10,6 +10,7 @@ if ! command -v git &> /dev/null; then
   apt-get download git
   dpkg -x git_* git
   echo "export PATH=$HOME/.local/mygit/git/usr/bin:\$PATH" >> ~/.bashrc
+  export PATH="$HOME/.local/mygit/git/usr/bin:$PATH"
   # dpkg -i git_*.deb --force-not-root --root=$HOME
 fi
 
