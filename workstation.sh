@@ -106,8 +106,8 @@ unzip /tmp/FiraCode.zip -d ~/.fonts
 # Replace shell in kitty config
 echo "shell $HOME/.local/bin/zsh" >> ~/.config/kitty/kitty.conf
 
+cd ~
 curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
 ln -s "$HOME/.local/kitty.app/bin/kitty" "$HOME/.local/bin/kitty"
 ln -s "$HOME/.local/kitty.app/bin/kitten" "$HOME/.local/bin/kitten"
 
-cd ~
