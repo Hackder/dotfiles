@@ -15,20 +15,30 @@ fi
 
 export PATH="$HOME/.local/bin:$PATH"
 
-mkdir -p ~/.config/stew
-echo "{
-  \"stewPath\": \"$HOME/.local/share/stew\",
-  \"stewBinPath\": \"$HOME/.local/bin\"
-}" > ~/.config/stew/stew.config.json
+# mkdir -p ~/.config/stew
+# echo "{
+#   \"stewPath\": \"$HOME/.local/share/stew\",
+#   \"stewBinPath\": \"$HOME/.local/bin\"
+# }" > ~/.config/stew/stew.config.json
+#
+# if command -v curl &> /dev/null; then
+#   curl -L https://github.com/marwanhawari/stew/releases/download/v0.4.0/stew-v0.4.0-linux-amd64.tar.gz -o /tmp/stew.tar.gz
+# else
+#   wget -O /tmp/stew.tar.gz https://github.com/marwanhawari/stew/releases/download/v0.4.0/stew-v0.4.0-linux-amd64.tar.gz
+# fi
+# mkdir -p /tmp/stew
+# tar -xzf /tmp/stew.tar.gz -C /tmp/stew
+# mv /tmp/stew/stew ~/.local/bin/stew
 
 if command -v curl &> /dev/null; then
-  curl -L https://github.com/marwanhawari/stew/releases/download/v0.4.0/stew-v0.4.0-linux-amd64.tar.gz -o /tmp/stew.tar.gz
+  curl -L https://github.com/Hackder/workstation/releases/download/v0.1.0/workstation-x86_64-unknown-linux-musl.tar.gz -o /tmp/workstation.tar.gz
 else
-  wget -O /tmp/stew.tar.gz https://github.com/marwanhawari/stew/releases/download/v0.4.0/stew-v0.4.0-linux-amd64.tar.gz
+  wget -O /tmp/workstation.tar.gz https://github.com/Hackder/workstation/releases/download/v0.1.0/workstation-x86_64-unknown-linux-musl.tar.gz
 fi
-mkdir -p /tmp/stew
-tar -xzf /tmp/stew.tar.gz -C /tmp/stew
-mv /tmp/stew/stew ~/.local/bin/stew
+mkdir -p /tmp/workstation
+tar -xzf /tmp/workstation.tar.gz -C /tmp/workstation
+mkdir -p ~/.local/bin
+mv /tmp/workstation/workstation ~/.local/bin/workstation
 
 cd ~
 git clone https://github.com/Hackder/dotfiles.git
@@ -46,7 +56,9 @@ git clone https://github.com/Hackder/dotfiles.git
 # stew install neovim/neovim
 # stew install nelsonenzo/tmux-appimage
 
-stew install ~/dotfiles/Stewfile.lock.json
+cd dotfiles
+workstation setup
+cd ~
 
 fnm install --latest
 
