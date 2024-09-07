@@ -16,6 +16,7 @@ if ! command -v git &> /dev/null; then
   rm ~/miniconda3/miniconda.sh
   ~/miniconda3/bin/conda init bash
   ~/miniconda3/bin/conda install -y git
+  PATH="$HOME/miniconda3/bin:$PATH"
 fi
 
 # ZSH
