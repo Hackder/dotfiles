@@ -6,12 +6,15 @@
 
 mkdir -p ~/.local/mygit
 if ! command -v git &> /dev/null; then
-  cd ~/.local/mygit
-  apt-get download git
-  dpkg -x git_* git
-  echo "export PATH=$HOME/.local/mygit/git/usr/bin:\$PATH" >> ~/.bashrc
-  export PATH="$HOME/.local/mygit/git/usr/bin:$PATH"
-  # dpkg -i git_*.deb --force-not-root --root=$HOME
+  mkdir -p ~/miniconda3
+  if ! command -v curl &> /dev/null; then
+    wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda3/miniconda.sh
+  else
+    curl https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -L -o ~/miniconda3/miniconda.sh
+  fi
+  bash ~/miniconda3/miniconda.sh -b -u -p ~/miniconda3
+  rm ~/miniconda3/miniconda.sh
+  ~/miniconda3/bin/conda install -y git
 fi
 
 # ZSH
