@@ -31,9 +31,9 @@ export PATH="$HOME/.local/bin:$PATH"
 # mv /tmp/stew/stew ~/.local/bin/stew
 
 if command -v curl &> /dev/null; then
-  curl -L https://github.com/Hackder/workstation/releases/download/v0.1.0/workstation-x86_64-unknown-linux-musl.tar.gz -o /tmp/workstation.tar.gz
+  curl -L https://github.com/Hackder/workstation/releases/latest/download/workstation-x86_64-unknown-linux-musl.tar.gz -o /tmp/workstation.tar.gz
 else
-  wget -O /tmp/workstation.tar.gz https://github.com/Hackder/workstation/releases/download/v0.1.0/workstation-x86_64-unknown-linux-musl.tar.gz
+  wget -O /tmp/workstation.tar.gz https://github.com/Hackder/workstation/releases/latest/download/workstation-x86_64-unknown-linux-musl.tar.gz
 fi
 mkdir -p /tmp/workstation
 tar -xzf /tmp/workstation.tar.gz -C /tmp/workstation
