@@ -4,8 +4,6 @@
 # It will download binaries for all the tools and set them up
 # in PATH. It will also stow all the dotfiles.
 
-set -e
-
 mkdir -p ~/.local/mygit
 if ! command -v git &> /dev/null; then
   cd ~/.local/mygit
