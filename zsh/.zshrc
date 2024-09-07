@@ -23,7 +23,7 @@ autoload -U colors && colors
 
 # Custom Variables
 export EDITOR=nvim
-export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/.local/mygit/git/usr/bin:$HOME/.local/bin:$PATH"
 export SHELL=$(which zsh)
 
 # History in cache directory:

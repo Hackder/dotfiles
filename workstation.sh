@@ -4,6 +4,17 @@
 # It will download binaries for all the tools and set them up
 # in PATH. It will also stow all the dotfiles.
 
+set -e
+
+mkdir -p ~/.local/mygit
+if ! command -v git &> /dev/null; then
+  cd ~/.local/mygit
+  apt-get download git
+  dpkg -x git_* git
+  echo "export PATH=$HOME/.local/mygit/git/usr/bin:\$PATH" >> ~/.bashrc
+  # dpkg -i git_*.deb --force-not-root --root=$HOME
+fi
+
 # ZSH
 if command -v curl &> /dev/null; then
   echo "2
