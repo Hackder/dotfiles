@@ -31,45 +31,15 @@ fi
 echo "2
 n" | sh -c "$(curl -fsSL https://raw.githubusercontent.com/romkatv/zsh-bin/master/install)"
 
-
-# mkdir -p ~/.config/stew
-# echo "{
-#   \"stewPath\": \"$HOME/.local/share/stew\",
-#   \"stewBinPath\": \"$HOME/.local/bin\"
-# }" > ~/.config/stew/stew.config.json
-#
-# if command -v curl &> /dev/null; then
-#   curl -L https://github.com/marwanhawari/stew/releases/download/v0.4.0/stew-v0.4.0-linux-amd64.tar.gz -o /tmp/stew.tar.gz
-# else
-#   wget -O /tmp/stew.tar.gz https://github.com/marwanhawari/stew/releases/download/v0.4.0/stew-v0.4.0-linux-amd64.tar.gz
-# fi
-# mkdir -p /tmp/stew
-# tar -xzf /tmp/stew.tar.gz -C /tmp/stew
-# mv /tmp/stew/stew ~/.local/bin/stew
-
-
-cd ~
-git clone https://github.com/Hackder/dotfiles.git
-
-# If git is not installed, install it
-# if ! command -v git &> /dev/null; then
-#   # TODO install git
-# fi
-
-# stew install junegunn/fzf
-# stew install BurntSushi/ripgrep
-# stew install sharkdp/fd
-# stew install sxyazi/yazi
-# stew install starship/starship
-# stew install neovim/neovim
-# stew install nelsonenzo/tmux-appimage
-
 fnm install --latest
 
 curl https://mise.run | sh
+mise settings set python_compile false
 mise install python
 mise use --global python
 
+cd ~
+git clone https://github.com/Hackder/dotfiles.git
 
 link_files() {
     local target_dir="$1"
