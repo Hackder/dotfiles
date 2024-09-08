@@ -39,7 +39,12 @@ mise install python
 mise use --global python
 
 cd ~
-git clone https://github.com/Hackder/dotfiles.git
+if ! command -v git &> /dev/null; then
+  curl curl -L -O https://github.com/Hackder/dotfiles/archive/main.zip
+  unzip master.zip -d dotfiles
+else
+  git clone https://github.com/Hackder/dotfiles.git
+fi
 
 link_files() {
     local target_dir="$1"
