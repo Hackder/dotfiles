@@ -42,6 +42,7 @@ cd ~
 if ! command -v git &> /dev/null; then
   curl -L -O https://github.com/Hackder/dotfiles/archive/main.zip
   unzip master.zip -d dotfiles
+  mv dotfiles/dotfiles-main/* dotfiles/.
 else
   git clone https://github.com/Hackder/dotfiles.git
 fi
