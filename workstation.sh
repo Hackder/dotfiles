@@ -4,14 +4,22 @@
 # It will download binaries for all the tools and set them up
 # in PATH. It will also stow all the dotfiles.
 
-mkdir -p ~/.local/mygit
+export PATH="$HOME/.local/bin:$PATH"
+if command -v curl &> /dev/null; then
+  curl -L https://github.com/Hackder/workstation/releases/latest/download/workstation-x86_64-unknown-linux-musl.tar.gz -o /tmp/workstation.tar.gz
+else
+  wget -O /tmp/workstation.tar.gz https://github.com/Hackder/workstation/releases/latest/download/workstation-x86_64-unknown-linux-musl.tar.gz
+fi
+mkdir -p /tmp/workstation
+tar -xzf /tmp/workstation.tar.gz -C /tmp/workstation
+mkdir -p ~/.local/bin
+mv /tmp/workstation/workstation ~/.local/bin/workstation
+
+workstation -r https://raw.githubusercontent.com/Hackder/dotfiles/main/workstation.toml setup
+
 if ! command -v git &> /dev/null; then
   mkdir -p ~/miniconda3
-  if ! command -v curl &> /dev/null; then
-    wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda3/miniconda.sh
-  else
-    curl https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -L -o ~/miniconda3/miniconda.sh
-  fi
+  curl https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -L -o ~/miniconda3/miniconda.sh
   bash ~/miniconda3/miniconda.sh -b -u -p ~/miniconda3
   rm ~/miniconda3/miniconda.sh
   ~/miniconda3/bin/conda init bash
@@ -20,15 +28,9 @@ if ! command -v git &> /dev/null; then
 fi
 
 # ZSH
-if command -v curl &> /dev/null; then
-  echo "2
+echo "2
 n" | sh -c "$(curl -fsSL https://raw.githubusercontent.com/romkatv/zsh-bin/master/install)"
-else
-  echo "2
-n" | sh -c "$(wget -O- https://raw.githubusercontent.com/romkatv/zsh-bin/master/install)"
-fi
 
-export PATH="$HOME/.local/bin:$PATH"
 
 # mkdir -p ~/.config/stew
 # echo "{
@@ -45,15 +47,6 @@ export PATH="$HOME/.local/bin:$PATH"
 # tar -xzf /tmp/stew.tar.gz -C /tmp/stew
 # mv /tmp/stew/stew ~/.local/bin/stew
 
-if command -v curl &> /dev/null; then
-  curl -L https://github.com/Hackder/workstation/releases/latest/download/workstation-x86_64-unknown-linux-musl.tar.gz -o /tmp/workstation.tar.gz
-else
-  wget -O /tmp/workstation.tar.gz https://github.com/Hackder/workstation/releases/latest/download/workstation-x86_64-unknown-linux-musl.tar.gz
-fi
-mkdir -p /tmp/workstation
-tar -xzf /tmp/workstation.tar.gz -C /tmp/workstation
-mkdir -p ~/.local/bin
-mv /tmp/workstation/workstation ~/.local/bin/workstation
 
 cd ~
 git clone https://github.com/Hackder/dotfiles.git
@@ -70,10 +63,6 @@ git clone https://github.com/Hackder/dotfiles.git
 # stew install starship/starship
 # stew install neovim/neovim
 # stew install nelsonenzo/tmux-appimage
-
-cd dotfiles
-workstation setup
-cd ~
 
 fnm install --latest
 
