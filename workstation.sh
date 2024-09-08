@@ -40,7 +40,7 @@ mise use --global python
 
 cd ~
 if ! command -v git &> /dev/null; then
-  curl curl -L -O https://github.com/Hackder/dotfiles/archive/main.zip
+  curl -L -O https://github.com/Hackder/dotfiles/archive/main.zip
   unzip master.zip -d dotfiles
 else
   git clone https://github.com/Hackder/dotfiles.git
