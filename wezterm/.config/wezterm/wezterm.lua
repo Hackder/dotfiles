@@ -5,23 +5,23 @@ local config = wezterm.config_builder()
 
 config.native_macos_fullscreen_mode = false
 
-function recompute_padding(window)
-	local window_dims = window:get_dimensions()
-	local overrides = window:get_config_overrides() or {}
+-- function recompute_padding(window)
+-- 	local window_dims = window:get_dimensions()
+-- 	local overrides = window:get_config_overrides() or {}
+--
+-- 	if window_dims.is_full_screen then
+-- 		window:set_position(0, 0)
+-- 	end
+-- 	window:set_config_overrides(overrides)
+-- end
 
-	if window_dims.is_full_screen then
-		window:set_position(0, 0)
-	end
-	window:set_config_overrides(overrides)
-end
-
-wezterm.on("window-resized", function(window, pane)
-	recompute_padding(window)
-end)
-
-wezterm.on("window-config-reloaded", function(window)
-	recompute_padding(window)
-end)
+-- wezterm.on("window-resized", function(window, pane)
+-- 	recompute_padding(window)
+-- end)
+--
+-- wezterm.on("window-config-reloaded", function(window)
+-- 	recompute_padding(window)
+-- end)
 
 config.unix_domains = {
 	{
@@ -39,6 +39,8 @@ config.default_gui_startup_args = { "connect", "unix" }
 
 -- For example, changing the color scheme:
 config.color_scheme = "Gruvbox dark, hard (base16)"
+config.font = wezterm.font("FiraCode Nerd Font Mono")
+config.font_size = 14.0
 
 config.tab_bar_at_bottom = true
 config.use_fancy_tab_bar = false
@@ -157,6 +159,16 @@ config.keys = {
 		key = "p",
 		mods = "CMD",
 		action = wezterm.action.ActivateCommandPalette,
+	},
+	{
+		key = "f",
+		mods = "LEADER",
+		action = wezterm.action_callback(require("sessionizer").toggle),
+	},
+	{
+		key = "s",
+		mods = "LEADER",
+		action = wezterm.action.ShowLauncherArgs({ flags = "FUZZY|WORKSPACES" }),
 	},
 	-- Debug
 	{
