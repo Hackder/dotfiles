@@ -126,3 +126,5 @@ curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
 ln -s "$HOME/.local/kitty.app/bin/kitty" "$HOME/.local/bin/kitty"
 ln -s "$HOME/.local/kitty.app/bin/kitten" "$HOME/.local/bin/kitten"
 
+echo 'alias kitty="$HOME/.local/bin/kitty"' >> ~/.bashrc
+
