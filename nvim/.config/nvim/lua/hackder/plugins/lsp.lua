@@ -42,10 +42,10 @@ return {
 				})
 
 				require("mason-lspconfig").setup({
-					ensure_installed = { "lua_ls", "tsserver", "rust_analyzer", "pyright" },
+					ensure_installed = { "lua_ls", "ts_ls", "rust_analyzer", "pyright" },
 					handlers = {
 						lsp_zero.default_setup,
-						tsserver = function()
+						ts_ls = function()
 							require("lspconfig").ts_ls.setup({
 								handlers = {
 									["textDocument/publishDiagnostics"] = function(_, result, ctx, config)
@@ -53,7 +53,7 @@ return {
 											return
 										end
 
-										-- ignore some tsserver diagnostics
+										-- ignore some ts_ls diagnostics
 										local idx = 1
 										while idx <= #result.diagnostics do
 											local entry = result.diagnostics[idx]

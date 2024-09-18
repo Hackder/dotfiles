@@ -73,7 +73,7 @@ eval "$(starship init zsh)"
 export PATH="/Users/jurajpetras/Library/Application Support/fnm:$PATH"
 # check if fnm is installed
 if command -v fnm > /dev/null; then
-  eval "`fnm env`"
+  eval "`fnm env --use-on-cd --shell zsh`"
 fi
 
 if command -v pyenv > /dev/null; then
