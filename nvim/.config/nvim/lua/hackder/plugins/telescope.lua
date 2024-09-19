@@ -61,7 +61,7 @@ return {
 		vim.keymap.set("n", "<leader>fW", function()
 			require("telescope.builtin").live_grep({
 				additional_args = function(args)
-					return vim.list_extend(args, { "--hidden", "--glob", "!\\.git" })
+					return vim.list_extend(args, { "--hidden", "--glob", "!\\.git", "--glob", "!node_modules" })
 				end,
 			})
 		end, {
