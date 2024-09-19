@@ -90,6 +90,12 @@ function telescopePickers.prettyFilesPicker(pickerAndOptions)
 			},
 		})
 
+		-- For the actual filtering, use the string "tail + filepath" to make the filename
+		-- more important in the order
+		local filepath = originalEntryTable[1]
+		local tail = telescopeUtilities.path_tail(filepath)
+		originalEntryTable.ordinal = tail .. "  " .. filepath
+
 		-- LIFECYCLE: At this point the "displayer" has been created by the create() method, which has in turn
 		--            returned a function. This means that we can now call said function by using the
 		--            'displayer' variable and pass it actual entry values so that it will, in turn, output
@@ -104,7 +110,8 @@ function telescopePickers.prettyFilesPicker(pickerAndOptions)
 		-- HELP: Read the 'make_entry.lua' file for more info on how all of this works
 		originalEntryTable.display = function(entry)
 			-- Get the Tail and the Path to display
-			local tail, pathToDisplay = telescopePickers.getPathAndTail(entry.value)
+			-- local tail, dirPath = telescopePickers.getPathAndTail(entry.value)
+			local tail = telescopeUtilities.path_tail(entry.value)
 
 			-- Add an extra space to the tail so that it looks nicely separated from the path
 			local tailForDisplay = tail .. "  "
@@ -118,7 +125,7 @@ function telescopePickers.prettyFilesPicker(pickerAndOptions)
 			return displayer({
 				{ icon, iconHighlight },
 				tailForDisplay,
-				{ pathToDisplay, "TelescopeResultsComment" },
+				{ entry.value, "TelescopeResultsComment" },
 			})
 		end
 
