@@ -82,7 +82,7 @@ function telescopePickers.prettyFilesPicker(pickerAndOptions)
 		--          will be displayed inside the picker, this means that we must define options that define
 		--          its dimensions, like, for example, its width.
 		local displayer = telescopeEntryDisplayModule.create({
-			separator = " ", -- Telescope will use this separator between each entry item
+			separator = "", -- Telescope will use this separator between each entry item
 			items = {
 				{ width = fileTypeIconWidth },
 				{ width = nil },
@@ -107,7 +107,7 @@ function telescopePickers.prettyFilesPicker(pickerAndOptions)
 			local tail, pathToDisplay = telescopePickers.getPathAndTail(entry.value)
 
 			-- Add an extra space to the tail so that it looks nicely separated from the path
-			local tailForDisplay = tail .. " "
+			local tailForDisplay = tail .. "  "
 
 			-- Get the Icon with its corresponding Highlight information
 			local icon, iconHighlight = telescopeUtilities.get_devicons(tail)

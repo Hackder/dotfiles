@@ -122,9 +122,15 @@ return {
 		},
 		{ "neovim/nvim-lspconfig" },
 		{ "hrsh7th/cmp-nvim-lsp" },
+		{ "hrsh7th/cmp-buffer" },
 		{
 			"hrsh7th/nvim-cmp",
-			dependencies = { "hrsh7th/cmp-nvim-lsp", "hrsh7th/cmp-path", "L3MON4D3/LuaSnip" },
+			dependencies = {
+				"hrsh7th/cmp-nvim-lsp",
+				"hrsh7th/cmp-path",
+				"hrsh7th/cmp-buffer",
+				"L3MON4D3/LuaSnip",
+			},
 			config = function()
 				local cmp = require("cmp")
 				local cmp_select = { beahvior = cmp.SelectBehavior.Select }
@@ -135,23 +141,37 @@ return {
 					["<C-Space>"] = cmp.mapping.complete(),
 				})
 
+				local icons = require("hackder.icons")
 				cmp.setup({
 					mapping = cmp_mappings,
-					sources = {
-						{ name = "path", keyword_length = 1 },
-						{ name = "nvim_lsp" },
-						{ name = "buffer", keyword_length = 3 },
-						{ name = "luasnip", keyword_length = 2 },
-					},
 					completion = {
 						completeopt = "menu,menuone,noinsert",
 					},
 					formatting = {
+						fields = { "kind", "abbr", "menu" },
 						format = function(entry, vim_item)
 							vim_item.menu = entry:get_completion_item().detail
+							if icons.kinds[vim_item.kind] then
+								vim_item.kind = icons.kinds[vim_item.kind]
+							else
+								vim_item.kind = icons.kinds.Text
+							end
 							return vim_item
 						end,
 					},
+					experimental = {
+						ghost_text = {
+							hl_group = "CmpGhostText",
+						},
+					},
+				})
+
+				cmp.config.sources({
+					{ name = "path", keyword_length = 1 },
+					{ name = "nvim_lsp" },
+					{ name = "luasnip", keyword_length = 2 },
+				}, {
+					{ name = "buffer" },
 				})
 
 				cmp.setup.filetype({ "sql" }, {
