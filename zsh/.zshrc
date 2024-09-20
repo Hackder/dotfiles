@@ -41,8 +41,8 @@ _comp_options+=(globdots)               # Include hidden files.
 
 # Custom ZSH Binds
 bindkey '^j' autosuggest-accept
-bindkey -s ^f '~/dotfiles/scripts/tmux-sessionizer.sh\n'
-bindkey -s ^a 'tmux a\n'
+bindkey -s "^f" "~/dotfiles/scripts/tmux-sessionizer.sh^M"
+bindkey -s "^a" "tmux a^M"
 
 # Load aliases and shortcuts if existent.
 [ -f "$HOME/aliasrc" ] && source "$HOME/aliasrc"
