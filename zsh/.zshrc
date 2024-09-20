@@ -40,7 +40,7 @@ compinit
 _comp_options+=(globdots)               # Include hidden files.
 
 # Custom ZSH Binds
-bindkey '^ ' autosuggest-accept
+bindkey '^j' autosuggest-accept
 bindkey -s ^f '~/dotfiles/scripts/tmux-sessionizer.sh\n'
 bindkey -s ^a 'tmux a\n'
 
