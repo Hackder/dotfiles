@@ -79,6 +79,7 @@ link_files tmux
 link_files kitty
 link_files yazi
 link_files starship
+link_files clang
 
 curl -L https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/FiraCode.zip -o /tmp/FiraCode.zip
 unzip /tmp/FiraCode.zip -d ~/.fonts
