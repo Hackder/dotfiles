@@ -7,7 +7,7 @@ packages = [
   { bin = "fd-v10.2.0-x86_64-unknown-linux-musl/fd", name = "fd", archive = "https://github.com/sharkdp/fd/releases/download/v10.2.0/fd-v10.2.0-x86_64-unknown-linux-musl.tar.gz" },
   { bin = "yazi-x86_64-unknown-linux-musl/yazi", name = "yazi", archive = "https://github.com/sxyazi/yazi/releases/download/v0.3.3/yazi-x86_64-unknown-linux-musl.zip" },
   { bin = "starship", name = "starship", archive = "https://github.com/starship/starship/releases/download/v1.20.1/starship-x86_64-unknown-linux-musl.tar.gz" },
-  { name = "nvim", url = "https://github.com/neovim/neovim/releases/latest/download/nvim.appimage" },
+  { name = "nvim", url = "https://github.com/neovim/neovim-releases/releases/download/v0.10.1/nvim.appimage" },
   { name = "tmux", url = "https://github.com/nelsonenzo/tmux-appimage/releases/download/3.3a/tmux.appimage" },
   { bin = "fnm", name = "fnm", archive = "https://github.com/Schniz/fnm/releases/download/v1.37.1/fnm-linux.zip" },
   { bin = "eza", name = "eza", archive = "https://github.com/eza-community/eza/releases/download/v0.19.2/eza_x86_64-unknown-linux-musl.tar.gz" },
