@@ -16,11 +16,11 @@ return {
 				dap.repl.open()
 			end, { desc = "Open REPL" })
 
-			vim.keymap.set("n", "<leader>ds", function()
+			vim.keymap.set("n", "<F10>", function()
 				dap.step_over()
 			end, { desc = "Step over" })
 
-			vim.keymap.set("n", "<leader>di", function()
+			vim.keymap.set("n", "<F11>", function()
 				dap.step_into()
 			end, { desc = "Step into" })
 
@@ -39,11 +39,19 @@ return {
 			vim.keymap.set("n", "<leader>dd", function()
 				dap.disconnect()
 			end, { desc = "Disconnect" })
-
-			vim.keymap.set("n", "<leader>dr", function()
-				dap.run()
-			end, { desc = "Run" })
 		end,
+	},
+	{
+		"jay-babu/mason-nvim-dap.nvim",
+		event = "VeryLazy",
+		dependencies = {
+			"mfussenegger/nvim-dap",
+			"williamboman/mason.nvim",
+		},
+		opts = {
+			handlers = {},
+			ensure_installed = {},
+		},
 	},
 	{
 		"mfussenegger/nvim-dap-python",

@@ -30,13 +30,6 @@ vim.keymap.set(
 	{ desc = "Rename current word" }
 )
 
-vim.keymap.set(
-	"n",
-	"<F11>",
-	"<cmd>let g:neovide_fullscreen = !g:neovide_fullscreen<cr>",
-	{ desc = "Toggle fullscreen in neovide" }
-)
-
 vim.keymap.set("t", "<Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 
 vim.keymap.set("n", "<C-n>", ":cprevious<CR>", { desc = "Previous item in quickfix list" })

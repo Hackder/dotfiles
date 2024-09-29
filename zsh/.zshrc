@@ -138,6 +138,8 @@ if command -v brew &> /dev/null; then
   export DYLD_LIBRARY_PATH="$(brew --prefix)/lib:$DYLD_LIBRARY_PATH"
 fi
 
+alias sci-mark="~/dev/sci-markdown/.venv/bin/python ~/dev/sci-markdown/src/sci_markdown/__main__.py"
+
 # zprof
 
 

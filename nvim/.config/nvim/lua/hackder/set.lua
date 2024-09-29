@@ -61,3 +61,12 @@ if os.execute("command -v win32yank.exe") == 0 then
 		cache_enabled = 0,
 	}
 end
+
+-- File specific tabstop and shiftwidth
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "cpp",
+	callback = function()
+		vim.opt_local.shiftwidth = 4
+		vim.opt_local.tabstop = 4
+	end,
+})
