@@ -10,6 +10,9 @@ vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move selection up" })
 vim.keymap.set("n", "<C-d>", "<C-d>zz", { desc = "Scroll down half page" })
 vim.keymap.set("n", "<C-u>", "<C-u>zz", { desc = "Scroll up half page" })
 
+vim.keymap.set("n", "H", "^", { desc = "Go to beginning of a line" })
+vim.keymap.set("n", "L", "$", { desc = "Go to end of a line" })
+
 vim.keymap.set("x", "<leader>p", '"_dP', { desc = "Paste without yanking" })
 
 vim.keymap.set("n", "<leader>y", '"+y', { desc = "Copy to clipboard" })
