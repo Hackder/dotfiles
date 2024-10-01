@@ -49,7 +49,31 @@ return {
 			"williamboman/mason.nvim",
 		},
 		opts = {
-			handlers = {},
+			handlers = {
+				codelldb = function(config)
+					table.insert(config.configurations, {
+						args = {},
+						console = "integratedTerminal",
+						cwd = "${workspaceFolder}",
+						name = "LLDB: Launch prog3",
+						program = function()
+							local current_dir = vim.fn.expand("%:p:h")
+							local cmake_lists = io.open(current_dir .. "/CMakeLists.txt")
+							if cmake_lists then
+								local content = cmake_lists:read("*all")
+								cmake_lists:close()
+								local project_name = content:match("project%(([%w_%-]+)%)")
+								return current_dir .. "/build/" .. project_name
+							end
+						end,
+						request = "launch",
+						stopOnEntry = false,
+						type = "codelldb",
+					})
+
+					require("mason-nvim-dap").default_setup(config)
+				end,
+			},
 			ensure_installed = {},
 		},
 	},
