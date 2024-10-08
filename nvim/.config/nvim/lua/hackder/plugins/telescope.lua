@@ -19,6 +19,16 @@ local find_command = {
 	"\\.turbo",
 }
 
+local git_command = {
+	"fd",
+	"--type",
+	"f",
+	"--strip-cwd-prefix",
+	"--hidden",
+	"-E",
+	"**/\\.git",
+}
+
 return {
 	"nvim-telescope/telescope.nvim",
 	branch = "0.1.x",
@@ -37,8 +47,10 @@ return {
 
 			if is_inside_work_tree[cwd] then
 				pickers.prettyFilesPicker({
-					picker = "git_files",
-					options = { show_untracked = true },
+					picker = "find_files",
+					options = {
+						find_command = git_command,
+					},
 				})
 			else
 				pickers.prettyFilesPicker({ picker = "find_files", options = { find_command = find_command } })

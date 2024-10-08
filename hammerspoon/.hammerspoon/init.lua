@@ -19,3 +19,13 @@ end)
 hs.hotkey.bind({ "alt" }, "H", function()
 	hs.application.launchOrFocus("Kitty")
 end)
+
+hs.hotkey.bind({ "alt" }, "K", function()
+	hs.application.launchOrFocus("Preview")
+end)
+
+hs.hotkey.bind({ "alt" }, "L", function()
+	local appName = require("machinelocal").workApp
+	print("Launching or focusing " .. appName)
+	hs.application.launchOrFocus(appName)
+end)
