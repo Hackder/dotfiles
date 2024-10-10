@@ -16,6 +16,8 @@ local find_command = {
 	"-E",
 	"**/\\.next",
 	"-E",
+	"**/.venv",
+	"-E",
 	"\\.turbo",
 }
 
