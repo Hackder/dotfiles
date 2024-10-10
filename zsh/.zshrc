@@ -140,6 +140,8 @@ fi
 
 alias sci-mark="~/dev/sci-markdown/.venv/bin/python ~/dev/sci-markdown/src/sci_markdown/__main__.py"
 
+eval "$(zoxide init zsh)"
+
 # zprof
 
 
