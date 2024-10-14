@@ -39,6 +39,10 @@ return {
 			vim.keymap.set("n", "<leader>dd", function()
 				dap.disconnect()
 			end, { desc = "Disconnect" })
+
+			vim.keymap.set("n", "<leader>drb", function()
+				dap.clear_breakpoints()
+			end, { desc = "Remove all breakpoints" })
 		end,
 	},
 	{
