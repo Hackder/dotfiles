@@ -16,11 +16,11 @@ return {
 				dap.repl.open()
 			end, { desc = "Open REPL" })
 
-			vim.keymap.set("n", "<F10>", function()
+			vim.keymap.set("n", "<F7>", function()
 				dap.step_over()
 			end, { desc = "Step over" })
 
-			vim.keymap.set("n", "<F11>", function()
+			vim.keymap.set("n", "<F8>", function()
 				dap.step_into()
 			end, { desc = "Step into" })
 
