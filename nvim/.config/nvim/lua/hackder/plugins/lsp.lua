@@ -123,6 +123,7 @@ return {
 		{ "neovim/nvim-lspconfig" },
 		{ "hrsh7th/cmp-nvim-lsp" },
 		{ "hrsh7th/cmp-buffer" },
+		{ "hrsh7th/cmp-path" },
 		{
 			"hrsh7th/nvim-cmp",
 			dependencies = {
@@ -147,6 +148,12 @@ return {
 					completion = {
 						completeopt = "menu,menuone,noinsert",
 					},
+					sources = {
+						{ name = "nvim_lsp" },
+						{ name = "buffer" },
+						{ name = "path" },
+						{ name = "luasnip", keyword_length = 2 },
+					},
 					formatting = {
 						fields = { "kind", "abbr", "menu" },
 						format = function(entry, vim_item)
@@ -166,17 +173,10 @@ return {
 					},
 				})
 
-				cmp.config.sources({
-					{ name = "path", keyword_length = 1 },
-					{ name = "nvim_lsp" },
-					{ name = "luasnip", keyword_length = 2 },
-				}, {
-					{ name = "buffer" },
-				})
-
 				cmp.setup.filetype({ "sql" }, {
 					sources = {
 						{ name = "vim-dadbod-completion" },
+						{ name = "path" },
 						{ name = "buffer" },
 					},
 				})
@@ -222,8 +222,8 @@ return {
 					vim.keymap.set(
 						"n",
 						"gD",
-						vim.lsp.buf.declaration,
-						{ buffer = bufnr, remap = false, desc = "Go to declaration" }
+						require("telescope.builtin").lsp_type_definitions,
+						{ buffer = bufnr, remap = false, desc = "Go to type definition" }
 					)
 					vim.keymap.set(
 						"n",
