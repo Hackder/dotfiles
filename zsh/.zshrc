@@ -144,4 +144,5 @@ eval "$(zoxide init zsh)"
 
 # zprof
 
+[ -f "/Users/jurajpetras/.ghcup/env" ] && . "/Users/jurajpetras/.ghcup/env" # ghcup-env
 
