@@ -113,9 +113,6 @@ source <(fzf --zsh)
 # Zig
 export PATH="$HOME/zig:$PATH"
 
-# Odin
-export PATH="$HOME/odin:$PATH"
-
 # Deno
 export DENO_INSTALL="/Users/jurajpetras/.deno"
 export PATH="$DENO_INSTALL/bin:$PATH"
@@ -146,3 +143,4 @@ eval "$(zoxide init zsh)"
 
 [ -f "/Users/jurajpetras/.ghcup/env" ] && . "/Users/jurajpetras/.ghcup/env" # ghcup-env
 
+export PATH="$PATH:/Users/jurajpetras/.modular/bin"
