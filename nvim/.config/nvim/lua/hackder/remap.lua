@@ -13,7 +13,7 @@ vim.keymap.set("n", "<C-u>", "<C-u>zz", { desc = "Scroll up half page" })
 vim.keymap.set("n", "H", "^", { desc = "Go to beginning of a line" })
 vim.keymap.set("n", "L", "$", { desc = "Go to end of a line" })
 
-vim.keymap.set("x", "<leader>p", '"_dP', { desc = "Paste without yanking" })
+vim.keymap.set("x", "p", '"_dP', { desc = "Paste without yanking" })
 
 vim.keymap.set("n", "<leader>y", '"+y', { desc = "Copy to clipboard" })
 vim.keymap.set("v", "<leader>y", '"+y', { desc = "Copy to clipboard" })
