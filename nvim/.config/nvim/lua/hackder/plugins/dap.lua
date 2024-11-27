@@ -43,6 +43,23 @@ return {
 			vim.keymap.set("n", "<leader>drb", function()
 				dap.clear_breakpoints()
 			end, { desc = "Remove all breakpoints" })
+
+			dap.configurations.odin = {
+				{
+					name = "Debug with codelldb",
+					type = "codelldb",
+					request = "launch",
+					program = function()
+						return vim.fn.input({
+							prompt = "Path to executable: ",
+							default = vim.fn.getcwd() .. "/",
+							completion = "file",
+						})
+					end,
+					cwd = "${workspaceFolder}",
+					stopOnEntry = false,
+				},
+			}
 		end,
 	},
 	{
