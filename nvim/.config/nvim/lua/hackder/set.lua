@@ -64,7 +64,7 @@ end
 
 -- File specific tabstop and shiftwidth
 vim.api.nvim_create_autocmd("FileType", {
-	pattern = { "cpp", "c", "go" },
+	pattern = { "cpp", "c", "go", "odin" },
 	callback = function()
 		vim.opt_local.shiftwidth = 4
 		vim.opt_local.tabstop = 4
