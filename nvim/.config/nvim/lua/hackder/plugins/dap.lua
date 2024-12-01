@@ -83,10 +83,13 @@ return {
 							if cmake_lists then
 								local content = cmake_lists:read("*all")
 								cmake_lists:close()
-								local project_name = content:match("project%(([%w_%-]+)%)")
+								local project_name = content:match("TARGET ([%w_%-]+)")
 								return current_dir .. "/build/" .. project_name
 							end
 						end,
+						preRunCommands = {
+							"breakpoint name configure --disable cpp_exception",
+						},
 						request = "launch",
 						stopOnEntry = false,
 						type = "codelldb",
