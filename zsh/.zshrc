@@ -39,10 +39,12 @@ zmodload zsh/complist
 compinit
 _comp_options+=(globdots)               # Include hidden files.
 
+bindkey -e
+
 # Custom ZSH Binds
 bindkey '^j' autosuggest-accept
 bindkey -s "^f" "~/dotfiles/scripts/tmux-sessionizer.sh^M"
-bindkey -s "^a" "tmux a^M"
+bindkey -s "^ " "tmux a^M"
 
 # Load aliases and shortcuts if existent.
 [ -f "$HOME/aliasrc" ] && source "$HOME/aliasrc"

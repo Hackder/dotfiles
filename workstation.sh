@@ -71,6 +71,8 @@ link_files() {
     done
 }
 
+# tpm
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
 cd dotfiles
 link_files nvim
