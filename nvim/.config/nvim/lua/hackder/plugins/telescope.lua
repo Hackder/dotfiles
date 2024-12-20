@@ -34,9 +34,15 @@ local git_command = {
 return {
 	"nvim-telescope/telescope.nvim",
 	branch = "0.1.x",
-	dependencies = { "nvim-lua/plenary.nvim" },
+	dependencies = { "nvim-lua/plenary.nvim", { "nvim-telescope/telescope-fzf-native.nvim", build = "make" } },
 	config = function()
-		require("telescope").setup({})
+		require("telescope").setup({
+			extensions = {
+				fzf = {},
+			},
+		})
+		require("telescope").load_extension("fzf")
+
 		local pickers = require("hackder.telescope-pickers")
 
 		local builtin = require("telescope.builtin")
@@ -72,12 +78,58 @@ return {
 		end, { desc = "Search all files" })
 		vim.keymap.set("n", "<leader>fw", builtin.grep_string, { desc = "Grep string in current file" })
 		vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "Search buffers" })
-		vim.keymap.set("n", "<leader>fW", function()
-			require("telescope.builtin").live_grep({
-				additional_args = function(args)
-					return vim.list_extend(args, { "--hidden", "--glob", "!\\.git", "--glob", "!node_modules" })
+
+		local default_pickers = require("telescope.pickers")
+		local finders = require("telescope.finders")
+		local make_entry = require("telescope.make_entry")
+		local conf = require("telescope.config").values
+		vim.keymap.set("n", "<leader>fW", function(opts)
+			local finder = finders.new_async_job({
+				command_generator = function(prompt)
+					if not prompt or prompt == "" then
+						return nil
+					end
+
+					local pieces = vim.split(prompt, "  ")
+					local args = { "rg" }
+
+					if pieces[1] then
+						table.insert(args, "-e")
+						table.insert(args, pieces[1])
+					end
+
+					if pieces[2] then
+						table.insert(args, "--glob")
+						table.insert(args, pieces[2])
+					end
+
+					return vim.list_extend(args, {
+						"--hidden",
+						"--glob",
+						"!\\.git",
+						"--glob",
+						"!node_modules",
+						"--color=never",
+						"--no-heading",
+						"--with-filename",
+						"--line-number",
+						"--column",
+						"--smart-case",
+					})
 				end,
+
+				entry_maker = make_entry.gen_from_vimgrep(opts),
 			})
+
+			default_pickers
+				.new({}, {
+					debounce = 100,
+					prompt_title = "Multi Grep",
+					finder = finder,
+					previewer = conf.grep_previewer({}),
+					sorter = require("telescope.sorters").empty(),
+				})
+				:find()
 		end, {
 			desc = "Grep string in all files (including hidden)",
 		})
