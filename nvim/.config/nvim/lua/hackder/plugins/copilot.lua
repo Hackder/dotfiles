@@ -1,6 +1,8 @@
 return {
 	{
 		"zbirenbaum/copilot.lua",
+		cmd = "Copilot",
+		event = "InsertEnter",
 		dependencies = {
 			{ "nvim-lua/plenary.nvim" },
 			{ "folke/which-key.nvim" },
@@ -54,7 +56,7 @@ return {
 	},
 	{
 		"CopilotC-Nvim/CopilotChat.nvim",
-		branch = "canary",
+		branch = "main",
 		dependencies = {
 			{ "folke/which-key.nvim" },
 			{ "zbirenbaum/copilot.lua" }, -- or github/copilot.vim
