@@ -5,7 +5,7 @@ local config = wezterm.config_builder()
 
 config.native_macos_fullscreen_mode = false
 
-config.default_prog = { 'powershell.exe' }
+config.default_prog = { 'nu.exe' }
 
 -- function recompute_padding(window)
 -- 	local window_dims = window:get_dimensions()
