@@ -39,7 +39,7 @@ return {
 					},
 				},
 				filetypes = {
-					yaml = false,
+					yaml = true,
 					markdown = true,
 					help = false,
 					gitcommit = false,
@@ -52,11 +52,16 @@ return {
 				copilot_node_command = "node", -- Node.js version must be > 18.x
 				server_opts_overrides = {},
 			})
+
+			vim.keymap.set("n", "<leader>cd", function()
+				vim.cmd("Copilot toggle")
+			end, { noremap = true, silent = true })
 		end,
 	},
 	{
 		"CopilotC-Nvim/CopilotChat.nvim",
 		branch = "main",
+		event = "BufRead",
 		dependencies = {
 			{ "folke/which-key.nvim" },
 			{ "zbirenbaum/copilot.lua" }, -- or github/copilot.vim
