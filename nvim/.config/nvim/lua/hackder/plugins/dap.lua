@@ -95,6 +95,31 @@ return {
 						type = "codelldb",
 					})
 
+					table.insert(config.configurations, {
+						console = "integratedTerminal",
+						cwd = "${workspaceFolder}",
+						name = "LLDB: Launch with arguments",
+						program = function()
+							return vim.fn.input({
+								prompt = "Path to executable: ",
+								default = vim.fn.getcwd() .. "/",
+								completion = "file",
+							})
+						end,
+						args = function()
+							local args = vim.fn.input({
+								prompt = "Arguments: ",
+								default = vim.fn.getcwd() .. "/",
+								completion = "file",
+							})
+
+							return vim.split(args, " ")
+						end,
+						request = "launch",
+						stopOnEntry = false,
+						type = "codelldb",
+					})
+
 					require("mason-nvim-dap").default_setup(config)
 				end,
 			},
