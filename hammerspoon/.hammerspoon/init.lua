@@ -21,11 +21,9 @@ hs.hotkey.bind({ "alt" }, "H", function()
 end)
 
 hs.hotkey.bind({ "alt" }, "K", function()
-	hs.application.launchOrFocus("Preview")
+	hs.application.launchOrFocus("Finder")
 end)
 
 hs.hotkey.bind({ "alt" }, "L", function()
-	local appName = require("machinelocal").workApp
-	print("Launching or focusing " .. appName)
-	hs.application.launchOrFocus(appName)
+	hs.application.launchOrFocus("Messages")
 end)
