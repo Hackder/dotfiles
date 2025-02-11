@@ -61,7 +61,7 @@ fi
 # # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 # [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 export COLORTERM=truecolor
-export TERM='screen-256color'
+export TERM='xterm-256color'
 export RANRC=1
 
 if [ -f ~/.zsh_secrets ]; then
@@ -146,3 +146,4 @@ eval "$(zoxide init zsh)"
 [ -f "/Users/jurajpetras/.ghcup/env" ] && . "/Users/jurajpetras/.ghcup/env" # ghcup-env
 
 export PATH="$PATH:/Users/jurajpetras/.modular/bin"
+export PATH="/opt/homebrew/opt/binutils/bin:$PATH"
