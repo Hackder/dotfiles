@@ -95,7 +95,8 @@ if ! command -v cmake &> /dev/null; then
   mv /tmp/cmake/share/* ~/.local/share
 fi
 
-$HOME/.local/bin/zsh -c "source ~/.zshrc && npm install -g tldr"
+source <(fnm env)
+npm i -g tldr
 
 # Replace shell in kitty config
 echo "shell $HOME/.local/bin/zsh" >> ~/.config/kitty/kitty.conf
