@@ -1,0 +1,8 @@
+theme = GruvboxDarkHard
+macos-non-native-fullscreen = true
+
+font-family = "FiraCode Nerd Font Mono"
+font-synthetic-style = true
+font-thicken = false
+font-thicken-strength = 0
+
