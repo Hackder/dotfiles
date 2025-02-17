@@ -124,6 +124,7 @@ return {
 		{ "hrsh7th/cmp-nvim-lsp" },
 		{ "hrsh7th/cmp-buffer" },
 		{ "hrsh7th/cmp-path" },
+		{ "saadparwaiz1/cmp_luasnip" },
 		{
 			"hrsh7th/nvim-cmp",
 			dependencies = {
@@ -131,24 +132,44 @@ return {
 				"hrsh7th/cmp-path",
 				"hrsh7th/cmp-buffer",
 				"L3MON4D3/LuaSnip",
+				"saadparwaiz1/cmp_luasnip",
 			},
 			config = function()
 				local cmp = require("cmp")
 				local cmp_select = { beahvior = cmp.SelectBehavior.Select }
+				local luasnip = require("luasnip")
+				luasnip.config.setup({})
+
 				local cmp_mappings = cmp.mapping.preset.insert({
 					["<C-p>"] = cmp.mapping.select_prev_item(cmp_select),
 					["<C-n>"] = cmp.mapping.select_next_item(cmp_select),
 					["<C-y>"] = cmp.mapping.confirm({ select = true }),
 					["<C-Space>"] = cmp.mapping.complete(),
+					["<C-l>"] = cmp.mapping(function()
+						if luasnip.expand_or_locally_jumpable() then
+							luasnip.expand_or_jump()
+						end
+					end, { "i", "s" }),
+					["<C-h>"] = cmp.mapping(function()
+						if luasnip.locally_jumpable(-1) then
+							luasnip.jump(-1)
+						end
+					end, { "i", "s" }),
 				})
 
 				local icons = require("hackder.icons")
 				cmp.setup({
 					mapping = cmp_mappings,
+					snippet = {
+						expand = function(args)
+							luasnip.lsp_expand(args.body)
+						end,
+					},
 					completion = {
 						completeopt = "menu,menuone,noinsert",
 					},
 					sources = {
+						{ name = "lazydev", group_index = 0 },
 						{ name = "nvim_lsp" },
 						{ name = "buffer" },
 						{ name = "path" },
