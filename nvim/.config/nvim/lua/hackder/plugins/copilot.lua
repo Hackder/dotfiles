@@ -61,20 +61,48 @@ return {
 	{
 		"CopilotC-Nvim/CopilotChat.nvim",
 		branch = "main",
-		event = "BufRead",
 		dependencies = {
-			{ "folke/which-key.nvim" },
 			{ "zbirenbaum/copilot.lua" }, -- or github/copilot.vim
 			{ "nvim-lua/plenary.nvim" }, -- for curl, log wrapper
-			{ "nvim-telescope/telescope.nvim" },
 		},
+		build = "make tiktoken",
 		config = function()
 			local wk = require("which-key")
 			wk.add({ { "<leader>cc", group = "CopilotChat" } })
-			require("CopilotChat").setup({})
+			require("CopilotChat").setup({
+				model = "o3-mini",
+				question_header = os.getenv("USER") .. " ",
+				chat_autocomplete = false,
+				window = {
+					layout = "vertical", -- 'vertical', 'horizontal', 'float', 'replace'
+					width = 0.5, -- fractional width of parent, or absolute width in columns when > 1
+					-- height = 0.5, -- fractional height of parent, or absolute height in rows when > 1
+				},
+				mappings = {
+					complete = {
+						insert = "<C-.>",
+						normal = "<C-.>",
+					},
+				},
+			})
 		end,
-		-- See Commands section for default commands if you want to lazy load on them
 		keys = {
+			{ "<leader>ccs", ":CopilotChatStop<CR>", desc = "CopilotChat Stop", mode = { "n", "v" } },
+			-- Ask the Perplexity agent a quick question
+			{
+				"<leader>ccp",
+				function()
+					local input = vim.fn.input("Perplexity: ")
+					if input ~= "" then
+						require("CopilotChat").ask(input, {
+							agent = "perplexityai",
+							selection = false,
+						})
+					end
+				end,
+				desc = "CopilotChat - Perplexity Search",
+				mode = { "n", "v" },
+			},
 			{
 				"<leader>cch",
 				function()
