@@ -86,6 +86,17 @@ link_files clang
 curl -L https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/FiraCode.zip -o /tmp/FiraCode.zip
 unzip /tmp/FiraCode.zip -d ~/.fonts
 
+# Install cmake
+if ! command -v cmake &> /dev/null; then
+  curl -L https://github.com/Kitware/CMake/releases/download/v3.31.5/cmake-3.31.5-linux-x86_64.tar.gz -o /tmp/cmake.tar.gz
+  mkdir -p /tmp/cmake
+  tar -xzf /tmp/cmake.tar.gz -C /tmp/cmake --strip-components=1
+  mv /tmp/cmake/bin/* ~/.local/bin
+  mv /tmp/cmake/share/* ~/.local/share
+fi
+
+npm install -g tldr
+
 # Replace shell in kitty config
 echo "shell $HOME/.local/bin/zsh" >> ~/.config/kitty/kitty.conf
 
