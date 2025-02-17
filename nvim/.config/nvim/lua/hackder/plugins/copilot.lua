@@ -66,26 +66,20 @@ return {
 			{ "nvim-lua/plenary.nvim" }, -- for curl, log wrapper
 		},
 		build = "make tiktoken",
-		config = function()
-			local wk = require("which-key")
-			wk.add({ { "<leader>cc", group = "CopilotChat" } })
-			require("CopilotChat").setup({
-				model = "o3-mini",
-				question_header = os.getenv("USER") .. " ",
-				chat_autocomplete = false,
-				window = {
-					layout = "vertical", -- 'vertical', 'horizontal', 'float', 'replace'
-					width = 0.5, -- fractional width of parent, or absolute width in columns when > 1
-					-- height = 0.5, -- fractional height of parent, or absolute height in rows when > 1
+		opts = {
+			question_header = os.getenv("USER") .. " ",
+			chat_autocomplete = false,
+			window = {
+				layout = "vertical", -- 'vertical', 'horizontal', 'float', 'replace'
+				width = 0.5, -- fractional width of parent, or absolute width in columns when > 1
+				-- height = 0.5, -- fractional height of parent, or absolute height in rows when > 1
+			},
+			mappings = {
+				complete = {
+					insert = "<Tab>",
 				},
-				mappings = {
-					complete = {
-						insert = "<C-.>",
-						normal = "<C-.>",
-					},
-				},
-			})
-		end,
+			},
+		},
 		keys = {
 			{ "<leader>ccs", ":CopilotChatStop<CR>", desc = "CopilotChat Stop", mode = { "n", "v" } },
 			-- Ask the Perplexity agent a quick question
