@@ -14,5 +14,5 @@ packages = [
   { bin = "stew", name = "stew", archive = "https://github.com/marwanhawari/stew/releases/download/v0.4.0/stew-v0.4.0-linux-amd64.tar.gz" },
   { bin = "zoxide", name = "zoxide", archive = "https://github.com/ajeetdsouza/zoxide/releases/download/v0.9.6/zoxide-0.9.6-x86_64-unknown-linux-musl.tar.gz" },
   { bin = "termchat-v1.3.1-x86_64-unknown-linux-musl/termchat", name = "termchat", archive = "https://github.com/lemunozm/termchat/releases/download/v1.3.1/termchat-v1.3.1-x86_64-unknown-linux-musl.tar.gz" },
-  { bin = "btm", name = "btm", archive = "https://github.com/ClementTsang/bottom/releases/download/0.10.2/bottom_x86_64-unknown-linux-musl.tar.gz" },
+  { bin = "bottom_x86_64-unknown-linux-musl/btm", name = "btm", archive = "https://github.com/ClementTsang/bottom/releases/download/0.10.2/bottom_x86_64-unknown-linux-musl.tar.gz" },
 ]
