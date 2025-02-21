@@ -25,5 +25,5 @@ hs.hotkey.bind({ "alt" }, "K", function()
 end)
 
 hs.hotkey.bind({ "alt" }, "L", function()
-	hs.application.launchOrFocus("Messages")
+	hs.application.launchOrFocus("Preview")
 end)
