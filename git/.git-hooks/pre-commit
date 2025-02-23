@@ -1,0 +1,9 @@
+#!/bin/sh
+
+# Search for "nocheckin" in all tracked files, including hidden ones
+if rg --hidden nocheckin -E git/.git-hooks/pre-commit; then
+    echo "❌ Commit blocked: Found 'nocheckin' in files. Remove it before committing."
+    exit 1
+fi
+
+exit 0
