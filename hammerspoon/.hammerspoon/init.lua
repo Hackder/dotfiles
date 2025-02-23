@@ -17,7 +17,7 @@ hs.hotkey.bind({ "alt" }, "J", function()
 end)
 
 hs.hotkey.bind({ "alt" }, "H", function()
-	hs.application.launchOrFocus("Kitty")
+	hs.application.launchOrFocus("Ghostty")
 end)
 
 hs.hotkey.bind({ "alt" }, "K", function()
