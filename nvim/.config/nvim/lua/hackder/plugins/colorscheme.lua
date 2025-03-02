@@ -30,9 +30,9 @@ return {
 			vim.api.nvim_set_hl(0, "@lsp.typemod.variable.defaultLibrary", { link = "@variable.builtin" })
 			vim.api.nvim_set_hl(0, "@function.builtin", { link = "@variable.builtin" })
 
-			vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
-			vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
-			vim.api.nvim_set_hl(0, "SignColumn", { bg = "none" })
+			-- vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+			-- vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+			-- vim.api.nvim_set_hl(0, "SignColumn", { bg = "none" })
 		end,
 	},
 	{ "catppuccin/nvim", lazy = false, name = "catppuccin", priority = 1000 },
