@@ -67,7 +67,6 @@ return {
 		},
 		build = "make tiktoken",
 		opts = {
-			question_header = os.getenv("USER") .. " ",
 			chat_autocomplete = false,
 			window = {
 				layout = "vertical", -- 'vertical', 'horizontal', 'float', 'replace'
