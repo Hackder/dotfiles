@@ -63,13 +63,13 @@ if os.execute("command -v win32yank.exe") == 0 then
 end
 
 local function augroup(name)
-  return vim.api.nvim_create_augroup("hackder_" .. name, { clear = true })
+	return vim.api.nvim_create_augroup("hackder_" .. name, { clear = true })
 end
 
 -- File specific tabstop and shiftwidth
 vim.api.nvim_create_autocmd("FileType", {
-  group = augroup("tab_width"),
-	pattern = { "cpp", "c", "go", "odin" },
+	group = augroup("tab_width"),
+	pattern = { "cpp", "c", "go", "odin", "java" },
 	callback = function()
 		vim.opt_local.shiftwidth = 4
 		vim.opt_local.tabstop = 4
