@@ -34,7 +34,7 @@ config.default_prog = { "nu.exe" }
 
 -- For example, changing the color scheme:
 config.color_scheme = "Gruvbox dark, hard (base16)"
-config.font = wezterm.font("FiraCode Nerd Font Mono")
+config.font = wezterm.font("JetBrainsMono Nerd Font")
 config.font_size = 12.0
 
 config.tab_bar_at_bottom = true
