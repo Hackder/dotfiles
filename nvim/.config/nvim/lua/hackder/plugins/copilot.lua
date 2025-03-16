@@ -69,13 +69,33 @@ return {
 		opts = {
 			chat_autocomplete = false,
 			window = {
-				layout = "vertical", -- 'vertical', 'horizontal', 'float', 'replace'
-				width = 0.5, -- fractional width of parent, or absolute width in columns when > 1
-				-- height = 0.5, -- fractional height of parent, or absolute height in rows when > 1
+				layout = "float", -- 'vertical', 'horizontal', 'float', 'replace'
+				width = 0.75, -- fractional width of parent, or absolute width in columns when > 1
+				height = 0.75, -- fractional height of parent, or absolute height in rows when > 1
 			},
 			mappings = {
 				complete = {
 					insert = "<Tab>",
+				},
+			},
+			prompts = {
+				Gramatika = {
+					prompt = ">$gpt-4o\n\nPrepis text so Slovenskou diakritikou, gramaticke chyby, ciarky a slovosled smies upravit, no slova alebo vyznam viet nemen.",
+					system_prompt = "You are thorough and precise when getting your task done. You will do exactly what user wants you to. You will be tasked to help with text, do not write line numbers",
+					mapping = "<leader>csk",
+					description = "Will rewrite slovak text with correct grammar",
+				},
+				Grammar = {
+					prompt = ">$gpt-4o\n\nRewrite the text with correct English grammar, punctuation, and sentence structure. Do not change the meaning of the sentences.",
+					system_prompt = "You are thorough and precise when getting your task done. You will do exactly what user wants you to. You will be tasked to help with text, do not write line numbers",
+					mapping = "<leader>cen",
+					description = "Will rewrite English text with correct grammar",
+				},
+				SystemProgrammingChat = {
+					prompt = "> You will answer me based on info from this file\n> You are an expert on system programming, but make sure to tell me where it is written in the material, based on what you respond.\n> Make your answers that require explanation brief -> one sentence.\n\n> You may be asked to explain something, be brief and precise. Or to choose single or multiple answers from given choices, be precise and briefly explain based on which info you chose the answer.\n\n> You may be asked to write code, be precise and follow code formatting instructions. Do not include additional text or line numbers.",
+					system_prompt = "You are precise and follow code formatting instructions. Do not include additional text or line numbers. Only answer based on the given context.",
+					mapping = "<leader>pcb",
+					description = "Expert system programming responses based on file material",
 				},
 			},
 		},

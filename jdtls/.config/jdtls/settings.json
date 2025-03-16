@@ -1,0 +1,6 @@
+{
+  "java.format.settings.url": "https://raw.githubusercontent.com/redhat-developer/vscode-java/master/java-formatter.xml",
+  "java.format.settings.profile": "GoogleStyle",
+  "editor.tabSize": 4,
+  "editor.insertSpaces": true
+}
