@@ -108,3 +108,5 @@ ln -s "$HOME/.local/kitty.app/bin/kitten" "$HOME/.local/bin/kitten"
 
 echo 'alias kitty="$HOME/.local/bin/kitty"' >> ~/.bashrc
 
+cd ~
+git clone https://github.com/Vl4dk0/sysprogdocs.git
