@@ -83,8 +83,8 @@ link_files yazi
 link_files starship
 link_files clang
 
-curl -L https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/FiraCode.zip -o /tmp/FiraCode.zip
-unzip /tmp/FiraCode.zip -d ~/.fonts
+curl -L https://github.com/ryanoasis/nerd-fonts/releases/download/v3.3.0/JetBrainsMono.zip -o /tmp/JetBrainsMono.zip
+unzip /tmp/JetBrainsMono.zip -d ~/.fonts
 
 # Install cmake
 if ! command -v cmake &> /dev/null; then
