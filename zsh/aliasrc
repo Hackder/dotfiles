@@ -29,8 +29,9 @@ export EDITOR=nvim
 alias pacman-update='sudo pacman-mirrors --geoip'
 
 alias ls='eza'
+alias la='eza -a'
 alias lls='/bin/ls'
-alias ll='ls -l'
+alias ll='eza -l'
 # ls, the common ones I use a lot shortened for rapid fire usage
 # alias l='ls -lFh'     #size,show type,human readable
 # alias la='ls -lAFh'   #long list,show almost all,show type,human readable
