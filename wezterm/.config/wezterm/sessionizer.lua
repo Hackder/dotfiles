@@ -5,7 +5,7 @@ local M = {}
 
 local fd =
 "C:\\Users\\dronehacks\\AppData\\Local\\Microsoft\\WinGet\\Packages\\sharkdp.fd_Microsoft.Winget.Source_8wekyb3d8bbwe\\fd-v10.2.0-x86_64-pc-windows-msvc\\fd.exe"
-local rootPath = "/Users/dronehacks/dev"
+local rootPath = "\\Users\\dronehacks"
 
 M.toggle = function(window, pane)
   local projects = {}
@@ -48,8 +48,8 @@ M.toggle = function(window, pane)
   end
 
   for line in stdout:gmatch("([^\n]*)\n?") do
-    local project = line:gsub("/.git/$", "")
-    project = project:gsub("^/Users/jurajpetras/", "~/")
+    local project = line:gsub("\\.git\\$", "")
+    -- project = project:gsub("^\\Users\\dronehacks\\", "~\\")
     local label = project
     local id = project:gsub(".*/", "")
     table.insert(projects, { label = tostring(label), id = tostring(id) })
