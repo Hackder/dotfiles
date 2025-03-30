@@ -1,3 +1,7 @@
 IndentWidth: '4'
 TabWidth: '4'
 PointerAlignment: Left
+AllowShortFunctionsOnASingleLine: false
+BraceWrapping:
+  AfterFunction: true
+
