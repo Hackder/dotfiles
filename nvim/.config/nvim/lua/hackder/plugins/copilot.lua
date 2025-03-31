@@ -69,9 +69,9 @@ return {
 		opts = {
 			chat_autocomplete = false,
 			window = {
-				layout = "float", -- 'vertical', 'horizontal', 'float', 'replace'
-				width = 0.75, -- fractional width of parent, or absolute width in columns when > 1
-				height = 0.75, -- fractional height of parent, or absolute height in rows when > 1
+				layout = "vertical", -- 'vertical', 'horizontal', 'float', 'replace'
+				-- width = 0.75, -- fractional width of parent, or absolute width in columns when > 1
+				-- height = 0.75, -- fractional height of parent, or absolute height in rows when > 1
 			},
 			mappings = {
 				complete = {
