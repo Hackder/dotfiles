@@ -151,9 +151,20 @@ return {
 					end, { "i", "s" }),
 				})
 
+				vim.api.nvim_set_hl(0, "CmpNormal", { bg = "#1A1C1D" })
+				vim.api.nvim_set_hl(0, "CmpItemAbbr", { bg = "none" })
+
 				local icons = require("hackder.icons")
 				cmp.setup({
 					mapping = cmp_mappings,
+					window = {
+						completion = {
+							winhighlight = "Normal:CmpNormal",
+						},
+						documentation = {
+							winhighlight = "Normal:CmpNormal,FloatBorder:CmpNormal",
+						},
+					},
 					snippet = {
 						expand = function(args)
 							luasnip.lsp_expand(args.body)
@@ -170,14 +181,26 @@ return {
 						{ name = "luasnip", keyword_length = 2 },
 					},
 					formatting = {
-						fields = { "kind", "abbr", "menu" },
+						fields = { "kind", "abbr" },
 						format = function(entry, vim_item)
-							vim_item.menu = entry:get_completion_item().detail
+							local highlights_info = require("colorful-menu").cmp_highlights(entry)
+
+							-- highlight_info is nil means we are missing the ts parser, it's
+							-- better to fallback to use default `vim_item.abbr`. What this plugin
+							-- offers is two fields: `vim_item.abbr_hl_group` and `vim_item.abbr`.
+							if highlights_info ~= nil then
+								vim_item.abbr_hl_group = highlights_info.highlights
+								vim_item.abbr = highlights_info.text
+							else
+								vim_item.abbr_hl_group = "CmpItemAbbr"
+							end
+
 							if icons.kinds[vim_item.kind] then
 								vim_item.kind = icons.kinds[vim_item.kind]
 							else
 								vim_item.kind = icons.kinds.Text
 							end
+
 							return vim_item
 						end,
 					},
