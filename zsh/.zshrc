@@ -149,3 +149,6 @@ export PATH="$PATH:/Users/jurajpetras/.modular/bin"
 export PATH="/opt/homebrew/opt/binutils/bin:$PATH"
 
 alias loglang="/Users/jurajpetras/school/logic/log_lang/.venv/bin/python /Users/jurajpetras/school/logic/log_lang/main.py"
+alias lc="/Users/jurajpetras/school/verification/lc/.venv/bin/python /Users/jurajpetras/school/verification/lc/lc.py"
+
+export DELTA_FEATURES=+side-by-side
