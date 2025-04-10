@@ -198,7 +198,7 @@ You are an AI assistant specialized in answering questions about systems program
 				desc = "CopilotChat - Help actions",
 			},
 			{
-				"<up>",
+				"<leader>cco",
 				function()
 					require("CopilotChat").toggle()
 				end,
