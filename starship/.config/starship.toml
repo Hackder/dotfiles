@@ -22,25 +22,25 @@ $cmd_duration\
 $status\
 $line_break$character"""
 
-palette = 'gruvbox_dark_hard'
+palette = 'base16_ansii_theme'
 
-[palettes.gruvbox_dark_hard]
-color_base00 = '#1d2021'
-color_base01 = '#3c3836'
-color_base02 = '#504945'
-color_base03 = '#665c54'
-color_base04 = '#bdae93'
-color_base05 = '#d5c4a1'
-color_base06 = '#ebdbb2'
-color_base07 = '#fbf1c7'
-color_base08 = '#fb4934'
-color_base09 = '#fe8019'
-color_base0a = '#fabd2f'
-color_base0b = '#b8bb26'
-color_base0c = '#8ec07c'
-color_base0d = '#83a598'
-color_base0e = '#d3869b'
-color_base0f = '#d65d0e'
+[palettes.base16_ansii_theme]
+color_base00 = 'black'
+color_base01 = 'bright-black'
+color_base02 = 'dimmed'
+color_base03 = 'dimmed'
+color_base04 = 'white'
+color_base05 = 'bright-white'
+color_base06 = 'bright-white'
+color_base07 = 'bright-white'
+color_base08 = 'red'
+color_base09 = 'yellow'
+color_base0a = 'yellow'
+color_base0b = 'green'
+color_base0c = 'cyan'
+color_base0d = 'blue'
+color_base0e = 'magenta'
+color_base0f = 'red'
 
 [os]
 disabled = false

@@ -1,3 +1,4 @@
 **/.DS_Store
 machinelocal.lua
 *.exe
+./ghostty/.config/ghostty/theme

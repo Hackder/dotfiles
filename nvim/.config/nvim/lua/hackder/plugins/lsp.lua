@@ -151,7 +151,7 @@ return {
 					end, { "i", "s" }),
 				})
 
-				vim.api.nvim_set_hl(0, "CmpNormal", { bg = "#1A1C1D" })
+				-- vim.api.nvim_set_hl(0, "CmpNormal", { bg = "#1A1C1D" })
 				vim.api.nvim_set_hl(0, "CmpItemAbbr", { bg = "none" })
 
 				local icons = require("hackder.icons")

@@ -4,35 +4,110 @@ return {
 		lazy = false,
 		priority = 1000,
 		config = function()
+			local light_theme = "github_light_default"
+			local dark_theme = "base16-gruvbox-dark-hard"
+
+			local gruvbox_ns = vim.api.nvim_create_namespace("gruvbox_custom")
+
+			-- To prevent the initial dark flash when using light theme
+			vim.api.nvim_set_hl(0, "Normal", { bg = "NONE" })
+
+			vim.api.nvim_set_hl(gruvbox_ns, "@lsp.type.namespace", { link = "@namespace" })
+			vim.api.nvim_set_hl(gruvbox_ns, "@lsp.type.type", { link = "@type" })
+			vim.api.nvim_set_hl(gruvbox_ns, "@lsp.type.class", { link = "@type" })
+			vim.api.nvim_set_hl(gruvbox_ns, "@lsp.type.enum", { link = "@type" })
+			vim.api.nvim_set_hl(gruvbox_ns, "@lsp.type.interface", { link = "@type" })
+			vim.api.nvim_set_hl(gruvbox_ns, "@lsp.type.struct", { link = "@structure" })
+			vim.api.nvim_set_hl(gruvbox_ns, "@lsp.type.parameter", { link = "@parameter" })
+			vim.api.nvim_set_hl(gruvbox_ns, "@lsp.type.variable", { link = "@property" })
+			vim.api.nvim_set_hl(gruvbox_ns, "@lsp.type.property", { link = "@property" })
+			vim.api.nvim_set_hl(gruvbox_ns, "@lsp.type.enumMember", { link = "@constant" })
+			vim.api.nvim_set_hl(gruvbox_ns, "@lsp.type.function", { link = "@function" })
+			vim.api.nvim_set_hl(gruvbox_ns, "@lsp.type.method", { link = "@method" })
+			vim.api.nvim_set_hl(gruvbox_ns, "@lsp.type.macro", { link = "@macro" })
+			vim.api.nvim_set_hl(gruvbox_ns, "@lsp.type.decorator", { link = "@function" })
+			vim.api.nvim_set_hl(gruvbox_ns, "TSTagDelimiter", { link = "@property" })
+			vim.api.nvim_set_hl(gruvbox_ns, "TSVariable", { link = "@property" })
+			vim.api.nvim_set_hl(gruvbox_ns, "TSPunctDelimiter", { link = "@property" })
+			vim.api.nvim_set_hl(gruvbox_ns, "@lsp.mod.global", { link = "@variable.builtin" })
+			vim.api.nvim_set_hl(gruvbox_ns, "@lsp.typemod.variable.defaultLibrary", { link = "@variable.builtin" })
+			vim.api.nvim_set_hl(gruvbox_ns, "@function.builtin", { link = "@variable.builtin" })
+			-- vim.api.nvim_set_hl(gruvbox_ns, "CmpNormal", { bg = "#1A1C1D" })
+
+			-- Default highlight override for the autocomplete menu background
+			vim.api.nvim_set_hl(0, "CmpNormal", { link = "CmpDocumentation" })
+
+			vim.api.nvim_set_hl_ns(gruvbox_ns)
 			vim.g.base16colorspace = 256
-			vim.o.background = "dark"
-			vim.cmd.colorscheme("base16-gruvbox-dark-hard")
-			-- Setup lsp token highlights
-			vim.api.nvim_set_hl(0, "@lsp.type.namespace", { link = "@namespace" })
-			vim.api.nvim_set_hl(0, "@lsp.type.type", { link = "@type" })
-			vim.api.nvim_set_hl(0, "@lsp.type.class", { link = "@type" })
-			vim.api.nvim_set_hl(0, "@lsp.type.enum", { link = "@type" })
-			vim.api.nvim_set_hl(0, "@lsp.type.interface", { link = "@type" })
-			vim.api.nvim_set_hl(0, "@lsp.type.struct", { link = "@structure" })
-			vim.api.nvim_set_hl(0, "@lsp.type.parameter", { link = "@parameter" })
-			vim.api.nvim_set_hl(0, "@lsp.type.variable", { link = "@property" })
-			vim.api.nvim_set_hl(0, "@lsp.type.property", { link = "@property" })
-			vim.api.nvim_set_hl(0, "@lsp.type.enumMember", { link = "@constant" })
-			vim.api.nvim_set_hl(0, "@lsp.type.function", { link = "@function" })
-			vim.api.nvim_set_hl(0, "@lsp.type.method", { link = "@method" })
-			vim.api.nvim_set_hl(0, "@lsp.type.macro", { link = "@macro" })
-			vim.api.nvim_set_hl(0, "@lsp.type.decorator", { link = "@function" })
-			vim.api.nvim_set_hl(0, "TSTagDelimiter", { link = "@property" })
-			vim.api.nvim_set_hl(0, "TSVariable", { link = "@property" })
-			vim.api.nvim_set_hl(0, "TSPunctDelimiter", { link = "@property" })
+			-- vim.o.background = "dark"
 
-			vim.api.nvim_set_hl(0, "@lsp.mod.global", { link = "@variable.builtin" })
-			vim.api.nvim_set_hl(0, "@lsp.typemod.variable.defaultLibrary", { link = "@variable.builtin" })
-			vim.api.nvim_set_hl(0, "@function.builtin", { link = "@variable.builtin" })
+			local theme_config_path = vim.fn.expand("~/dotfiles/ghostty/.config/ghostty/theme")
+			local function read_theme_config()
+				local file = io.open(theme_config_path, "r")
+				if file then
+					local content = file:read("*a")
+					file:close()
+					return content
+				end
+				return nil
+			end
 
-			-- vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
-			-- vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
-			-- vim.api.nvim_set_hl(0, "SignColumn", { bg = "none" })
+			local function set_correct_theme()
+				local theme_config = read_theme_config()
+				if theme_config and theme_config:lower():match("light") then
+					vim.cmd.colorscheme(light_theme)
+				else
+					vim.cmd.colorscheme(dark_theme)
+				end
+			end
+			set_correct_theme()
+
+			vim.api.nvim_create_autocmd("ColorScheme", {
+				pattern = "*",
+				callback = function()
+					local current_colorscheme = vim.g.colors_name
+					if current_colorscheme == "base16-gruvbox-dark-hard" then
+						vim.api.nvim_set_hl_ns(gruvbox_ns)
+					else
+						vim.api.nvim_set_hl_ns(0)
+					end
+				end,
+			})
+
+			vim.api.nvim_create_user_command("ToggleTheme", function()
+				if vim.g.colors_name == dark_theme then
+					vim.cmd.colorscheme(light_theme)
+				else
+					vim.cmd.colorscheme(dark_theme)
+				end
+			end, {})
+
+			local uv = vim.loop
+			local file_to_watch = vim.fn.expand("~/dotfiles/ghostty/.config/ghostty/theme")
+			local function watch_file(file_path)
+				local handle = uv.new_fs_event()
+
+				-- Callback function to execute when the file changes
+				local function on_change(err, filename, events)
+					if err then
+						print("Error watching file:", err)
+						return
+					end
+
+					vim.schedule(function()
+						set_correct_theme()
+					end)
+				end
+
+				if handle == nil then
+					print("Failed to create file watcher handle.")
+					return
+				end
+
+				uv.fs_event_start(handle, file_path, {}, on_change)
+			end
+
+			watch_file(file_to_watch)
 		end,
 	},
 	{
