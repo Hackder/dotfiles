@@ -32,14 +32,9 @@ return {
 			vim.api.nvim_set_hl(gruvbox_ns, "@lsp.mod.global", { link = "@variable.builtin" })
 			vim.api.nvim_set_hl(gruvbox_ns, "@lsp.typemod.variable.defaultLibrary", { link = "@variable.builtin" })
 			vim.api.nvim_set_hl(gruvbox_ns, "@function.builtin", { link = "@variable.builtin" })
-			-- vim.api.nvim_set_hl(gruvbox_ns, "CmpNormal", { bg = "#1A1C1D" })
-
-			-- Default highlight override for the autocomplete menu background
-			vim.api.nvim_set_hl(0, "CmpNormal", { link = "CmpDocumentation" })
 
 			vim.api.nvim_set_hl_ns(gruvbox_ns)
 			vim.g.base16colorspace = 256
-			-- vim.o.background = "dark"
 
 			local theme_config_path = vim.fn.expand("~/dotfiles/ghostty/.config/ghostty/theme")
 			local function read_theme_config()
@@ -56,8 +51,12 @@ return {
 				local theme_config = read_theme_config()
 				if theme_config and theme_config:lower():match("light") then
 					vim.cmd.colorscheme(light_theme)
+					vim.api.nvim_set_hl(0, "CmpNormal", { link = "CmpDocumentation" })
+					vim.o.background = "light"
 				else
 					vim.cmd.colorscheme(dark_theme)
+					vim.api.nvim_set_hl(0, "CmpNormal", { bg = "#1A1C1D" })
+					vim.o.background = "dark"
 				end
 			end
 			set_correct_theme()
@@ -67,20 +66,14 @@ return {
 				callback = function()
 					local current_colorscheme = vim.g.colors_name
 					if current_colorscheme == "base16-gruvbox-dark-hard" then
+						vim.o.background = "dark"
 						vim.api.nvim_set_hl_ns(gruvbox_ns)
 					else
+						vim.o.background = "light"
 						vim.api.nvim_set_hl_ns(0)
 					end
 				end,
 			})
-
-			vim.api.nvim_create_user_command("ToggleTheme", function()
-				if vim.g.colors_name == dark_theme then
-					vim.cmd.colorscheme(light_theme)
-				else
-					vim.cmd.colorscheme(dark_theme)
-				end
-			end, {})
 
 			local uv = vim.loop
 			local function watch_file(file_path)
