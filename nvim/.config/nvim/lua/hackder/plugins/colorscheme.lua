@@ -83,7 +83,6 @@ return {
 			end, {})
 
 			local uv = vim.loop
-			local file_to_watch = vim.fn.expand("~/dotfiles/ghostty/.config/ghostty/theme")
 			local function watch_file(file_path)
 				local handle = uv.new_fs_event()
 
@@ -107,7 +106,7 @@ return {
 				uv.fs_event_start(handle, file_path, {}, on_change)
 			end
 
-			watch_file(file_to_watch)
+			watch_file(theme_config_path)
 		end,
 	},
 	{
