@@ -6,3 +6,4 @@ font-thicken-strength = 100
 
 config-file = ?theme
 
+keybind = global:super+j=esc:[106;9u
