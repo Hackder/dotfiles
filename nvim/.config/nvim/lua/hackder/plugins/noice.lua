@@ -42,6 +42,13 @@ return {
 					},
 				},
 			})
+
+			vim.keymap.set("n", "<leader>nd", function()
+				require("notify").dismiss({
+					pending = true,
+					silent = true,
+				})
+			end, { desc = "Dismiss all notifications" })
 		end,
 		dependencies = {
 			-- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
