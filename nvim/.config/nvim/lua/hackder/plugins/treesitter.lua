@@ -12,6 +12,10 @@ return {
 				-- A list of parser names, or "all"
 				ensure_installed = { "javascript", "typescript", "python", "cpp", "lua", "rust", "query" },
 
+				ignore_install = {},
+
+				modules = {},
+
 				-- Install parsers synchronously (only applied to `ensure_installed`)
 				sync_install = false,
 

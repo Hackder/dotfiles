@@ -86,7 +86,6 @@ fi
 # CTRL + Backspace
 bindkey '^H' backward-kill-word
 
-export LDFLAGS="-L/usr/local/opt/tcl-tk/lib"
 export CPPFLAGS="-I/usr/local/opt/tcl-tk/include"
 export PATH=$PATH:/usr/local/opt/tcl-tk/bin
 
@@ -111,6 +110,8 @@ alias lsbm="list-submit"
 alias lls="/bin/ls"
 
 source <(fzf --zsh)
+
+export GOOGLE_APPLICATION_CREDENTIALS="$HOME/.config/gcloud/application_default_credentials.json"
 
 # Zig
 export PATH="$HOME/zig:$PATH"
@@ -152,3 +153,9 @@ alias loglang="/Users/jurajpetras/school/logic/log_lang/.venv/bin/python /Users/
 alias lc="/Users/jurajpetras/school/verification/lc/.venv/bin/python /Users/jurajpetras/school/verification/lc/lc.py"
 
 export DELTA_FEATURES=+side-by-side
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/jurajpetras/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/jurajpetras/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/jurajpetras/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/jurajpetras/google-cloud-sdk/completion.zsh.inc'; fi

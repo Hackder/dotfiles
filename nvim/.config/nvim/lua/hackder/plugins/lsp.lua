@@ -42,38 +42,12 @@ return {
 				})
 
 				require("mason-lspconfig").setup({
+					automatic_enable = true,
 					ensure_installed = { "lua_ls", "ts_ls", "rust_analyzer", "pyright" },
 					handlers = {
 						lsp_zero.default_setup,
 						ts_ls = function()
-							require("lspconfig").ts_ls.setup({
-								handlers = {
-									["textDocument/publishDiagnostics"] = function(_, result, ctx, config)
-										if result.diagnostics == nil then
-											return
-										end
-
-										-- ignore some ts_ls diagnostics
-										local idx = 1
-										while idx <= #result.diagnostics do
-											local entry = result.diagnostics[idx]
-
-											local formatter = require("format-ts-errors")[entry.code]
-											entry.message = formatter and formatter(entry.message) or entry.message
-
-											-- codes: https://github.com/microsoft/TypeScript/blob/main/src/compiler/diagnosticMessages.json
-											if entry.code == 80001 then
-												-- { message = "File is a CommonJS module; it may be converted to an ES module.", }
-												table.remove(result.diagnostics, idx)
-											else
-												idx = idx + 1
-											end
-										end
-
-										vim.lsp.diagnostic.on_publish_diagnostics(_, result, ctx, config)
-									end,
-								},
-							})
+							require("lspconfig").ts_ls.setup({})
 						end,
 						lua_ls = function()
 							require("lspconfig").lua_ls.setup({})
@@ -287,18 +261,12 @@ return {
 						vim.diagnostic.open_float,
 						{ buffer = bufnr, remap = false, desc = "Show diagnostics" }
 					)
-					vim.keymap.set(
-						"n",
-						"[d",
-						vim.diagnostic.goto_next,
-						{ buffer = bufnr, remap = false, desc = "Next diagnostic" }
-					)
-					vim.keymap.set(
-						"n",
-						"]d",
-						vim.diagnostic.goto_prev,
-						{ buffer = bufnr, remap = false, desc = "Previous diagnostic" }
-					)
+					vim.keymap.set("n", "[d", function()
+						vim.diagnostic.jump({ count = 1, float = true })
+					end, { buffer = bufnr, remap = false, desc = "Next diagnostic" })
+					vim.keymap.set("n", "]d", function()
+						vim.diagnostic.jump({ count = -1, float = true })
+					end, { buffer = bufnr, remap = false, desc = "Previous diagnostic" })
 					vim.keymap.set(
 						"n",
 						"<leader>la",

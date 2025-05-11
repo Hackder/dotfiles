@@ -31,8 +31,7 @@ return {
 					debounce = 75,
 					keymap = {
 						accept = "<C-j>",
-						accept_word = "<M-j>",
-						accept_line = false,
+						accept_line = "<M-j>",
 						next = "<M-]>",
 						prev = "<M-[>",
 						dismiss = "<C-]>",
@@ -191,8 +190,7 @@ You are an AI assistant specialized in answering questions about systems program
 			{
 				"<leader>cch",
 				function()
-					local actions = require("CopilotChat.actions")
-					require("CopilotChat.integrations.telescope").pick(actions.prompt_actions())
+					require("CopilotChat").select_prompt()
 				end,
 				mode = { "n", "v" },
 				desc = "CopilotChat - Help actions",

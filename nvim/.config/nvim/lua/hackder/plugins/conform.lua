@@ -39,7 +39,7 @@ return {
 				if opts.fargs[1] == "on" then
 					ConformFormatOnSave()
 				elseif opts.fargs[1] == "off" then
-					vim.api.nvim_exec("autocmd! formatting", true)
+					vim.api.nvim_exec2("autocmd! formatting", { output = true })
 				else
 					print("Invalid argument")
 				end
@@ -53,7 +53,7 @@ return {
 			ConformFormatOnSave()
 
 			vim.keymap.set("n", "<leader>gf", function()
-				local hunks = require("gitsigns").get_hunks()
+				local hunks = require("gitsigns").get_hunks(vim.api.nvim_get_current_buf())
 				local format = require("conform").format
 				for i = #hunks, 1, -1 do
 					local hunk = hunks[i]
