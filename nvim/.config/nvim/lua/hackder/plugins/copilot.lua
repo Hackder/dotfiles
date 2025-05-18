@@ -203,6 +203,13 @@ You are an AI assistant specialized in answering questions about systems program
 				mode = { "n", "v" },
 				desc = "CopilotChat - Toggle",
 			},
+			{
+				"<leader>ccf",
+				function()
+					vim.cmd("normal! ggVG")
+					require("CopilotChat").toggle()
+				end,
+			},
 		},
 	},
 }
