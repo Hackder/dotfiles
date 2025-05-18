@@ -19,6 +19,8 @@ local find_command = {
 	"**/.venv",
 	"-E",
 	"\\.turbo",
+	"-E",
+	"**/target",
 }
 
 local git_command = {
