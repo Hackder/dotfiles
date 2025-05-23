@@ -83,9 +83,15 @@ return {
 			vim.keymap.set("n", "<leader>fg", function()
 				pickers.prettyGrepPicker({ picker = "live_grep" })
 			end, { desc = "Search all files" })
-			vim.keymap.set("n", "<leader>fw", builtin.grep_string, { desc = "Grep string in current file" })
+			vim.keymap.set(
+				"n",
+				"<leader>fw",
+				builtin.current_buffer_fuzzy_find,
+				{ desc = "Grep string in current file" }
+			)
 			vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "Search buffers" })
 			vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "Search help tags" })
+			vim.keymap.set("n", "<leader>ft", builtin.treesitter, { desc = "Search treesitter" })
 
 			local default_pickers = require("telescope.pickers")
 			local finders = require("telescope.finders")
