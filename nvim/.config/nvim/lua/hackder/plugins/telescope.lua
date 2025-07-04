@@ -43,7 +43,15 @@ return {
 		branch = "0.1.x",
 		dependencies = { "nvim-lua/plenary.nvim", { "nvim-telescope/telescope-fzf-native.nvim" } },
 		config = function()
+			local open_with_trouble = require("trouble.sources.telescope").open
+
 			require("telescope").setup({
+				defaults = {
+					mappings = {
+						i = { ["<c-t>"] = open_with_trouble },
+						n = { ["<c-t>"] = open_with_trouble },
+					},
+				},
 				extensions = {
 					fzf = {},
 				},
@@ -97,7 +105,7 @@ return {
 			local finders = require("telescope.finders")
 			local make_entry = require("telescope.make_entry")
 			local conf = require("telescope.config").values
-			vim.keymap.set("n", "<leader>fW", function(opts)
+			local grep_in_project = function(opts)
 				local finder = finders.new_async_job({
 					command_generator = function(prompt)
 						if not prompt or prompt == "" then
@@ -112,12 +120,7 @@ return {
 							table.insert(args, pieces[1])
 						end
 
-						if pieces[2] then
-							table.insert(args, "--glob")
-							table.insert(args, pieces[2])
-						end
-
-						return vim.list_extend(args, {
+						vim.list_extend(args, {
 							"--hidden",
 							"--glob",
 							"!\\.git",
@@ -130,6 +133,13 @@ return {
 							"--column",
 							"--smart-case",
 						})
+
+						if pieces[2] then
+							table.insert(args, "--glob")
+							table.insert(args, pieces[2])
+						end
+
+						return args
 					end,
 
 					entry_maker = make_entry.gen_from_vimgrep(opts),
@@ -144,7 +154,13 @@ return {
 						sorter = require("telescope.sorters").empty(),
 					})
 					:find()
-			end, {
+			end
+
+			vim.keymap.set("n", "<leader>fW", grep_in_project, {
+				desc = "Grep string in all files (including hidden)",
+			})
+
+			vim.keymap.set("n", "<F4>", grep_in_project, {
 				desc = "Grep string in all files (including hidden)",
 			})
 

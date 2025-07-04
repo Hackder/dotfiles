@@ -2,6 +2,7 @@ IndentWidth: '4'
 TabWidth: '4'
 PointerAlignment: Left
 AllowShortFunctionsOnASingleLine: false
+# AlwaysBreakAfterReturnType: TopLevel
 BraceWrapping:
   AfterFunction: true
 

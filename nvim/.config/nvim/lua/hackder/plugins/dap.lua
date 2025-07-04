@@ -4,6 +4,20 @@ return {
 		"mfussenegger/nvim-dap",
 		config = function()
 			local dap = require("dap")
+
+			vim.api.nvim_set_hl(0, "DapStoppedLineYellow", { bg = "#343328" })
+
+			vim.fn.sign_define("DapBreakpoint", { text = "⬤", texthl = "DiagnosticError", linehl = "", numhl = "" })
+			vim.fn.sign_define(
+				"DapStopped",
+				{ text = "▶", texthl = "DiagnosticInfo", linehl = "DapStoppedLineYellow", numhl = "" }
+			)
+			vim.fn.sign_define("DapLogPoint", { text = "⬤", texthl = "DiagnosticHint", linehl = "", numhl = "" })
+			vim.fn.sign_define(
+				"DapBreakpointRejected",
+				{ text = "x", texthl = "DiagnosticError", linehl = "", numhl = "" }
+			)
+
 			vim.keymap.set("n", "<leader>db", function()
 				dap.toggle_breakpoint()
 			end, { desc = "Toggle breakpoint" })
@@ -40,26 +54,9 @@ return {
 				dap.disconnect()
 			end, { desc = "Disconnect" })
 
-			vim.keymap.set("n", "<leader>drb", function()
+			vim.keymap.set("n", "<leader>dx", function()
 				dap.clear_breakpoints()
 			end, { desc = "Remove all breakpoints" })
-
-			dap.configurations.odin = {
-				{
-					name = "Debug with codelldb",
-					type = "codelldb",
-					request = "launch",
-					program = function()
-						return vim.fn.input({
-							prompt = "Path to executable: ",
-							default = vim.fn.getcwd() .. "/",
-							completion = "file",
-						})
-					end,
-					cwd = "${workspaceFolder}",
-					stopOnEntry = false,
-				},
-			}
 		end,
 	},
 	{
@@ -69,62 +66,7 @@ return {
 			"mfussenegger/nvim-dap",
 			"williamboman/mason.nvim",
 		},
-		opts = {
-			handlers = {
-				codelldb = function(config)
-					table.insert(config.configurations, {
-						args = {},
-						console = "integratedTerminal",
-						cwd = "${workspaceFolder}",
-						name = "LLDB: Launch prog3",
-						program = function()
-							local current_dir = vim.fn.expand("%:p:h")
-							local cmake_lists = io.open(current_dir .. "/CMakeLists.txt")
-							if cmake_lists then
-								local content = cmake_lists:read("*all")
-								cmake_lists:close()
-								local project_name = content:match("TARGET ([%w_%-]+)")
-								return current_dir .. "/build/" .. project_name
-							end
-						end,
-						preRunCommands = {
-							"breakpoint name configure --disable cpp_exception",
-						},
-						request = "launch",
-						stopOnEntry = false,
-						type = "codelldb",
-					})
-
-					table.insert(config.configurations, {
-						console = "integratedTerminal",
-						cwd = "${workspaceFolder}",
-						name = "LLDB: Launch with arguments",
-						program = function()
-							return vim.fn.input({
-								prompt = "Path to executable: ",
-								default = vim.fn.getcwd() .. "/",
-								completion = "file",
-							})
-						end,
-						args = function()
-							local args = vim.fn.input({
-								prompt = "Arguments: ",
-								default = vim.fn.getcwd() .. "/",
-								completion = "file",
-							})
-
-							return vim.split(args, " ")
-						end,
-						request = "launch",
-						stopOnEntry = false,
-						type = "codelldb",
-					})
-
-					require("mason-nvim-dap").default_setup(config)
-				end,
-			},
-			ensure_installed = {},
-		},
+		opts = {},
 	},
 	{
 		"mfussenegger/nvim-dap-python",
@@ -153,7 +95,9 @@ return {
 		"theHamsta/nvim-dap-virtual-text",
 		dependencies = { "mfussenegger/nvim-dap" },
 		config = function()
-			require("nvim-dap-virtual-text").setup()
+			require("nvim-dap-virtual-text").setup({
+				enabled = true,
+			})
 		end,
 	},
 }
