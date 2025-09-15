@@ -124,6 +124,11 @@ export PATH="$DENO_INSTALL/bin:$PATH"
 export PATH="/Users/jurajpetras/roc_nightly-macos_apple_silicon-2024-07-13-070d14a5d60:$PATH"
 eval "$(mise activate zsh)"
 
+# Android SDK
+export ANDROID_HOME="$HOME/Library/Android/sdk"
+export NDK_HOME="$ANDROID_HOME/ndk/29.0.13599879"
+export NDK_ROOT="$NDK_HOME/toolchains/llvm/prebuilt/darwin-x86_64/bin"
+
 # yazi
 function yy() {
 	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
@@ -152,8 +157,6 @@ export PATH="/opt/homebrew/opt/binutils/bin:$PATH"
 alias loglang="/Users/jurajpetras/school/logic/log_lang/.venv/bin/python /Users/jurajpetras/school/logic/log_lang/main.py"
 alias lc="/Users/jurajpetras/school/verification/lc/.venv/bin/python /Users/jurajpetras/school/verification/lc/lc.py"
 
-export DELTA_FEATURES=+side-by-side
-
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/jurajpetras/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/jurajpetras/google-cloud-sdk/path.zsh.inc'; fi
 
@@ -163,3 +166,5 @@ if [ -f '/Users/jurajpetras/google-cloud-sdk/completion.zsh.inc' ]; then . '/Use
 source <(jj util completion zsh)
 
 alias todo="nvim ~/todos.md"
+
+export PATH="/opt/homebrew/opt/libpq@17/bin:$PATH"

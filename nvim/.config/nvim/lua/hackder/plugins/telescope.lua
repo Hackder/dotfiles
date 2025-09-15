@@ -21,6 +21,12 @@ local find_command = {
 	"\\.turbo",
 	"-E",
 	"**/target",
+	"-E",
+	"**/dist",
+	"-E",
+	"**/build",
+	"-E",
+	"**/.jj",
 }
 
 local git_command = {
@@ -126,6 +132,8 @@ return {
 							"!\\.git",
 							"--glob",
 							"!node_modules",
+							"--glob",
+							"!\\.venv",
 							"--color=never",
 							"--no-heading",
 							"--with-filename",
