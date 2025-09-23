@@ -57,14 +57,6 @@ return {
 						n = { ["<c-t>"] = open_with_trouble },
 					},
 				},
-				extensions = {
-					fzf = {
-						fuzzy = true,
-						override_generic_sorter = false,
-						override_file_sorter = true,
-						case_mode = "smart_case",
-					},
-				},
 			})
 			require("telescope").load_extension("zf-native")
 
@@ -163,7 +155,6 @@ return {
 						prompt_title = "Multi Grep",
 						finder = finder,
 						previewer = conf.grep_previewer({}),
-						sorter = require("telescope.sorters").empty(),
 					})
 					:find()
 			end
