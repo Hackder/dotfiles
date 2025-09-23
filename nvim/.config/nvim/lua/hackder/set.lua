@@ -102,3 +102,10 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 		end)
 	end,
 })
+
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+	group = augroup("dash_in_word"),
+	callback = function()
+		vim.opt_local.iskeyword:remove("-")
+	end,
+})
