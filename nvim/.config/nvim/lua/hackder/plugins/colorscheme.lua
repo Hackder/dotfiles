@@ -51,11 +51,13 @@ return {
 				local theme_config = read_theme_config()
 				if theme_config and theme_config:lower():match("light") then
 					vim.cmd.colorscheme(light_theme)
-					vim.api.nvim_set_hl(0, "CmpNormal", { link = "CmpDocumentation" })
+					vim.api.nvim_set_hl(0, "BlinkCmpMenu", { link = "CmpDocumentation" })
+					vim.api.nvim_set_hl(0, "BlinkCmpKind", { link = "CmpDocumentation" })
 					vim.o.background = "light"
 				else
 					vim.cmd.colorscheme(dark_theme)
-					vim.api.nvim_set_hl(0, "CmpNormal", { bg = "#1A1C1D" })
+					vim.api.nvim_set_hl(0, "BlinkCmpMenu", { bg = "#1A1C1D" })
+					vim.api.nvim_set_hl(0, "BlinkCmpKind", { bg = "#1A1C1D" })
 					vim.o.background = "dark"
 				end
 			end

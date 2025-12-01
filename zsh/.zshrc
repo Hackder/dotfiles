@@ -152,7 +152,7 @@ eval "$(zoxide init zsh)"
 [ -f "/Users/jurajpetras/.ghcup/env" ] && . "/Users/jurajpetras/.ghcup/env" # ghcup-env
 
 export PATH="$PATH:/Users/jurajpetras/.modular/bin"
-export PATH="/opt/homebrew/opt/binutils/bin:$PATH"
+export PATH="$PATH:/opt/homebrew/opt/binutils/bin"
 
 alias loglang="/Users/jurajpetras/school/logic/log_lang/.venv/bin/python /Users/jurajpetras/school/logic/log_lang/main.py"
 alias lc="/Users/jurajpetras/school/verification/lc/.venv/bin/python /Users/jurajpetras/school/verification/lc/lc.py"
@@ -168,3 +168,6 @@ source <(jj util completion zsh)
 alias todo="nvim ~/todos.md"
 
 export PATH="/opt/homebrew/opt/libpq@17/bin:$PATH"
+
+# opencode
+export PATH=/Users/jurajpetras/.opencode/bin:$PATH

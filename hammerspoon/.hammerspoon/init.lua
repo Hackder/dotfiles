@@ -1,7 +1,12 @@
 hs.hotkey.bind({ "alt" }, "J", function()
-	local app = hs.application.find("Chrome")
+	local app = hs.application.find("Helium")
 	if app then
 		local windows = app:allWindows()
+		if #windows == 0 then
+			hs.application.launchOrFocus("Helium")
+			return
+		end
+
 		local leftMostWindow = windows[1]
 
 		for i, window in ipairs(windows) do

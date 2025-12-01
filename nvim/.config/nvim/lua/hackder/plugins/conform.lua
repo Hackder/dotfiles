@@ -1,15 +1,3 @@
-function ConformFormatOnSave()
-	local group = vim.api.nvim_create_augroup("formatting", { clear = true })
-
-	vim.api.nvim_create_autocmd("BufWritePre", {
-		pattern = "*",
-		group = group,
-		callback = function(args)
-			require("conform").format({ bufnr = args.buf, timeout = 1000, lsp_format = "fallback" })
-		end,
-	})
-end
-
 return {
 	{
 		"stevearc/conform.nvim",
@@ -33,24 +21,35 @@ return {
 					php = { "phpcbf" },
 					latex = { "latexindent" },
 				},
+				format_on_save = function(bufnr)
+					-- Disable with a global or buffer-local variable
+					if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
+						return
+					end
+					return { timeout_ms = 500, lsp_format = "fallback" }
+				end,
+				default_format_opts = {
+					lsp_format = "fallback",
+				},
 			})
 
-			vim.api.nvim_create_user_command("FormatOnSave", function(opts)
-				if opts.fargs[1] == "on" then
-					ConformFormatOnSave()
-				elseif opts.fargs[1] == "off" then
-					vim.api.nvim_exec2("autocmd! formatting", { output = true })
+			vim.api.nvim_create_user_command("FormatDisable", function(args)
+				if args.bang then
+					-- FormatDisable! will disable formatting just for this buffer
+					vim.b.disable_autoformat = true
 				else
-					print("Invalid argument")
+					vim.g.disable_autoformat = true
 				end
 			end, {
-				nargs = 1,
-				complete = function(ArgLead, CmdLine, CursorPos)
-					return { "on", "off" }
-				end,
+				desc = "Disable autoformat-on-save",
+				bang = true,
 			})
-
-			ConformFormatOnSave()
+			vim.api.nvim_create_user_command("FormatEnable", function()
+				vim.b.disable_autoformat = false
+				vim.g.disable_autoformat = false
+			end, {
+				desc = "Re-enable autoformat-on-save",
+			})
 
 			vim.keymap.set("n", "<leader>gf", function()
 				local hunks = require("gitsigns").get_hunks(vim.api.nvim_get_current_buf())

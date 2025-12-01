@@ -6,6 +6,7 @@ $os\
 $directory\
 $git_branch\
 $git_status\
+${custom.jj}\
 [|]()\
 $c\
 $rust\
@@ -159,3 +160,11 @@ format = '[| [$duration](fg:color_base04) ]()'
 disabled = false
 symbol = ''
 format = '[| $symbol$status]($style) '
+
+[custom.jj]
+command = "prompt"
+format = "$output"
+ignore_timeout = true
+shell = ["starship-jj", "--ignore-working-copy", "starship"]
+use_stdin = false
+when = true
