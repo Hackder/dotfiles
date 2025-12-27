@@ -69,7 +69,7 @@ end
 -- File specific tabstop and shiftwidth
 vim.api.nvim_create_autocmd("FileType", {
 	group = augroup("tab_width"),
-	pattern = { "javascript", "typescript", "css", "svelte", "astro", "typescriptreact", "javascriptreact" },
+	pattern = { "javascript", "typescript", "css", "svelte", "astro", "typescriptreact", "javascriptreact", "html" },
 	callback = function()
 		vim.opt_local.shiftwidth = 2
 		vim.opt_local.tabstop = 2

@@ -171,3 +171,6 @@ export PATH="/opt/homebrew/opt/libpq@17/bin:$PATH"
 
 # opencode
 export PATH=/Users/jurajpetras/.opencode/bin:$PATH
+
+alias dadb="/Users/jurajpetras/dev/drone-hacks/desktop-app/duml-rust/target/debug/adb"
+alias dfastboot="/Users/jurajpetras/dev/drone-hacks/desktop-app/duml-rust/target/debug/fastboot"

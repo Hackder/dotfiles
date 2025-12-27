@@ -76,10 +76,10 @@ return {
 						vim.tbl_extend("force", opts, { desc = "Show diagnostics" })
 					)
 					vim.keymap.set("n", "[d", function()
-						vim.diagnostic.jump({ count = 1, float = true })
+						vim.diagnostic.jump({ count = 1, float = true, severity = { min = vim.diagnostic.severity.WARN } })
 					end, vim.tbl_extend("force", opts, { desc = "Next diagnostic" }))
 					vim.keymap.set("n", "]d", function()
-						vim.diagnostic.jump({ count = -1, float = true })
+						vim.diagnostic.jump({ count = -1, float = true, severity = { min = vim.diagnostic.severity.WARN } })
 					end, vim.tbl_extend("force", opts, { desc = "Previous diagnostic" }))
 
 					-- Insert mode

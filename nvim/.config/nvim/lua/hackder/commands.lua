@@ -30,3 +30,18 @@ end, {
 		return matches
 	end,
 })
+
+vim.api.nvim_create_user_command("DiffLines", function()
+	local bufnr = vim.api.nvim_get_current_buf()
+	local row = vim.api.nvim_win_get_cursor(0)[1]
+	-- Get current line and the one below
+	local lines = vim.api.nvim_buf_get_lines(bufnr, row - 1, row + 1, false)
+
+	if #lines < 2 then
+		vim.notify("EOF: No line below to diff.", vim.log.levels.ERROR)
+		return
+	end
+
+	local result = vim.diff(lines[1], lines[2])
+	print(result ~= "" and result or "Lines are identical")
+end, { desc = "Diff current line and the line below" })
