@@ -5,7 +5,6 @@
 # if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
 #   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 # fi
-
 # Dependancies You Need for this Config
 # zsh-syntax-highlighting - syntax highlighting for ZSH in standard repos
 # autojump - jump to directories with j or jc for child or jo to open in file manager
@@ -174,3 +173,5 @@ export PATH=/Users/jurajpetras/.opencode/bin:$PATH
 
 alias dadb="/Users/jurajpetras/dev/drone-hacks/desktop-app/duml-rust/target/debug/adb"
 alias dfastboot="/Users/jurajpetras/dev/drone-hacks/desktop-app/duml-rust/target/debug/fastboot"
+
+alias ding="/Users/jurajpetras/dev/ding/ding.sh"
