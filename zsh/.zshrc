@@ -175,3 +175,6 @@ alias dadb="/Users/jurajpetras/dev/drone-hacks/desktop-app/duml-rust/target/debu
 alias dfastboot="/Users/jurajpetras/dev/drone-hacks/desktop-app/duml-rust/target/debug/fastboot"
 
 alias ding="/Users/jurajpetras/dev/ding/ding.sh"
+alias toggle-theme="~/dotfiles/scripts/toggle_theme.sh"
+
+. "$HOME/.turso/env"

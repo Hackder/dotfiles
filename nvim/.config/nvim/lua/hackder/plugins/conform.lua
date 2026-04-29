@@ -16,7 +16,7 @@ return {
 					typescriptreact = { "prettierd", "prettier", stop_after_first = true },
 					json = { "prettierd", "prettier", stop_after_first = true },
 					vue = { "prettierd", "prettier", stop_after_first = true },
-					astro = { "prettierd", "prettier", stop_after_first = true },
+					astro = { "prettier", stop_after_first = true },
 					java = { "google-java-format" },
 					php = { "phpcbf" },
 					latex = { "latexindent" },

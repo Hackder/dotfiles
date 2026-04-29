@@ -37,6 +37,14 @@ hs.hotkey.bind({ "alt" }, "I", function()
 	hs.application.launchOrFocus("ClickUp")
 end)
 
+hs.hotkey.bind({ "alt" }, "O", function()
+	hs.application.launchOrFocus("OpenCode")
+end)
+
 hs.hotkey.bind({ "alt" }, "M", function()
 	hs.application.launchOrFocus("Messages")
+end)
+
+hs.hotkey.bind({ "alt" }, ";", function()
+	hs.application.launchOrFocus("Spotify")
 end)

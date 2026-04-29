@@ -82,17 +82,17 @@ return {
 				end
 			end, { desc = "Search git files" })
 			vim.keymap.set("n", "<leader>fd", builtin.diagnostics, { desc = "Search diagnostics" })
-			vim.keymap.set("n", "<leader>fa", function()
-				pickers.prettyFilesPicker({
-					picker = "find_files",
-					options = {
-						find_command = find_command,
-					},
-				})
-			end, { desc = "Search all files" })
-			vim.keymap.set("n", "<leader>fg", function()
-				pickers.prettyGrepPicker({ picker = "live_grep" })
-			end, { desc = "Search all files" })
+			-- vim.keymap.set("n", "<leader>fa", function()
+			-- 	pickers.prettyFilesPicker({
+			-- 		picker = "find_files",
+			-- 		options = {
+			-- 			find_command = find_command,
+			-- 		},
+			-- 	})
+			-- end, { desc = "Search all files" })
+			-- vim.keymap.set("n", "<leader>fg", function()
+			-- 	pickers.prettyGrepPicker({ picker = "live_grep" })
+			-- end, { desc = "Search all files" })
 			vim.keymap.set(
 				"n",
 				"<leader>fw",
@@ -159,13 +159,13 @@ return {
 					:find()
 			end
 
-			vim.keymap.set("n", "<leader>fW", grep_in_project, {
-				desc = "Grep string in all files (including hidden)",
-			})
+			-- vim.keymap.set("n", "<leader>fW", grep_in_project, {
+			-- 	desc = "Grep string in all files (including hidden)",
+			-- })
 
-			vim.keymap.set("n", "<F4>", grep_in_project, {
-				desc = "Grep string in all files (including hidden)",
-			})
+			-- vim.keymap.set("n", "<F4>", grep_in_project, {
+			-- 	desc = "Grep string in all files (including hidden)",
+			-- })
 
 			vim.keymap.set("n", "<leader>fs", builtin.lsp_document_symbols, { desc = "Search document symbols" })
 			vim.keymap.set(

@@ -76,10 +76,18 @@ return {
 						vim.tbl_extend("force", opts, { desc = "Show diagnostics" })
 					)
 					vim.keymap.set("n", "[d", function()
-						vim.diagnostic.jump({ count = 1, float = true, severity = { min = vim.diagnostic.severity.WARN } })
+						vim.diagnostic.jump({
+							count = 1,
+							float = true,
+							severity = { min = vim.diagnostic.severity.WARN },
+						})
 					end, vim.tbl_extend("force", opts, { desc = "Next diagnostic" }))
 					vim.keymap.set("n", "]d", function()
-						vim.diagnostic.jump({ count = -1, float = true, severity = { min = vim.diagnostic.severity.WARN } })
+						vim.diagnostic.jump({
+							count = -1,
+							float = true,
+							severity = { min = vim.diagnostic.severity.WARN },
+						})
 					end, vim.tbl_extend("force", opts, { desc = "Previous diagnostic" }))
 
 					-- Insert mode
@@ -103,7 +111,7 @@ return {
 			require("mason-lspconfig").setup({
 				automatic_enable = {
 					exclude = {
-						"rust_analyzer", -- Exclude rust_analyzer as it is managed by rustaceanvim
+						-- "rust_analyzer", -- Exclude rust_analyzer as it is managed by rustaceanvim
 					},
 				},
 				ensure_installed = { "lua_ls", "ts_ls" },
