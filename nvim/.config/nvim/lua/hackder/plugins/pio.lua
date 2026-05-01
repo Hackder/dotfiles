@@ -11,7 +11,7 @@ return {
 			if platformioRootDir then
 				-- if platformio.ini file exist in cwd, enable plugin to install plugin (if not istalled) and load it.
 				vim.g.platformioRootDir = platformioRootDir
-			elseif (vim.uv or vim.loop).fs_stat(vim.fn.stdpath("data") .. "/lazy/nvim-platformio.lua") == nil then
+			elseif vim.uv.fs_stat(vim.fn.stdpath("data") .. "/lazy/nvim-platformio.lua") == nil then
 				-- if nvim-platformio not installed, enable plugin to install it first time
 				vim.g.platformioRootDir = vim.fn.getcwd()
 			else -- if nvim-platformio.lua installed but disabled, create Pioinit command

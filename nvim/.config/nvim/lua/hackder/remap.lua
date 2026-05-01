@@ -45,16 +45,76 @@ vim.keymap.set("v", ">", ">gv", { desc = "Indent selection without losing select
 vim.keymap.set("v", "<", "<gv", { desc = "Unindent selection without losing selection" })
 
 -- Resize window with Ctrl + Left
-vim.api.nvim_set_keymap("n", "<C-Left>", ":vertical resize -2<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<C-Left>", ":vertical resize -2<CR>", { silent = true })
 
 -- Resize window with Ctrl + Right
-vim.api.nvim_set_keymap("n", "<C-Right>", ":vertical resize +2<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<C-Right>", ":vertical resize +2<CR>", { silent = true })
 
 -- Resize window with Ctrl + Up
-vim.api.nvim_set_keymap("n", "<C-Up>", ":resize +2<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<C-Up>", ":resize +2<CR>", { silent = true })
 
 -- Resize window with Ctrl + Down
-vim.api.nvim_set_keymap("n", "<C-Down>", ":resize -2<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<C-Down>", ":resize -2<CR>", { silent = true })
+
+vim.keymap.set("n", "zf", "za", { noremap = true, desc = "Toggle fold" })
+vim.keymap.set("n", "za", "zf", { noremap = false, desc = "Create fold" }) -- noremap=false so zf resolves to the remapped za
+
+local function toggle_fold_subtree()
+	local cursor = vim.api.nvim_win_get_cursor(0)
+	local lnum = cursor[1]
+	local col = cursor[2]
+
+	local level = vim.fn.foldlevel(lnum)
+	if level == 0 then
+		return
+	end
+
+	-- Find start of the current fold
+	local start = lnum
+	while start > 1 and vim.fn.foldlevel(start - 1) >= level do
+		start = start - 1
+	end
+
+	-- Find end of the current fold
+	local last = vim.fn.line("$")
+	local finish = lnum
+	while finish < last and vim.fn.foldlevel(finish + 1) >= level do
+		finish = finish + 1
+	end
+
+	-- If current fold is closed, open it recursively
+	if vim.fn.foldclosed(start) ~= -1 then
+		vim.api.nvim_win_set_cursor(0, { start, 0 })
+		vim.cmd("normal! zO")
+		vim.api.nvim_win_set_cursor(0, { lnum, col })
+		return
+	end
+
+	-- Collect all fold starts in this subtree
+	local starts = {}
+	for i = start, finish do
+		local cur = vim.fn.foldlevel(i)
+		local prev = i == 1 and 0 or vim.fn.foldlevel(i - 1)
+
+		if cur >= level and cur > prev then
+			starts[#starts + 1] = i
+		end
+	end
+
+	-- Close deepest folds first, current fold last
+	for i = #starts, 1, -1 do
+		vim.api.nvim_win_set_cursor(0, { starts[i], 0 })
+		vim.cmd("normal! zc")
+	end
+
+	-- Cursor must stay on a visible line
+	vim.api.nvim_win_set_cursor(0, { start, 0 })
+end
+
+vim.keymap.set("n", "zF", toggle_fold_subtree, {
+	noremap = true,
+	desc = "Toggle current fold and all descendants",
+})
 
 local function get_json_path_value(json, path)
 	local keys = {}

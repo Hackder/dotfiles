@@ -77,7 +77,7 @@ return {
 				end,
 			})
 
-			local uv = vim.loop
+			local uv = vim.uv
 			local function watch_file(file_path)
 				local handle = uv.new_fs_event()
 
