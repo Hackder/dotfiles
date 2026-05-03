@@ -34,6 +34,24 @@ return {
 			vim.api.nvim_set_hl(gruvbox_ns, "@function.builtin", { link = "@variable.builtin" })
 
 			vim.api.nvim_set_hl_ns(gruvbox_ns)
+
+			-- Apply namespace to all windows and new ones
+			local function apply_gruvbox_ns_to_all_windows()
+				for _, win in ipairs(vim.api.nvim_list_wins()) do
+					vim.api.nvim_win_set_hl_ns(win, gruvbox_ns)
+				end
+			end
+
+			apply_gruvbox_ns_to_all_windows()
+
+			vim.api.nvim_create_autocmd("WinNew", {
+				callback = function()
+					local current_colorscheme = vim.g.colors_name
+					if current_colorscheme == "base16-gruvbox-dark-hard" then
+						vim.api.nvim_win_set_hl_ns(0, gruvbox_ns)
+					end
+				end,
+			})
 			vim.g.base16colorspace = 256
 
 			local theme_config_path = vim.fn.expand("~/dotfiles/ghostty/.config/ghostty/theme")
@@ -53,11 +71,13 @@ return {
 					vim.cmd.colorscheme(light_theme)
 					vim.api.nvim_set_hl(0, "BlinkCmpMenu", { link = "CmpDocumentation" })
 					vim.api.nvim_set_hl(0, "BlinkCmpKind", { link = "CmpDocumentation" })
+					vim.api.nvim_set_hl(0, "BlinkCmpMenuSelection", { bg = "#d0d7de", fg = "#1f2328" })
 					vim.o.background = "light"
 				else
 					vim.cmd.colorscheme(dark_theme)
 					vim.api.nvim_set_hl(0, "BlinkCmpMenu", { bg = "#1A1C1D" })
 					vim.api.nvim_set_hl(0, "BlinkCmpKind", { bg = "#1A1C1D" })
+					vim.api.nvim_set_hl(0, "BlinkCmpMenuSelection", { bg = "#3c3836", fg = "#ebdbb2" })
 					vim.o.background = "dark"
 				end
 			end
@@ -70,14 +90,18 @@ return {
 					if current_colorscheme == "base16-gruvbox-dark-hard" then
 						vim.o.background = "dark"
 						vim.api.nvim_set_hl_ns(gruvbox_ns)
+						apply_gruvbox_ns_to_all_windows()
 					else
 						vim.o.background = "light"
 						vim.api.nvim_set_hl_ns(0)
+						for _, win in ipairs(vim.api.nvim_list_wins()) do
+							vim.api.nvim_win_set_hl_ns(win, 0)
+						end
 					end
 				end,
 			})
 
-			local uv = vim.uv
+			local uv = vim.loop
 			local function watch_file(file_path)
 				local handle = uv.new_fs_event()
 
