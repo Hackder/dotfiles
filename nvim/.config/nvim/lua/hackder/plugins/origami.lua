@@ -7,6 +7,7 @@ return {
 			vim.opt.foldlevelstart = 99
 		end,
 		opts = {
+			pauseFoldsOnSearch = false,
 			useLspFoldsWithTreesitterFallback = {
 				enabled = true,
 			},
