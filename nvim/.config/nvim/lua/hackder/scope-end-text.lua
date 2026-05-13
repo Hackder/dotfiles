@@ -9,6 +9,31 @@ local defaults = {
 	min_rows = 2,
 	debounce_ms = 80,
 	excluded_filetypes = { "help", "markdown", "text", "gitcommit" },
+	-- Node types to skip: call chains, argument lists, collection literals — they
+	-- get folded but their "header" isn't useful end-of-scope context.
+	excluded_node_types = {
+		call_expression = true,
+		call = true,
+		method_invocation = true,
+		arguments = true,
+		argument_list = true,
+		parameters = true,
+		formal_parameters = true,
+		parameter_list = true,
+		tuple_expression = true,
+		tuple = true,
+		array_expression = true,
+		array_literal = true,
+		array = true,
+		list = true,
+		dictionary = true,
+		set = true,
+		object = true,
+		object_expression = true,
+		parenthesized_expression = true,
+		macro_invocation = true,
+		token_tree = true,
+	},
 }
 
 local enabled = true
@@ -28,6 +53,12 @@ local function header_for(bufnr, start_row, opts)
 	line = vim.trim(line)
 
 	if line == "" then
+		return nil
+	end
+
+	-- Skip continuation lines (method chains ".foo()", trailing ")...", etc.) but
+	-- keep things like closures "|x| {" or arrow functions.
+	if line:match("^[%.,%)%]}]") then
 		return nil
 	end
 
@@ -80,7 +111,11 @@ function M.refresh(bufnr)
 				end_row = end_row - 1
 			end
 
-			if end_row - start_row >= M.opts.min_rows and not used_rows[end_row] then
+			if
+				end_row - start_row >= M.opts.min_rows
+				and not used_rows[end_row]
+				and not M.opts.excluded_node_types[node:type()]
+			then
 				local text = header_for(bufnr, start_row, M.opts)
 				if text then
 					used_rows[end_row] = true
