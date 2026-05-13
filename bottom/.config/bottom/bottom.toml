@@ -1,0 +1,2 @@
+[flags]
+process_memory_as_value = true
