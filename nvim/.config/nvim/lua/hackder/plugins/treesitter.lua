@@ -16,6 +16,12 @@ return {
 				"html",
 			})
 
+			require("hackder.scope-end-text").setup({
+				prefix = "",
+				max_len = 100,
+				min_rows = 6,
+			})
+
 			-- Enable treesitter highlighting for all buffers
 			vim.api.nvim_create_autocmd("FileType", {
 				group = vim.api.nvim_create_augroup("tree-sitter-enable", { clear = true }),
