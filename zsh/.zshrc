@@ -177,4 +177,7 @@ alias dfastboot="/Users/jurajpetras/dev/drone-hacks/desktop-app/duml-rust/target
 alias ding="/Users/jurajpetras/dev/ding/ding.sh"
 alias toggle-theme="~/dotfiles/scripts/toggle_theme.sh"
 
+alias dbg="sudo /Users/jurajpetras/dev/debugger/target/release/debugger_ui"
+alias dbg-debug="sudo /Users/jurajpetras/dev/debugger/target/debug/debugger_ui"
+
 . "$HOME/.turso/env"
