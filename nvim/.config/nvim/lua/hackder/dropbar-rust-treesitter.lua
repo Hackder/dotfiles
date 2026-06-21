@@ -68,8 +68,21 @@ local function find_child(node, wanted_type)
 end
 
 local function label_impl(node, buf)
+	local type_field = node:field("type")[1]
+	local trait_field = node:field("trait")[1]
+
+	if trait_field and type_field then
+		local trait_text = text_of(trait_field, buf)
+		local type_text = text_of(type_field, buf)
+		return truncate("impl " .. trait_text .. " for " .. type_text, 64)
+	end
+
+	if type_field then
+		return truncate("impl " .. text_of(type_field, buf), 64)
+	end
+
 	local text = text_of(node, buf)
-	local head = text:match("^(impl%s+.-)%s*%{")
+	local head = text:match("^(impl%s+.-)%s*%{") or text:match("^(impl%s+.-)%s+where")
 
 	if head and head ~= "" then
 		return truncate(head, 64)

@@ -41,6 +41,10 @@ hs.hotkey.bind({ "alt" }, "O", function()
 	hs.application.launchOrFocus("OpenCode")
 end)
 
+hs.hotkey.bind({ "alt" }, "T", function()
+	hs.application.launchOrFocus("T3 Code (Nightly)")
+end)
+
 hs.hotkey.bind({ "alt" }, "M", function()
 	hs.application.launchOrFocus("Messages")
 end)
