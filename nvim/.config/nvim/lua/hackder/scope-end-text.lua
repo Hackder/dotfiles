@@ -39,11 +39,40 @@ local defaults = {
 local enabled = true
 local timers = {}
 
+-- Extra captures layered on top of the bundled `folds` query for the JS/TS
+-- family. The folds query only captures the whole `if_statement`, so the
+-- intermediate `} else if {` / `} else {` braces get no label. Capturing each
+-- branch body (and giving it priority over folds for shared end rows) lets every
+-- closing brace label the branch it actually closes.
+local branch_query_src = [[
+	(if_statement consequence: (statement_block) @branch)
+	(else_clause (statement_block) @branch)
+]]
+
+local branch_query_langs = {
+	typescript = true,
+	tsx = true,
+	javascript = true,
+}
+
+local branch_query_cache = {}
+
+local function get_branch_query(lang)
+	if not branch_query_langs[lang] then
+		return nil
+	end
+	if branch_query_cache[lang] == nil then
+		local ok, q = pcall(vim.treesitter.query.parse, lang, branch_query_src)
+		branch_query_cache[lang] = ok and q or false
+	end
+	return branch_query_cache[lang] or nil
+end
+
 local function clear(bufnr)
 	vim.api.nvim_buf_clear_namespace(bufnr, ns, 0, -1)
 end
 
-local function header_for(bufnr, start_row, opts)
+local function header_for(bufnr, start_row, opts, normalize_else)
 	local line = vim.api.nvim_buf_get_lines(bufnr, start_row, start_row + 1, false)[1]
 	if not line then
 		return nil
@@ -54,6 +83,17 @@ local function header_for(bufnr, start_row, opts)
 
 	if line == "" then
 		return nil
+	end
+
+	-- Normalize `} else {` and `} else if (...) {` so the label reads
+	-- "else" / "else if (...)" instead of being dropped by the leading-`}`
+	-- continuation check below. Gated per-language so other filetypes keep
+	-- their existing behavior.
+	if normalize_else then
+		local else_part = line:match("^}%s*(else.*)$")
+		if else_part then
+			line = else_part
+		end
 	end
 
 	-- Skip continuation lines (method chains ".foo()", trailing ")...", etc.) but
@@ -91,20 +131,16 @@ function M.refresh(bufnr)
 		return
 	end
 
-	local trees = parser:parse()
-	if not trees or not trees[1] then
-		return
-	end
-
-	local lang = parser:lang()
-	local query = vim.treesitter.query.get(lang, "folds")
-	if not query then
+	-- Parse the whole document, including injected languages (e.g. the TS in a
+	-- Svelte `<script>` block), so we can label scopes inside them too.
+	local pok = pcall(parser.parse, parser, true)
+	if not pok then
 		return
 	end
 
 	local used_rows = {}
 
-	for _, tree in ipairs(trees) do
+	local function process(query, tree, normalize_else)
 		for _, node in query:iter_captures(tree:root(), bufnr, 0, -1) do
 			local start_row, _, end_row, end_col = node:range()
 			if end_col == 0 then
@@ -116,7 +152,7 @@ function M.refresh(bufnr)
 				and not used_rows[end_row]
 				and not M.opts.excluded_node_types[node:type()]
 			then
-				local text = header_for(bufnr, start_row, M.opts)
+				local text = header_for(bufnr, start_row, M.opts, normalize_else)
 				if text then
 					used_rows[end_row] = true
 					vim.api.nvim_buf_set_extmark(bufnr, ns, end_row, 0, {
@@ -129,6 +165,31 @@ function M.refresh(bufnr)
 			end
 		end
 	end
+
+	-- Walk every language tree (root + injections). Each gets its own `folds`
+	-- query, plus the branch query for the JS/TS family.
+	local folds_cache = {}
+	parser:for_each_tree(function(tstree, ltree)
+		local lang = ltree:lang()
+
+		if folds_cache[lang] == nil then
+			folds_cache[lang] = vim.treesitter.query.get(lang, "folds") or false
+		end
+		local folds_query = folds_cache[lang]
+		if not folds_query then
+			return
+		end
+
+		local branch_query = get_branch_query(lang)
+		local normalize_else = branch_query ~= nil
+
+		-- Branch captures run first so an `else`/`else if` branch wins its
+		-- closing brace over the enclosing `if_statement` from the folds query.
+		if branch_query then
+			process(branch_query, tstree, normalize_else)
+		end
+		process(folds_query, tstree, normalize_else)
+	end)
 end
 
 local function schedule_refresh(bufnr)
