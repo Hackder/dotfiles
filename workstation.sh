@@ -41,8 +41,9 @@ mise use --global python
 cd ~
 if ! command -v git &> /dev/null; then
   curl -L -O https://github.com/Hackder/dotfiles/archive/main.zip
-  unzip master.zip -d dotfiles
-  mv dotfiles/dotfiles-main/* dotfiles/.
+  unzip main.zip -d dotfiles
+  (shopt -s dotglob; mv dotfiles/dotfiles-main/* dotfiles/.)
+  rmdir dotfiles/dotfiles-main
 else
   git clone https://github.com/Hackder/dotfiles.git
 fi
@@ -79,9 +80,13 @@ link_files nvim
 link_files zsh
 link_files tmux
 link_files kitty
-link_files yazi
 link_files starship
 link_files clang
+link_files bottom
+link_files git
+
+# nocheckin pre-commit hook
+git config --global core.hooksPath "$HOME/.git-hooks"
 
 curl -L https://github.com/ryanoasis/nerd-fonts/releases/download/v3.3.0/JetBrainsMono.zip -o /tmp/JetBrainsMono.zip
 unzip /tmp/JetBrainsMono.zip -d ~/.fonts
@@ -98,15 +103,14 @@ fi
 source <(fnm env)
 npm i -g tldr
 
-# Replace shell in kitty config
-echo "shell $HOME/.local/bin/zsh" >> ~/.config/kitty/kitty.conf
-
 cd ~
 curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
-ln -s "$HOME/.local/kitty.app/bin/kitty" "$HOME/.local/bin/kitty"
-ln -s "$HOME/.local/kitty.app/bin/kitten" "$HOME/.local/bin/kitten"
+ln -sf "$HOME/.local/kitty.app/bin/kitty" "$HOME/.local/bin/kitty"
+ln -sf "$HOME/.local/kitty.app/bin/kitten" "$HOME/.local/bin/kitten"
 
-echo 'alias kitty="$HOME/.local/bin/kitty"' >> ~/.bashrc
+# kitty.conf is symlinked into the dotfiles repo, so override the shell
+# on the command line instead of editing the tracked file
+echo 'alias kitty="$HOME/.local/bin/kitty -o shell=$HOME/.local/bin/zsh"' >> ~/.bashrc
 
 cd ~
 git clone https://github.com/Vl4dk0/sysprogdocs.git

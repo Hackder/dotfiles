@@ -162,7 +162,9 @@ if [ -f '/Users/jurajpetras/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/jur
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/jurajpetras/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/jurajpetras/google-cloud-sdk/completion.zsh.inc'; fi
 
-source <(jj util completion zsh)
+if command -v jj > /dev/null; then
+  source <(jj util completion zsh)
+fi
 
 alias todo="nvim ~/todos.md"
 
@@ -180,4 +182,4 @@ alias toggle-theme="~/dotfiles/scripts/toggle_theme.sh"
 alias dbg="sudo /Users/jurajpetras/dev/debugger/target/release/debugger_ui"
 alias dbg-debug="sudo /Users/jurajpetras/dev/debugger/target/debug/debugger_ui"
 
-. "$HOME/.turso/env"
+[ -f "$HOME/.turso/env" ] && . "$HOME/.turso/env"
