@@ -5,16 +5,24 @@ return {
 		opts = {},
 		config = function()
 			require("conform").setup({
+				formatters = {
+					-- Only use oxfmt in projects that opted into it; otherwise fall through to prettier
+					oxfmt = {
+						condition = function(_, ctx)
+							return vim.fs.root(ctx.filename, { ".oxfmtrc.json", ".oxfmtrc.jsonc" }) ~= nil
+						end,
+					},
+				},
 				formatters_by_ft = {
 					lua = { "stylua" },
 					-- Conform will run multiple formatters sequentially
 					python = { "ruff_fix", "ruff_format", "ruff_organize_imports" },
 					-- Use a sub-list to run only the first available formatter
-					javascript = { "prettierd", "prettier", stop_after_first = true },
-					javascriptreact = { "prettierd", "prettier", stop_after_first = true },
-					typescript = { "prettierd", "prettier", stop_after_first = true },
-					typescriptreact = { "prettierd", "prettier", stop_after_first = true },
-					json = { "prettierd", "prettier", stop_after_first = true },
+					javascript = { "oxfmt", "prettierd", "prettier", stop_after_first = true },
+					javascriptreact = { "oxfmt", "prettierd", "prettier", stop_after_first = true },
+					typescript = { "oxfmt", "prettierd", "prettier", stop_after_first = true },
+					typescriptreact = { "oxfmt", "prettierd", "prettier", stop_after_first = true },
+					json = { "oxfmt", "prettierd", "prettier", stop_after_first = true },
 					vue = { "prettierd", "prettier", stop_after_first = true },
 					astro = { "prettier", stop_after_first = true },
 					java = { "google-java-format" },

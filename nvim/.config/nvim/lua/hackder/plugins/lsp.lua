@@ -16,6 +16,57 @@ return {
 				callback = function(event)
 					local opts = { buffer = event.buf, remap = false }
 
+					local function preview_lsp_location(methods)
+						local params = vim.lsp.util.make_position_params(0, "utf-8")
+						local clients = vim.lsp.get_clients({ bufnr = event.buf })
+
+						local function try_method(index)
+							local method = methods[index]
+							if not method then
+								vim.lsp.buf.hover()
+								return
+							end
+
+							local supported_clients = vim.tbl_filter(function(client)
+								return client:supports_method(method, event.buf)
+							end, clients)
+
+							if #supported_clients == 0 then
+								try_method(index + 1)
+								return
+							end
+
+							vim.lsp.buf_request_all(event.buf, method, params, function(results)
+								local locations = {}
+
+								for _, result in pairs(results) do
+									local value = result.result
+									if value then
+										if vim.islist(value) then
+											vim.list_extend(locations, value)
+										else
+											table.insert(locations, value)
+										end
+									end
+								end
+
+								if #locations == 0 then
+									try_method(index + 1)
+									return
+								end
+
+								vim.lsp.util.preview_location(locations[1], {
+									border = "rounded",
+									focusable = true,
+									max_width = math.floor(vim.o.columns * 0.8),
+									max_height = math.floor(vim.o.lines * 0.6),
+								})
+							end)
+						end
+
+						try_method(1)
+					end
+
 					-- Navigation
 					vim.keymap.set(
 						"n",
@@ -35,6 +86,12 @@ return {
 						require("telescope.builtin").lsp_type_definitions,
 						vim.tbl_extend("force", opts, { desc = "Go to type definition" })
 					)
+					vim.keymap.set("n", "gp", function()
+						preview_lsp_location({
+							"textDocument/typeDefinition",
+							"textDocument/definition",
+						})
+					end, vim.tbl_extend("force", opts, { desc = "Preview type definition" }))
 					vim.keymap.set(
 						"n",
 						"gr",
