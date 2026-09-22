@@ -8,6 +8,7 @@ packages = [
   { bin = "yazi-x86_64-unknown-linux-musl/yazi", name = "yazi", archive = "https://github.com/sxyazi/yazi/releases/download/v25.2.11/yazi-x86_64-unknown-linux-musl.zip" },
   { bin = "starship", name = "starship", archive = "https://github.com/starship/starship/releases/download/v1.20.1/starship-x86_64-unknown-linux-musl.tar.gz" },
   { name = "nvim", url = "https://github.com/neovim/neovim-releases/releases/download/v0.12.2/nvim-linux-x86_64.appimage" },
+  { name = "ghostty", url = "https://github.com/pkgforge-dev/ghostty-appimage/releases/download/v1.3.1/Ghostty-1.3.1-x86_64.AppImage" },
   { name = "tmux", url = "https://github.com/nelsonenzo/tmux-appimage/releases/download/3.3a/tmux.appimage" },
   { bin = "fnm", name = "fnm", archive = "https://github.com/Schniz/fnm/releases/download/v1.37.1/fnm-linux.zip" },
   { bin = "eza", name = "eza", archive = "https://github.com/eza-community/eza/releases/download/v0.19.2/eza_x86_64-unknown-linux-musl.tar.gz" },

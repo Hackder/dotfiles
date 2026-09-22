@@ -79,7 +79,7 @@ cd dotfiles
 link_files nvim
 link_files zsh
 link_files tmux
-link_files kitty
+link_files ghostty
 link_files starship
 link_files clang
 link_files bottom
@@ -87,9 +87,6 @@ link_files git
 
 # nocheckin pre-commit hook
 git config --global core.hooksPath "$HOME/.git-hooks"
-
-curl -L https://github.com/ryanoasis/nerd-fonts/releases/download/v3.3.0/JetBrainsMono.zip -o /tmp/JetBrainsMono.zip
-unzip /tmp/JetBrainsMono.zip -d ~/.fonts
 
 # Install cmake
 if ! command -v cmake &> /dev/null; then
@@ -103,14 +100,10 @@ fi
 source <(fnm env)
 npm i -g tldr
 
-cd ~
-curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
-ln -sf "$HOME/.local/kitty.app/bin/kitty" "$HOME/.local/bin/kitty"
-ln -sf "$HOME/.local/kitty.app/bin/kitten" "$HOME/.local/bin/kitten"
-
-# kitty.conf is symlinked into the dotfiles repo, so override the shell
+# Ghostty is installed by workstation (portable AppImage, bundles its own libc).
+# The ghostty config is symlinked into the dotfiles repo, so override the shell
 # on the command line instead of editing the tracked file
-echo 'alias kitty="$HOME/.local/bin/kitty -o shell=$HOME/.local/bin/zsh"' >> ~/.bashrc
+echo 'alias ghostty="$HOME/.local/bin/ghostty --command=$HOME/.local/bin/zsh"' >> ~/.bashrc
 
 cd ~
 git clone https://github.com/Vl4dk0/sysprogdocs.git
