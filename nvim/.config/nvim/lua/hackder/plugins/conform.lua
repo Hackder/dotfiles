@@ -28,6 +28,7 @@ return {
 					java = { "google-java-format" },
 					php = { "phpcbf" },
 					latex = { "latexindent" },
+					markdown = { "prettierd" },
 				},
 				format_on_save = function(bufnr)
 					-- Disable with a global or buffer-local variable

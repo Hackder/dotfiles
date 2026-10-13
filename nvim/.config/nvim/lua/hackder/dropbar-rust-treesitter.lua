@@ -168,20 +168,23 @@ local function label_for(node, buf)
 end
 
 local function label_call(node, buf)
-	local text = text_of(node, buf)
-	local callee = text:match("^(.-)%s*%(")
+	local callee = node:field("function")[1]
 
-	if not callee or callee == "" then
+	if not callee then
 		return ""
 	end
 
-	callee = vim.trim(callee)
-
-	if callee == "" then
-		return ""
+	-- A chained call's receiver contains all preceding calls. Label the
+	-- actual method instead of taking text before the chain's first "(".
+	if callee:type() == "generic_function" then
+		callee = callee:field("function")[1] or callee
 	end
 
-	return truncate(callee, 64)
+	if callee:type() == "field_expression" then
+		callee = callee:field("field")[1] or callee
+	end
+
+	return truncate(text_of(callee, buf), 64)
 end
 
 local labelers = {
